@@ -1,0 +1,5 @@
+config BR2_PACKAGE_LIBBLURAY
+        bool "libbluray"
+        help
+            A Blu-Ray Discs playback library.
+            http://www.videolan.org/developers/libbluray.html

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_XFONT_FONT_LIBERATION_FONTS_TTF
+	bool "font-liberation-fonts-ttf"
+	help
+          This packages included the high-quality and open-sourced TrueType vector fonts released by RedHat.
+
+          https://www.redhat.com/promo/fonts/

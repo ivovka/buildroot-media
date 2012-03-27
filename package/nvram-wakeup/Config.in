@@ -1,0 +1,6 @@
+config BR2_PACKAGE_NVRAM_WAKEUP
+        bool "nvram-wakeup"
+        help
+            This is a small program that reads and writes the WakeUp time in the BIOS.
+
+            http://sourceforge.net/projects/nvram-wakeup/

@@ -1,0 +1,7 @@
+config BR2_PACKAGE_XBMC_ADDON_XVDR
+	bool "xbmc-addon-xvdr"
+	select BR2_PACKAGE_XBMC
+	help
+	    Standalone XVDR addon for XBMC
+
+	    https://github.com/pipelka/xbmc-addon-xvdr

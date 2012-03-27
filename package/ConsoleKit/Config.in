@@ -1,0 +1,9 @@
+config BR2_PACKAGE_CONSOLEKIT
+    bool "consolekit"
+    select BR2_PACKAGE_DBUS
+    select BR2_PACKAGE_DBUS_GLIB
+    select BR2_PACKAGE_POLKIT
+    help
+      ConsoleKit is a framework for defining and tracking users, login sessions, and seats.
+
+      http://www.freedesktop.org/wiki/Software/ConsoleKit

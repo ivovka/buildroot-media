@@ -1,0 +1,8 @@
+config BR2_PACKAGE_OPKG
+        bool "opkg"
+        select BR2_PACKAGE_LIBCURL
+        select BR2_PACKAGE_OPENSSL
+        help
+            Opkg is a lightweight package management system based on Ipkg.
+
+            http://code.google.com/p/opkg/

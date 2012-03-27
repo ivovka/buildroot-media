@@ -1,0 +1,6 @@
+config BR2_PACKAGE_V4L_UTILS
+	bool "v4l-utils"
+	help
+          Linux V4L2 and DVB API utilities and v4l libraries (libv4l).
+
+          http://linuxtv.org/

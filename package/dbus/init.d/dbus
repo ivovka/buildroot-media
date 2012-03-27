@@ -1,0 +1,27 @@
+#!/bin/sh
+# starting dbus
+#
+
+case "$1" in
+    start)
+        (
+        echo -n "Starting dbus..."
+        /bin/mkdir -p /var/lib/dbus /var/run/dbus
+        dbus-uuidgen --ensure
+        dbus-daemon --system
+        echo "OK"
+        )&
+        ;;
+    stop)
+        echo -n "Stopping dbus..."
+        killall dbus-uuidgen
+        killall dbus-daemon
+        echo "OK"
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop}"
+        exit 1
+esac
+
+exit $?
+

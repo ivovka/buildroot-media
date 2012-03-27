@@ -1,0 +1,7 @@
+config BR2_PACKAGE_BOOST
+        bool "boost"
+        select BR2_PACKAGE_ZLIB
+        select BR2_PACKAGE_BZIP2
+        help
+            Peer-reviewed STL style libraries for C++
+            http://www.boost.org/

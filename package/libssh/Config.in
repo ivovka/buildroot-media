@@ -1,0 +1,7 @@
+config BR2_PACKAGE_LIBSSH
+        bool "libssh"
+        select BR2_PACKAGE_ZLIB
+        select BR2_PACKAGE_LIBGCRYPT
+        help
+            A working SSH implementation by means of a library
+            http://www.libssh.org/

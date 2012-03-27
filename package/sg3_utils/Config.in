@@ -1,0 +1,9 @@
+config BR2_PACKAGE_SG3_UTILS
+	bool "sg3_utils"
+	help
+          sg3_utils is a package of utilities for accessing devices that use SCSI command sets.
+          Most utilities issue a single command and display the response, while some work at a
+          slightly higher level. There are utilities for fetching INQUIRY data and VPD, mode,
+          and log pages. There is support for modern SCSI transports such as SAS and FCP.
+
+          http://freshmeat.net/projects/sg3_utils/

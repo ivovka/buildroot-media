@@ -1,0 +1,10 @@
+config BR2_PACKAGE_XLIB_LIBPCIACCESS
+	bool "libpciaccess"
+	depends on BR2_LARGEFILE
+        select BR2_PACKAGE_XUTIL_UTIL_MACROS
+        select BR2_PACKAGE_ZLIB
+	help
+	  X.Org libpciaccess
+
+comment "libpciaccess requires a toolchain with LARGEFILE support"
+	depends on !BR2_LARGEFILE

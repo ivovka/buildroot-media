@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# monitoring udev events
+case "$1" in
+  start)
+  	echo -n "Starting udev monitor: "
+  	/usr/sbin/udevadm monitor -e > /dev/udev.log &
+  	echo "OK"
+  	;;
+  stop)
+  	echo -n "Stopping udev monitor: "
+  	start-stop-daemon -K -q -n udevadm
+  	echo "OK"
+  	;;
+  restart|reload)
+  	;;
+  *)
+  	echo $"Usage: $0 {start|stop|restart}"
+  	exit 1
+esac
+
+exit $?
+

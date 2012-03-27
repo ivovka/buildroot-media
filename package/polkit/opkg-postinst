@@ -1,0 +1,6 @@
+#!/bin/sh
+
+/bin/chmod 700 /etc/polkit-1/localauthority
+/bin/chmod 4755 /usr/bin/pkexec
+/bin/chmod 4755 /usr/lib/polkit-1/polkit-agent-helper-1
+exit 0

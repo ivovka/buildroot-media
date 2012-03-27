@@ -1,0 +1,13 @@
+config BR2_PACKAGE_POLKIT
+	bool "polkit"
+        select BR2_PACKAGE_ZLIB
+        select BR2_PACKAGE_SG3_UTILS
+        select BR2_PACKAGE_LIBGLIB2
+        select BR2_PACKAGE_UDEV
+        select BR2_PACKAGE_EGGDBUS
+        select BR2_PACKAGE_EXPAT
+	help
+          PolicyKit is a toolkit for defining and handling authorizations.
+          It is used for allowing unprivileged processes to speak to privileged processes.
+          
+          http://gitweb.freedesktop.org/?p=PolicyKit.git;a=summary

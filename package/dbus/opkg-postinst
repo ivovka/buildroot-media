@@ -1,0 +1,6 @@
+#!/bin/sh
+
+/bin/chown 0:81 /usr/lib/dbus/dbus-daemon-launch-helper
+/bin/chmod 4755 /usr/lib/dbus/dbus-daemon-launch-helper
+
+exit 0

@@ -1,0 +1,7 @@
+config BR2_PACKAGE_FREETYPE
+	bool "freetype"
+        select BR2_PACKAGE_ZLIB
+	help
+	  a free, high-quality and portable font engine.
+
+	  http://www.freetype.org/

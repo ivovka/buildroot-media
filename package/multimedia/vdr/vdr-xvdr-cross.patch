@@ -1,0 +1,11 @@
+--- vdr-1.7.21/PLUGINS/src/xvdr/Makefile.orig	2011-11-01 01:00:04.000000000 +0400
++++ vdr-1.7.21/PLUGINS/src/xvdr/Makefile	2011-11-01 01:00:37.000000000 +0400
+@@ -87,7 +87,7 @@
+ 
+ # Dependencies:
+ 
+-MAKEDEP = g++ -MM -MG
++MAKEDEP = $(CXX) -MM -MG
+ DEPFILE = .dependencies
+ $(DEPFILE): Makefile
+ 	@$(MAKEDEP) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@

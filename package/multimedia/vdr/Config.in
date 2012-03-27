@@ -1,0 +1,26 @@
+config BR2_PACKAGE_VDR
+        bool "vdr"
+        select BR2_PACKAGE_LIBCAP
+        select BR2_PACKAGE_JPEG_LIBRARY
+        select BR2_PACKAGE_FONTCONFIG
+        select BR2_PACKAGE_FREETYPE
+        help
+            The Video Disk Recorder
+
+            http://www.tvdr.de
+
+if BR2_PACKAGE_VDR
+menu "VDR plugins selection"
+config BR2_PACKAGE_VDR_SC
+        bool "vdr-sc"
+        default n
+        help
+            VDR softcam plugin
+
+config BR2_PACKAGE_VDR_XVDR
+        bool "vdr-xvdr"
+        default n
+        help
+            xvdr plugin
+endmenu
+endif

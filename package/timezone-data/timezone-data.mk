@@ -1,0 +1,20 @@
+TIMEZONE_DATA_VERSION = 2010o
+TIMEZONE_DATA_SOURCE = timezone-data-$(TIMEZONE_DATA_VERSION).tar.bz2
+TIMEZONE_DATA_SITE =http://sources.openelec.tv/devel
+TIMEZONE_DATA_BUILD_OPKG = YES
+TIMEZONE_DATA_INSTALL_STAGING = NO
+TIMEZONE_DATA_SECTION = system
+TIMEZONE_DATA_DESCRIPTION = timezone-data
+
+define TIMEZONE_DATA_BUILD_CMDS
+    make CC="$(HOSTCC)" CFLAGS="$(HOST_CFLAGS)" -C $(@D)
+endef
+
+define TIMEZONE_DATA_BUILD_OPKG_CMDS
+    make TOPDIR="$(BUILD_DIR_OPKG)/$(TIMEZONE_DATA_BASE_NAME)" -C $(@D) install
+    mkdir -p $(BUILD_DIR_OPKG)/$(TIMEZONE_DATA_BASE_NAME)/usr/share/zoneinfo
+    cp -R $(BUILD_DIR_OPKG)/$(TIMEZONE_DATA_BASE_NAME)/etc/zoneinfo/* $(BUILD_DIR_OPKG)/$(TIMEZONE_DATA_BASE_NAME)/usr/share/zoneinfo
+    rm -rf $(BUILD_DIR_OPKG)/$(TIMEZONE_DATA_BASE_NAME)/{etc,lib,man}
+endef
+
+$(eval $(call GENTARGETS,package,timezone-data))

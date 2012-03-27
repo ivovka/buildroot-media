@@ -1,0 +1,21 @@
+
+#!/bin/sh
+# request events from the kernel
+case "$1" in
+  start)
+	(
+	echo "request udev events from the kernel"
+    	/usr/sbin/udevadm trigger --action=add
+	/usr/sbin/udevadm settle
+	)&
+	;;
+  stop)
+  	;;
+  restart|reload)
+  	;;
+  *)
+  	echo $"Usage: $0 {start|stop|restart}"
+  	exit 1
+esac
+
+exit $?

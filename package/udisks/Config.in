@@ -1,0 +1,18 @@
+config BR2_PACKAGE_UDISKS
+	bool "udisks"
+        select BR2_PACKAGE_SG3_UTILS
+        select BR2_PACKAGE_UDEV
+        select BR2_PACKAGE_LIBGLIB2
+        select BR2_PACKAGE_DBUS
+        select BR2_PACKAGE_DBUS_GLIB
+        select BR2_PACKAGE_PARTED
+        select BR2_PACKAGE_LVM2
+        select BR2_PACKAGE_POLKIT
+        select BR2_PACKAGE_LIBATASMART
+	help
+          Udisks is a modular hardware abstraction layer designed for use in Linux systems
+          that is designed to simplify device management and replace the current monolithic Linux HAL.
+          Udisks includes the ability to enumerate system devices and send notifications
+          when hardware is added or removed from the computer system.
+
+          http://www.freedesktop.org/wiki/Software/udisks

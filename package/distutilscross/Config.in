@@ -1,0 +1,8 @@
+config BR2_PACKAGE_DISTUTILSCROSS
+        bool "distutilscross"
+        depends on BR2_PACKAGE_PYTHON
+        select BR2_PACKAGE_DISTRIBUTE
+        help
+          distutilscross enhances distutils to support Cross Compile of Python extensions
+
+          http://bitbucket.org/lambacck/distutilscross/

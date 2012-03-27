@@ -1,0 +1,6 @@
+config BR2_PACKAGE_ENCA
+        bool "enca"
+        select BR2_PACKAGE_LIBICONV if !BR2_ENABLE_LOCALE
+        help
+             detects the encoding of text files, on the basis of knowledge of their language.
+             http://freshmeat.net/projects/enca/

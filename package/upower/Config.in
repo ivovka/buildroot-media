@@ -1,0 +1,15 @@
+config BR2_PACKAGE_UPOWER
+	bool "upower"
+        select BR2_PACKAGE_UDEV
+        select BR2_PACKAGE_LIBGLIB2
+        select BR2_PACKAGE_DBUS
+        select BR2_PACKAGE_DBUS_GLIB
+        select BR2_PACKAGE_GOBJECT_INTROSPECTION
+        select BR2_PACKAGE_POLKIT
+	help
+          Upower is a modular hardware abstraction layer designed for use in Linux systems 
+          that is designed to simplify device management and replace the current monolithic Linux HAL.
+          Upower includes the ability to enumerate system devices and send notifications when
+          hardware is added or removed from the computer system.
+
+          http://upower.freedesktop.org/

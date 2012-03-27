@@ -1,0 +1,22 @@
+config BR2_PACKAGE_JPEG_LIBRARY
+        bool "Jpeg Library"
+        help
+            "Jpeg library"
+if BR2_PACKAGE_JPEG_LIBRARY
+
+choice
+        prompt "Jpeg library to use"
+        default BR2_PACKAGE_JPEG
+config BR2_PACKAGE_JPEG
+	bool "jpeg"
+	help
+	  The ubiquitous C library for manipulating JPEG images.
+
+	  http://www.ijg.org/
+source "package/libjpeg-turbo/Config.in"
+endchoice
+config BR2_JPEG_LIBRARY
+        string
+        default jpeg if BR2_PACKAGE_JPEG
+        default libjpeg-turbo if BR2_PACKAGE_LIBJPEG_TURBO
+endif

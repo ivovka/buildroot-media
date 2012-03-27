@@ -1,0 +1,8 @@
+--- xbmc-orig/Makefile.include.in	2012-03-25 13:26:05.402451519 +0400
++++ xbmc-g45c575b/Makefile.include.in	2012-03-26 23:16:23.734357604 +0400
+@@ -1,4 +1,4 @@
+-AR=ar
++AR=@AR@
+ ARFLAGS=crus
+ RM=rm -rf
+ SHELL=@SHELL@

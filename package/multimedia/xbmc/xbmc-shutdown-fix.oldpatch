@@ -1,0 +1,245 @@
+diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-d48d118/xbmc/Application.cpp
+--- xbmc-orig/xbmc/Application.cpp	2011-12-19 16:17:26.000000000 +0400
++++ xbmc-d48d118/xbmc/Application.cpp	2011-12-21 08:45:23.000000000 +0400
+@@ -363,6 +363,7 @@ CApplication::CApplication(void) : m_ite
+   m_nextPlaylistItem = -1;
+   m_bPlaybackStarting = false;
+   m_skinReloading = false;
++  m_bManualStart = true;
+ 
+ #ifdef HAS_GLX
+   XInitThreads();
+@@ -2156,6 +2157,7 @@ bool CApplication::OnKey(const CKey& key
+   // a key has been pressed.
+   // reset Idle Timer
+   m_idleTimer.StartZero();
++  SetManualStart (true);
+   bool processKey = AlwaysProcess(action);
+ 
+   ResetScreenSaver();
+@@ -2739,6 +2741,7 @@ bool CApplication::ProcessGamepad(float 
+   {
+     // reset Idle Timer
+     m_idleTimer.StartZero();
++    SetManualStart (true);
+ 
+     ResetScreenSaver();
+     if (WakeUpScreenSaverAndDPMS())
+@@ -2797,6 +2800,7 @@ bool CApplication::ProcessGamepad(float 
+   {
+     // reset Idle Timer
+     m_idleTimer.StartZero();
++    SetManualStart(true);
+ 
+     ResetScreenSaver();
+     if (WakeUpScreenSaverAndDPMS())
+@@ -2873,6 +2877,7 @@ bool CApplication::ProcessMouse()
+ 
+   // Reset the screensaver and idle timers
+   m_idleTimer.StartZero();
++  SetManualStart(true);
+   ResetScreenSaver();
+   if (WakeUpScreenSaverAndDPMS())
+     return true;
+@@ -2999,6 +3004,7 @@ bool CApplication::ProcessEventServer(fl
+   {
+     // reset idle timers
+     m_idleTimer.StartZero();
++    SetManualStart(true);
+     ResetScreenSaver();
+     WakeUpScreenSaverAndDPMS();
+   }
+@@ -3076,6 +3082,7 @@ bool CApplication::ProcessJoystickEvent(
+ {
+ #if defined(HAS_EVENT_SERVER)
+   m_idleTimer.StartZero();
++  SetManualStart(true);
+ 
+    // Make sure to reset screen saver, mouse.
+    ResetScreenSaver();
+@@ -4476,8 +4483,22 @@ void CApplication::CheckShutdown()
+   CGUIDialogMusicScan *pMusicScan = (CGUIDialogMusicScan *)g_windowManager.GetWindow(WINDOW_DIALOG_MUSIC_SCAN);
+   CGUIDialogVideoScan *pVideoScan = (CGUIDialogVideoScan *)g_windowManager.GetWindow(WINDOW_DIALOG_VIDEO_SCAN);
+ 
++  bool resetTimer;
++  int shutdownSeconds;
++
+   // first check if we should reset the timer
+-  bool resetTimer = m_bInhibitIdleShutdown;
++  // if XBMC started automatically for recording, it should shutdown immediately on the recording ends
++  // so, dont care about m_bInhibitIdleShutdown
++  if (!m_bManualStart)
++  {
++    resetTimer = false;
++    shutdownSeconds = 0;
++  }
++  else
++  {
++    resetTimer = m_bInhibitIdleShutdown;
++    shutdownSeconds = g_guiSettings.GetInt("powermanagement.shutdowntime") * 60;
++  }
+ 
+   if (IsPlaying() || IsPaused()) // is something playing?
+     resetTimer = true;
+@@ -4500,7 +4521,7 @@ void CApplication::CheckShutdown()
+     return;
+   }
+ 
+-  if ( m_shutdownTimer.GetElapsedSeconds() > g_guiSettings.GetInt("powermanagement.shutdowntime") * 60 )
++  if ( m_shutdownTimer.GetElapsedSeconds() > shutdownSeconds )
+   {
+     // Since it is a sleep instead of a shutdown, let's set everything to reset when we wake up.
+     m_shutdownTimer.Stop();
+diff -Nurp xbmc-orig/xbmc/Application.h xbmc-d48d118/xbmc/Application.h
+--- xbmc-orig/xbmc/Application.h	2011-12-19 16:17:26.000000000 +0400
++++ xbmc-d48d118/xbmc/Application.h	2011-12-19 16:26:43.000000000 +0400
+@@ -288,6 +288,11 @@ public:
+   bool ToggleDPMS(bool manual);
+ 
+   float GetDimScreenSaverLevel() const;
++
++  void SetManualStart(bool value)
++  {
++    m_bManualStart = value;
++  }
+ protected:
+   bool LoadSkin(const CStdString& skinID);
+   void LoadSkin(const boost::shared_ptr<ADDON::CSkinInfo>& skin);
+@@ -316,6 +321,7 @@ protected:
+   CStopWatch m_shutdownTimer;
+ 
+   bool m_bInhibitIdleShutdown;
++  bool m_bManualStart;
+ 
+   DPMSSupport* m_dpms;
+   bool m_dpmsIsActive;
+diff -Nurp xbmc-orig/xbmc/pvr/PVRManager.cpp xbmc-d48d118/xbmc/pvr/PVRManager.cpp
+--- xbmc-orig/xbmc/pvr/PVRManager.cpp	2011-12-19 16:18:04.000000000 +0400
++++ xbmc-d48d118/xbmc/pvr/PVRManager.cpp	2011-12-21 08:46:02.000000000 +0400
+@@ -312,6 +312,40 @@ bool CPVRManager::Load(void)
+ 
+   /* close the progess dialog */
+   HideProgressDialog();
++  /* set manual start flag of the application */
++  /* if recording exists
++   * then get the next recording time
++   * if the time is greater than now and time difference less than a constant
++   * then assume auto start
++   */
++  CLog::Log(LOGDEBUG,"%s : Trying to guess if the application was started automatically for recording....", __FUNCTION__);
++
++  if ( m_timers )
++  {
++    const CDateTime nextEvent = m_timers->GetNextEventTime();
++    const CDateTime now = CDateTime::GetUTCDateTime();
++    const CDateTimeSpan prewakeup(0, 0, g_guiSettings.GetInt("pvrpowermanagement.prewakeup"), 0);
++
++    time_t now_t, nextEvent_t;
++    now.GetAsTime(now_t);
++    nextEvent.GetAsTime(nextEvent_t);
++    CLog::Log(LOGDEBUG,"%s : Now it is %lld. Next event time is %lld. Configured prewakeup interval is %d.", __FUNCTION__, (long long int)now_t, (long long int)nextEvent_t, g_guiSettings.GetInt("pvrpowermanagement.prewakeup"));
++    /* if next event is within prewakeup interval from now, than assume XBMC started automatically for recording */
++    if (( nextEvent >= now ) && ( nextEvent - now <= prewakeup ))
++    {
++      CLog::Log(LOGDEBUG,"%s : Assuming automatic startup of XBMC", __FUNCTION__);
++      g_application.SetManualStart(false);
++    }
++    else
++    {
++      CLog::Log(LOGDEBUG,"%s : Assuming manual startup of XBMC", __FUNCTION__);
++      g_application.SetManualStart(true);
++    }
++  }
++  else
++  {
++    CLog::Log(LOGDEBUG,"%s : No timers found. Assume manual start", __FUNCTION__);
++  }
+ 
+   return true;
+ }
+@@ -900,10 +934,8 @@ bool CPVRManager::IsIdle(void) const
+     const CDateTime next = m_timers->GetNextEventTime();
+     const CDateTimeSpan delta = next - now;
+ 
+-    if (delta < idle)
+-    {
++    if ((next >= now) && (delta < idle))
+       return false;
+-    }
+   }
+ 
+   return true;
+diff -Nurp xbmc-orig/xbmc/pvr/timers/PVRTimers.cpp xbmc-d48d118/xbmc/pvr/timers/PVRTimers.cpp
+--- xbmc-orig/xbmc/pvr/timers/PVRTimers.cpp	2011-12-19 16:18:30.000000000 +0400
++++ xbmc-d48d118/xbmc/pvr/timers/PVRTimers.cpp	2011-12-21 08:51:50.000000000 +0400
+@@ -264,12 +264,14 @@ bool CPVRTimers::GetNextActiveTimer(CPVR
+ {
+   bool bReturn(false);
+   bool bGotFirst(false);
++  const CDateTime now = CDateTime::GetUTCDateTime();
+   CSingleLock lock(m_critSection);
+ 
+   for (unsigned int iTimerPtr = 0; iTimerPtr < size(); iTimerPtr++)
+   {
+     CPVRTimerInfoTag *current = at(iTimerPtr);
+     if (current->IsActive() && !current->IsRecording() &&
++        current->StartAsUTC() >= now &&
+         (!bGotFirst || current->Compare(*tag) < 0))
+     {
+       *tag = *at(iTimerPtr);
+@@ -642,7 +644,6 @@ void CPVRTimers::Notify(const Observable
+ 
+ CDateTime CPVRTimers::GetNextEventTime(void) const
+ {
+-  const CStdString wakeupcmd = g_guiSettings.GetString("pvrpowermanagement.setwakeupcmd", false);
+   const bool dailywakup = g_guiSettings.GetBool("pvrpowermanagement.dailywakeup");
+   const CDateTime now = CDateTime::GetUTCDateTime();
+   const CDateTimeSpan prewakeup(0, 0, g_guiSettings.GetInt("pvrpowermanagement.prewakeup"), 0);
+@@ -650,6 +651,7 @@ CDateTime CPVRTimers::GetNextEventTime(v
+ 
+   CDateTime timerwakeuptime;
+   CDateTime dailywakeuptime;
++  CDateTime rVal(0);
+ 
+   /* Check next active time */
+   CPVRTimerInfoTag timer;
+@@ -657,11 +659,15 @@ CDateTime CPVRTimers::GetNextEventTime(v
+   {
+     const CDateTime start = timer.StartAsUTC();
+ 
+-    if ((start - idle) > now) {
+-      timerwakeuptime = start - prewakeup;
+-    } else {
+-      timerwakeuptime = now + idle;
++    if (start > now)
++    {
++      if ((start - prewakeup) > now)
++        timerwakeuptime = start - prewakeup;
++      else
++        timerwakeuptime = now;
+     }
++    else
++      timerwakeuptime = start;
+   }
+ 
+   /* check daily wake up */
+@@ -675,13 +681,17 @@ CDateTime CPVRTimers::GetNextEventTime(v
+       dailywakeuptime.GetHour(), dailywakeuptime.GetMinute(), dailywakeuptime.GetSecond()
+     );
+ 
+-    if ((dailywakeuptime - idle) < now)
++    if (dailywakeuptime < now)
+     {
+       const CDateTimeSpan oneDay(1,0,0,0);
+       dailywakeuptime += oneDay;
+     }
+   }
++  if ( timerwakeuptime >= now )
++    rVal = timerwakeuptime;
++  if ( dailywakeuptime >= now && dailywakeuptime < timerwakeuptime )
++    rVal = dailywakeuptime;
+ 
+-  const CDateTime retVal((dailywakeuptime < timerwakeuptime) ? dailywakeuptime : timerwakeuptime);
++  const CDateTime retVal(rVal);
+   return retVal;
+ }

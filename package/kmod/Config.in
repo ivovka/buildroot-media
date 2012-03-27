@@ -1,0 +1,6 @@
+config BR2_PACKAGE_KMOD
+	bool "kmod"
+	help
+	  The new module loader.
+
+	  http://www.kernel.org/pub/linux/utils/kernel/kmod/

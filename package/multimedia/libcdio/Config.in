@@ -1,0 +1,6 @@
+config BR2_PACKAGE_LIBCDIO
+        bool "libcdio"
+        select BR2_PACKAGE_LIBICONV if !BR2_ENABLE_LOCALE
+        help
+            A CD-ROM reading and control library.
+            http://www.gnu.org/software/libcdio/

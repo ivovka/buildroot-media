@@ -1,0 +1,24 @@
+#!/bin/sh
+# Start udev daemon
+case "$1" in
+  start)
+  	echo -n "Starting udev daemon: "
+  	echo -e '\000\000\000\000' > /proc/sys/kernel/hotplug
+	mkdir -p /dev/rules.d
+	start-stop-daemon -S -q --exec /usr/sbin/udevd -- --daemon
+	echo "OK"
+	;;
+  stop)
+  	echo -n "Stopping udev daemon: "
+  	start-stop-daemon -K -q -n udevd
+  	echo "OK"
+  	;;
+  restart|reload)
+  	;;
+  *)
+  	echo $"Usage: $0 {start|stop|restart}"
+  	exit 1
+esac
+
+exit $?
+

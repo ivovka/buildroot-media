@@ -1,0 +1,4 @@
+config BR2_PACKAGE_LIBC_GCONV
+        bool "libc-gconv"
+        help
+            Gconv conversion modules from libc

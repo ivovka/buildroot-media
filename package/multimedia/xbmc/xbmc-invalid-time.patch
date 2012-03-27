@@ -1,0 +1,18 @@
+--- xbmc-edaaac4/xbmc/XBDateTime.cpp.orig	2011-11-09 15:10:46.000000000 +0400
++++ xbmc-edaaac4/xbmc/XBDateTime.cpp	2011-11-09 15:14:36.000000000 +0400
+@@ -815,8 +815,13 @@
+ void CDateTime::GetAsTime(time_t& time) const
+ {
+   LONGLONG ll;
+-  ll = ((LONGLONG)m_time.dwHighDateTime << 32) + m_time.dwLowDateTime;
+-  time=(time_t)((ll - UNIX_BASE_TIME) / 10000000);
++  if (m_state == valid)
++  {
++    ll = ((LONGLONG)m_time.dwHighDateTime << 32) + m_time.dwLowDateTime;
++    time=(time_t)((ll - UNIX_BASE_TIME) / 10000000);
++  }
++  else
++    time = 0;
+ }
+ 
+ void CDateTime::GetAsTm(tm& time) const

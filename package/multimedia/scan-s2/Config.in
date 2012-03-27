@@ -1,0 +1,6 @@
+config BR2_PACKAGE_SCAN_S2
+        bool "scan-s2"
+        help
+            DVB scan utility using S2API
+
+            http://mercurial.intuxication.org/hg/scan-s2/

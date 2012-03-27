@@ -1,0 +1,5 @@
+config BR2_PACKAGE_XLIB_XTRANS
+	bool "xtrans"
+        select BR2_PACKAGE_XUTIL_UTIL_MACROS
+	help
+	  X.Org xtrans library

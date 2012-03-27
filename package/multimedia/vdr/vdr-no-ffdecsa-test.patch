@@ -1,0 +1,10 @@
+--- vdr-1.7.21/PLUGINS/src/sc/FFdecsa/Makefile.orig	2011-11-01 00:51:33.000000000 +0400
++++ vdr-1.7.21/PLUGINS/src/sc/FFdecsa/Makefile	2011-11-01 00:51:46.000000000 +0400
+@@ -49,7 +49,6 @@
+ FFdecsa.o: 	FFdecsa.c stream.c $(H_FILES)
+ 
+ FFdecsa_test.done: FFdecsa_test
+-	@./FFdecsa_test
+ 	@touch FFdecsa_test.done
+ 
+ clean:

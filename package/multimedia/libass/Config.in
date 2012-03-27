@@ -1,0 +1,8 @@
+config BR2_PACKAGE_LIBASS
+        bool "libass"
+        select BR2_PACKAGE_FREETYPE
+        select BR2_PACKAGE_FONTCONFIG
+        select BR2_PACKAGE_ENCA
+        help
+            a portable subtitle renderer for the ASS/SSA (Advanced Substation Alpha/Substation Alpha) subtitle format.
+            http://code.google.com/p/libass/

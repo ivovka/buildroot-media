@@ -1,0 +1,6 @@
+config BR2_PACKAGE_JFSUTILS
+	bool "jfsutils"
+        select BR2_PACKAGE_UTIL_LINUX
+	help
+	    Journaled File System Technology for Linux 
+	    http://jfs.sourceforge.net/

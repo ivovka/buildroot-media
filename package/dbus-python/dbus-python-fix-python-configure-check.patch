@@ -1,0 +1,23 @@
+--- dbus-python-0.83.1/configure.orig	2011-09-12 12:58:07.000000000 +0400
++++ dbus-python-0.83.1/configure	2011-09-12 12:58:10.000000000 +0400
+@@ -10646,6 +10646,12 @@
+ 
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Python headers using $PYTHON-config --includes" >&5
+ $as_echo_n "checking for Python headers using $PYTHON-config --includes... " >&6; }
++if test "${am_cv_python_includes+set}" = set; then
++echo $ECHO_N "(cached) $ECHO_C" >&6
++PYTHON_INCLUDES=${am_cv_python_includes}
++{ echo "$as_me:$LINENO: result: $PYTHON_INCLUDES" >&5
++echo "${ECHO_T}$PYTHON_INCLUDES" >&6; }
++else
+ PYTHON_INCLUDES=`$PYTHON-config --includes`
+ if test $? = 0; then
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_INCLUDES" >&5
+@@ -10664,6 +10670,7 @@
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_INCLUDES" >&5
+ $as_echo "$PYTHON_INCLUDES" >&6; }
+ fi
++fi
+ 
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether those headers are sufficient" >&5
+ $as_echo_n "checking whether those headers are sufficient... " >&6; }

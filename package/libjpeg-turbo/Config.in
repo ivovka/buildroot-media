@@ -1,0 +1,8 @@
+config BR2_PACKAGE_LIBJPEG_TURBO
+        bool "libjpeg-turbo"
+        help
+            a high-speed version of libjpeg for x86 and x86-64
+            processors which uses SIMD instructions (MMX, SSE2, etc.)
+            to accelerate baseline JPEG compression and decompression.
+
+            http://libjpeg-turbo.virtualgl.org/

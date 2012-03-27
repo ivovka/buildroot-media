@@ -1,0 +1,24 @@
+--- xbmc-a17e541/xbmc/pvr/addons/PVRClient.cpp.orig	2011-11-21 17:42:15.000000000 +0400
++++ xbmc-a17e541/xbmc/pvr/addons/PVRClient.cpp	2011-11-21 17:44:15.000000000 +0400
+@@ -169,7 +169,7 @@
+   time_t recTime;
+   xbmcRecording.RecordingTimeAsUTC().GetAsTime(recTime);
+ 
+-  addonRecording.recordingTime  = recTime - g_advancedSettings.m_iPVRTimeCorrection;
++  addonRecording.recordingTime  = recTime ? recTime - g_advancedSettings.m_iPVRTimeCorrection : recTime;
+   addonRecording.strRecordingId = xbmcRecording.m_strRecordingId.c_str();
+   addonRecording.strTitle       = xbmcRecording.m_strTitle.c_str();
+   addonRecording.strPlotOutline = xbmcRecording.m_strPlotOutline.c_str();
+@@ -205,9 +205,9 @@
+   addonTimer.iLifetime         = xbmcTimer.m_iLifetime;
+   addonTimer.bIsRepeating      = xbmcTimer.m_bIsRepeating;
+   addonTimer.iWeekdays         = xbmcTimer.m_iWeekdays;
+-  addonTimer.startTime         = start - g_advancedSettings.m_iPVRTimeCorrection;
+-  addonTimer.endTime           = end - g_advancedSettings.m_iPVRTimeCorrection;
+-  addonTimer.firstDay          = firstDay - g_advancedSettings.m_iPVRTimeCorrection;
++  addonTimer.startTime         = start ? start - g_advancedSettings.m_iPVRTimeCorrection : start;
++  addonTimer.endTime           = end ? end - g_advancedSettings.m_iPVRTimeCorrection : end;
++  addonTimer.firstDay          = firstDay ? firstDay - g_advancedSettings.m_iPVRTimeCorrection : firstDay;
+   addonTimer.iEpgUid           = epgTag ? epgTag->UniqueBroadcastID() : -1;
+   addonTimer.strSummary        = xbmcTimer.m_strSummary.c_str();
+   addonTimer.iMarginStart      = xbmcTimer.m_iMarginStart;

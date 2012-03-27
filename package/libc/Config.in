@@ -1,0 +1,4 @@
+config BR2_PACKAGE_LIBC
+	bool "libc"
+	help
+	    This package needed for build opkg package from toolchain libc library.

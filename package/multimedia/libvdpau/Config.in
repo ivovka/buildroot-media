@@ -1,0 +1,10 @@
+config BR2_PACKAGE_LIBVDPAU
+	bool "libvdpau"
+        select BR2_PACKAGE_XLIB_LIBX11
+	help
+          VDPAU is the Video Decode and Presentation API for UNIX.
+          It provides an interface to video decode acceleration and
+          presentation hardware present in modern GPUs.
+
+	  http://freedesktop.org/wiki/Software/VDPAU
+

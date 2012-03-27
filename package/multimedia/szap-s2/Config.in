@@ -1,0 +1,6 @@
+config BR2_PACKAGE_SZAP_S2
+        bool "szap-s2"
+        help
+            DVB-S(S2) szap-s2 utility for Linux
+
+            http://mercurial.intuxication.org/hg/szap-s2/

@@ -1,0 +1,60 @@
+config BR2_PACKAGE_XBMC
+        bool "xbmc"
+        select BR2_PACKAGE_BOOST
+        select BR2_PACKAGE_PYTHON
+        select BR2_PACKAGE_ZLIB
+        select BR2_PACKAGE_BZIP2
+        select BR2_PACKAGE_LZO
+        select BR2_PACKAGE_PCRE
+        select BR2_PACKAGE_ALSA_LIB
+        select BR2_PACKAGE_LIBASS
+        select BR2_PACKAGE_ENCA
+        select BR2_PACKAGE_CURL
+        select BR2_PACKAGE_LIBSSH
+        select BR2_PACKAGE_RTMPDUMP
+        select BR2_PACKAGE_DBUS
+        select BR2_PACKAGE_XLIB_LIBXT
+        select BR2_PACKAGE_XLIB_LIBXTST
+        select BR2_PACKAGE_XLIB_LIBXMU
+        select BR2_PACKAGE_XLIB_LIBXRANDR
+        select BR2_PACKAGE_MESA3D
+        select BR2_PACKAGE_GLEW
+        select BR2_PACKAGE_FONTCONFIG
+        select BR2_PACKAGE_FRIBIDI
+        select BR2_PACKAGE_JPEG_LIBRARY
+        select BR2_PACKAGE_LIBPNG
+        select BR2_PACKAGE_TIFF
+        select BR2_PACKAGE_FREETYPE
+        select BR2_PACKAGE_JASPER
+        select BR2_PACKAGE_LIBMAD
+        select BR2_PACKAGE_LIBSAMPLERATE
+        select BR2_PACKAGE_LIBOGG
+        select BR2_PACKAGE_LIBVORBIS
+        select BR2_PACKAGE_LIBCDIO
+        select BR2_PACKAGE_LIBMODPLUG
+        select BR2_PACKAGE_FAAD2
+        select BR2_PACKAGE_FLAC
+        select BR2_PACKAGE_WAVPACK
+        select BR2_PACKAGE_LAME
+        select BR2_PACKAGE_LIBMPEG2
+        select BR2_PACKAGE_LIBBLURAY
+        select BR2_PACKAGE_SDL
+	select BR2_PACKAGE_SDL_X11
+        select BR2_PACKAGE_SDL_MIXER
+        select BR2_PACKAGE_SDL_IMAGE
+        select BR2_PACKAGE_SQLITE
+        select BR2_PACKAGE_MYSQL
+        select BR2_PACKAGE_SAMBA
+        select BR2_PACKAGE_AVAHI
+        select BR2_PACKAGE_LIBMICROHTTPD
+        select BR2_PACKAGE_LIBVDPAU
+        select BR2_PACKAGE_YAJL
+    help
+      XBMC Media Center (which was formerly named Xbox Media Center) is a free and open source
+      cross-platform media player and home entertainment system software with a 10-foot user
+      interface designed for the living-room TV.
+      Its graphical user interface allows the user to easily manage video, photos, podcasts,
+      and music from a computer, optical disk, local network, and the internet using
+      a remote control.
+
+      http://www.xbmc.org

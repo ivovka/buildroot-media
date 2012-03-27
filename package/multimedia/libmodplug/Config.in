@@ -1,0 +1,5 @@
+config BR2_PACKAGE_LIBMODPLUG
+        bool "libmodplug"
+        help
+            renders mod music files as raw audio data, for playing or conversion.
+            http://modplug-xmms.sourceforge.net/

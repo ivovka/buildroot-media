@@ -1,0 +1,45 @@
+diff -Naur enca-1.13-orig/configure.ac enca-1.13/configure.ac
+--- enca-1.13-orig/configure.ac	2011-07-23 16:51:50.000000000 +0400
++++ enca-1.13/configure.ac	2011-07-23 16:52:10.000000000 +0400
+@@ -97,17 +97,10 @@
+ dnl Check for good random number sources
+ AC_CHECK_FILES(/dev/random /dev/urandom /dev/srandom /dev/arandom)
+ 
+-dnl Dirty path hack.  Helps some people with badly set up search paths.
+-if test "$prefix" = "NONE"; then
+-  LDFLAGS="$LDFLAGS -L$ac_default_prefix/lib"
+-  CPPFLAGS="$CPPFLAGS -I$ac_default_prefix/include"
+-else
+-  LDFLAGS="$LDFLAGS -L$prefix/lib"
+-  CPPFLAGS="$CPPFLAGS -I$prefix/include"
+-fi
+-
+ dnl Checks for libraries.
+-ye_CHECK_LIBM
++dnl ye_CHECK_LIBM
++AC_SEARCH_LIBS(sqrt,m,LIBM="-lm")
++AC_SUBST(LIBM)
+ 
+ dnl Checks for header files.
+ AC_HEADER_STDC
+diff -Naur enca-1.13-orig/m4/libiconv.m4 enca-1.13/m4/libiconv.m4
+--- enca-1.13-orig/m4/libiconv.m4	2011-07-23 16:51:50.000000000 +0400
++++ enca-1.13/m4/libiconv.m4	2011-07-23 16:53:29.000000000 +0400
+@@ -16,8 +16,6 @@
+ AC_REQUIRE([AC_C_CONST])dnl
+ dnl
+ 
+-dnl Use standard iconv test
+-AM_ICONV
+ CONVERTER_LIBS="$CONVERTER_LIBS $LIBICONV"
+ 
+ dnl Compile iconvcap.c and run it to determine what encodings iconv actually
+@@ -27,7 +25,7 @@
+ libiconv_ok="$am_cv_func_iconv"
+ if test "$libiconv_ok" = yes; then
+   AC_MSG_CHECKING([whether iconv implementation is usable])
+-  if $CC -o iconvcap$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS $srcdir/iconvcap.c $LIBS $CONVERTER_LIBS 1>&5 2>&5 && test -s ./iconvcap$ac_exeext 2>&5; then
++  if $CC_FOR_BUILD -o iconvcap$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS $srcdir/iconvcap.c $LIBS $CONVERTER_LIBS 1>&5 2>&5 && test -s ./iconvcap$ac_exeext 2>&5; then
+     if ./iconvcap 2>&5 >iconvenc.h; then
+       libiconv_ok=yes
+     else

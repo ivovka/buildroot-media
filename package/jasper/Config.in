@@ -1,0 +1,5 @@
+config BR2_PACKAGE_JASPER
+        bool "jasper"
+        help
+            JPEG-2000 Part-1 standard (i.e., ISO/IEC 15444-1) implementation.
+            http://www.ece.uvic.ca/~mdadams/jasper/

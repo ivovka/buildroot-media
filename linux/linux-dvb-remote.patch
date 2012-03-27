@@ -1,0 +1,43 @@
+--- linux-3.0/drivers/media/dvb/dvb-usb/dw2102.c.bak	2011-11-03 22:29:41.000000000 +0400
++++ linux-3.0/drivers/media/dvb/dvb-usb/dw2102.c	2011-11-04 12:48:25.000000000 +0400
+@@ -511,7 +511,9 @@
+ 			u8 ibuf[5];
+ 			ret  = dw210x_op_rw(d->udev, 0xb8, 0, 0,
+ 					ibuf, 5, DW210X_READ_MSG);
+-			memcpy(msg[j].buf, ibuf + 3, 2);
++                        memcpy(msg[j].buf, ibuf + 2, 2);
++	                /*info("s6x0_i2c_transfer-dw2102_rc_query: ibuf=%d:%d:%d:%d:%d\n",
++                            ibuf[0],ibuf[1],ibuf[2],ibuf[3],ibuf[4]);*/
+ 			break;
+ 		}
+ 		case (DW2102_VOLTAGE_CTRL): {
+@@ -1331,21 +1333,23 @@
+ 	{ 0xf893, KEY_VOLUMEUP },
+ 	{ 0xf88c, KEY_VOLUMEDOWN },
+ 	{ 0xf883, KEY_RECORD },
+-	{ 0xf898, KEY_PAUSE  },
++	{ 0xf898, KEY_PAUSE  }, /* YELLOW on my remote */
+ 	{ 0xf899, KEY_OK },
+-	{ 0xf89a, KEY_SHUFFLE },
++	{ 0xf89a, KEY_SHUFFLE }, /* SNAP on my remote */
+ 	{ 0xf881, KEY_UP },
+ 	{ 0xf890, KEY_LEFT },
+ 	{ 0xf882, KEY_RIGHT },
+ 	{ 0xf888, KEY_DOWN },
+-	{ 0xf895, KEY_FAVORITES },
+-	{ 0xf897, KEY_SUBTITLE },
++	{ 0xf895, KEY_FAVORITES }, /* BLUE on my remote */
++	{ 0xf897, KEY_SUBTITLE }, /* GREEN on my remote */
+ 	{ 0xf89d, KEY_ZOOM },
+ 	{ 0xf89f, KEY_EXIT },
+ 	{ 0xf89e, KEY_MENU },
+ 	{ 0xf89c, KEY_EPG },
+-	{ 0xf880, KEY_PREVIOUS },
+-	{ 0xf89b, KEY_MODE }
++	{ 0xf880, KEY_PREVIOUS }, /* RED on my remote */
++	{ 0xf89b, KEY_MODE },
++        { 0xf8c0, KEY_PAGEDOWN}, /* 10+ on my remote */
++        { 0xf8d0, KEY_PAGEUP} /* 10- on my remote */
+ };
+ 
+ static struct rc_map_table rc_map_su3000_table[] = {

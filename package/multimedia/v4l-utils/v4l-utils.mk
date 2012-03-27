@@ -1,0 +1,23 @@
+V4L_UTILS_VERSION = 0.8.5
+V4L_UTILS_SOURCE = v4l-utils-$(V4L_UTILS_VERSION).tar.bz2
+V4L_UTILS_SITE = http://linuxtv.org/downloads/v4l-utils
+V4L_UTILS_INSTALL_STAGING = NO
+V4L_UTILS_BUILD_OPKG = YES
+V4L_UTILS_SECTION = system
+V4L_UTILS_DESCRIPTION = Linux V4L2 and DVB API utilities and v4l libraries (libv4l).
+
+#V4L_CFLAGS = `echo $(TARGET_CFLAGS) | $(SED) 's:-D_FILE_OFFSET_BITS=64::'`
+
+define V4L_UTILS_BUILD_CMDS
+    $(TARGET_MAKE_ENV) $(MAKE) CC="$(TARGET_CC)" CXX="$(TARGET_CXX)" LDFLAGS="$(TARGET_LDFLAGS)" PREFIX=/usr -C $(@D)
+endef
+
+define V4L_UTILS_INSTALL_TARGET_CMDS
+    $(TARGET_MAKE_ENV) $(MAKE) -C $(@D) DESTDIR=$(BUILD_DIR_OPKG)/$(V4L_UTILS_BASE_NAME) PREFIX=/usr install
+endef
+
+define V4L_UTILS_BUILD_OPKG_CMDS
+    $(TARGET_MAKE_ENV) $(MAKE) -C $(@D) DESTDIR=$(BUILD_DIR_OPKG)/$(V4L_UTILS_BASE_NAME) PREFIX=/usr install
+endef
+
+$(eval $(call GENTARGETS,package/multimedia,v4l-utils))
