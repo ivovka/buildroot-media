@@ -9,10 +9,10 @@ LIBFFI_SITE    = ftp://sources.redhat.com/pub/libffi/
 
 LIBFFI_INSTALL_STAGING = YES
 LIBFFI_BUILD_OPKG = YES
+LIBFFI_OPKG_DEPENDENCIES = libc
 
 LIBFFI_SECTION = devel
 LIBFFI_PRIORITY = optional
-LIBFFI_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 LIBFFI_DESCRIPTION = Foreign Function Interface Library
 
 # Move the headers to the usual location, and adjust the .pc file
