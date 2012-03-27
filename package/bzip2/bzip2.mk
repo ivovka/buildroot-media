@@ -81,20 +81,12 @@ define BZIP2_BUILD_OPKG_CMDS
 	$(TARGET_MAKE_ENV) $(TARGET_CONFIGURE_OPTS) \
 	$(MAKE) PREFIX=$(BUILD_DIR_OPKG)/bzip2-$(BZIP2_VERSION)/usr -C $(@D) install
 	mkdir -p $(BUILD_DIR_OPKG)/bzip2-$(BZIP2_VERSION)/usr/lib
-	mkdir -p $(BUILD_DIR_OPKG)/bzip2-$(BZIP2_VERSION)/usr/bin
 	cp $(@D)/libbz2.so.$(BZIP2_SONAME) $(BUILD_DIR_OPKG)/bzip2-$(BZIP2_VERSION)/usr/lib/
 	(cd $(BUILD_DIR_OPKG)/bzip2-$(BZIP2_VERSION)/usr/lib; \
 		ln -snf libbz2.so.$(BZIP2_SONAME) libbz2.so.1.0; \
 		ln -snf libbz2.so.$(BZIP2_SONAME) libbz2.so; \
 	)
-	(cd $(BUILD_DIR_OPKG)/bzip2-$(BZIP2_VERSION)/usr/bin; \
-		ln -snf bzip2 bunzip2; \
-		ln -snf bzip2 bzcat; \
-		ln -snf bzdiff bzcmp; \
-		ln -snf bzmore bzless; \
-		ln -snf bzgrep bzegrep; \
-		ln -snf bzgrep bzfgrep; \
-	)
+	rm -rf $(BUILD_DIR_OPKG)/bzip2-$(BZIP2_VERSION)/usr/bin
 endef
 
 define BZIP2_CLEAN_CMDS
