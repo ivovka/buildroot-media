@@ -8,10 +8,9 @@ PCRE_VERSION = 8.30
 PCRE_SITE = ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre
 PCRE_INSTALL_STAGING = YES
 PCRE_BUILD_OPKG = YES
+PCRE_OPKG_DEPENDENCIES = libc
 
 PCRE_SECTION = devel
-PCRE_PRIORITY = optional
-PCRE_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 PCRE_DESCRIPTION = Perl Compatible Regulat Expressions
 
 PCRE_CONF_OPT = --enable-unicode-properties --enable-utf8
@@ -35,6 +34,12 @@ endef
 define PCRE_OPKG_REMOVE_PCRE_CONFIG
 	rm -f $(BUILD_DIR_OPKG)/pcre-$(PCRE_VERSION)/usr/bin/pcre-config
 endef
+
+define PCRE_OPKG_RM_BIN
+	rm -rf $(BUILD_DIR_OPKG)/pcre-$(PCRE_VERSION)/usr/bin
+endef
+
+PCRE_PRE_BUILD_OPKG_HOOKS += PCRE_OPKG_RM_BIN
 
 ifneq ($(BR2_HAVE_DEVFILES),y)
 PCRE_POST_INSTALL_TARGET_HOOKS += PCRE_TARGET_REMOVE_PCRE_CONFIG
