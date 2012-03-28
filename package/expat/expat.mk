@@ -4,7 +4,7 @@
 #
 #############################################################
 
-EXPAT_VERSION = 2.0.1
+EXPAT_VERSION = 2.1.0
 EXPAT_SOURCE = expat-$(EXPAT_VERSION).tar.gz
 EXPAT_SITE = http://$(BR2_SOURCEFORGE_MIRROR).dl.sourceforge.net/sourceforge/expat
 EXPAT_INSTALL_STAGING = YES
@@ -12,10 +12,8 @@ EXPAT_INSTALL_TARGET = YES
 
 EXPAT_BUILD_OPKG = YES
 EXPAT_SECTION = text
-EXPAT_PRIORITY = optional
-EXPAT_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 EXPAT_DESCRIPTION = XML parser library
-EXPAT_OPKG_DEPENDENCIES = 
+EXPAT_OPKG_DEPENDENCIES = libc 
 
 EXPAT_INSTALL_STAGING_OPT = DESTDIR=$(STAGING_DIR) installlib
 EXPAT_INSTALL_TARGET_OPT = DESTDIR=$(TARGET_DIR) installlib
