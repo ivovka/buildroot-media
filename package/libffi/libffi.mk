@@ -26,6 +26,12 @@ endef
 
 LIBFFI_POST_INSTALL_STAGING_HOOKS += LIBFFI_MOVE_STAGING_HEADERS
 
+define LIBFFI_RM_OPKG_HEADERS
+	rm -rf $(BUILD_DIR_OPKG)/libffi-$(LIBFFI_VERSION)/usr/lib/libffi-*
+endef
+
+LIBFFI_PRE_BUILD_OPKG_HOOKS += LIBFFI_RM_OPKG_HEADERS
+
 # Similar for target headers
 define LIBFFI_MOVE_TARGET_HEADERS
 	install -d $(TARGET_DIR)/usr/include/
