@@ -12,8 +12,6 @@ LIBUSB_INSTALL_TARGET = YES
 LIBUSB_BUILD_OPKG = YES
 
 LIBUSB_SECTION = system
-LIBUSB_PRIORITY = optional
-LIBUSB_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 LIBUSB_DESCRIPTION = OS independent USB device access
 
 $(eval $(call AUTOTARGETS,package,libusb))
