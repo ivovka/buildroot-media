@@ -16,15 +16,17 @@ UTIL_LINUX_CONF_ENV = gt_cv_func_gnugettext1_libintl=no scanf_cv_alloc_modifier=
 UTIL_LINUX_CONF_OPT = \
     --enable-tls \
     --disable-mount \
-    --disable-fsck \
+    --enable-fsck \
     --enable-libuuid \
-    --disable-uuidd \
+    --enable-uuidd \
     --enable-libblkid \
     --disable-libmount \
     --disable-libmount-mount \
+    --disable-mountpoint \
     --disable-nls \
     --disable-rpath \
     --disable-arch \
+    --disable-ddate \
     --disable-agetty \
     --disable-cramfs \
     --disable-switch-root \
@@ -35,6 +37,7 @@ UTIL_LINUX_CONF_OPT = \
     --disable-init \
     --disable-kill \
     --disable-last \
+    --disable-line \
     --disable-mesg \
     --disable-partx \
     --disable-raw \
@@ -62,11 +65,12 @@ UTIL_LINUX_CONF_OPT = \
 define UTIL_LINUX_BUILD_OPKG_CMDS
     mkdir -p $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/sbin
     cp $(BUILD_DIR)/$(UTIL_LINUX_BASE_NAME)/misc-utils/blkid $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/sbin
-    mkdir -p $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/usr/lib
-    cp -PR $(BUILD_DIR)/$(UTIL_LINUX_BASE_NAME)/libblkid/src/.libs/libblkid.so* $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/usr/lib
-    rm -rf $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/usr/lib/libblkid.so*T
-    cp -PR $(BUILD_DIR)/$(UTIL_LINUX_BASE_NAME)/libuuid/src/.libs/libuuid.so* $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/usr/lib
-    rm -rf $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/usr/lib/libuuid.so*T
+    cp $(BUILD_DIR)/$(UTIL_LINUX_BASE_NAME)/fsck/fsck $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/sbin
+    mkdir -p $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/lib
+    cp -PR $(BUILD_DIR)/$(UTIL_LINUX_BASE_NAME)/libblkid/src/.libs/libblkid.so* $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/lib
+    rm -rf $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/lib/libblkid.so*T
+    cp -PR $(BUILD_DIR)/$(UTIL_LINUX_BASE_NAME)/libuuid/src/.libs/libuuid.so* $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/lib
+    rm -rf $(BUILD_DIR_OPKG)/$(UTIL_LINUX_BASE_NAME)/lib/libuuid.so*T
 endef
 
 $(eval $(call AUTOTARGETS,package,util-linux))
