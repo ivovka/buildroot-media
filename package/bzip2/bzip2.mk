@@ -11,8 +11,6 @@ BZIP2_INSTALL_STAGING=YES
 BZIP2_BUILD_OPKG = YES
 
 BZIP2_SECTION = base
-BZIP2_PRIORITY = optional
-BZIP2_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 BZIP2_DESCRIPTION = bzip2 data compressor
 
 define BZIP2_FIX_MAKEFILE
