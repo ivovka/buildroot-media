@@ -12,10 +12,15 @@ FRIBIDI_INSTALL_TARGET = YES
 FRIBIDI_BUILD_OPKG = YES
 
 FRIBIDI_SECTION = other
-FRIBIDI_PRIORITY = optional
-FRIBIDI_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 FRIBIDI_DESCRIPTION = The Bidirectional Algorithm library
-FRIBIDI_CONF_OPT = --with-glib=no \
+FRIBIDI_CONF_OPT = --without-glib \
     --disable-debug \
-    --enable-malloc
+    --disable-malloc \
+    --enable-charsets
+
+define FRIBIDI_OPKG_RM_BIN
+    rm -rf $(BUILD_DIR_OPKG)/$(FRIBIDI_BASE_NAME)/usr/bin
+endef
+
+FRIBIDI_PRE_BUILD_OPKG_HOOKS += FRIBIDI_OPKG_RM_BIN
 $(eval $(call AUTOTARGETS,package,fribidi))
