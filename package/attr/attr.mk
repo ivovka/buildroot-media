@@ -9,10 +9,9 @@ ATTR_SOURCE = attr-$(ATTR_VERSION).src.tar.gz
 ATTR_SITE = http://download.savannah.gnu.org/releases/attr
 ATTR_INSTALL_STAGING = YES
 ATTR_BUILD_OPKG = YES
+ATTR_OPKG_DEPENDENCIES = libc
 
 ATTR_SECTION = accessibility 
-ATTR_PRIORITY = optional
-ATTR_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 ATTR_DESCRIPTION = Extended Attributes Of Filesystem Objects
 ATTR_CONF_OPT = --enable-gettext=no
 
@@ -34,5 +33,11 @@ ATTR_BUILD_OPKG_OPT = 			\
 	prefix=$(BUILD_DIR_OPKG)/attr-$(ATTR_VERSION)/usr 		\
 	exec_prefix=$(BUILD_DIR_OPKG)/attr-$(ATTR_VERSION)/usr 		\
 	install install-lib
+
+define ATTR_OPKG_RM_BIN
+	rm -rf $(BUILD_DIR_OPKG)/$(ATTR_BASE_NAME)/usr/bin
+endef
+
+ATTR_PRE_BUILD_OPKG_HOOKS += ATTR_OPKG_RM_BIN
 
 $(eval $(call AUTOTARGETS,package,attr))
