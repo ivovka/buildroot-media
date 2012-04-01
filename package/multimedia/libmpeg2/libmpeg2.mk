@@ -11,7 +11,6 @@ LIBMPEG2_BUILD_OPKG = YES
 
 LIBMPEG2_SECTION = libs
 LIBMPEG2_PRIORITY = important
-LIBMPEG2_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 LIBMPEG2_DESCRIPTION = The MPEG Library - version 2
 
 LIBMPEG2_CONF_OPT = --without-x --disable-directx
@@ -30,7 +29,13 @@ define LIBMPEG2_REMOVE_BINS
 		mpeg2dec corrupt_mpeg2 extract_mpeg2)
 endef
 
+define LIBMPEG2_OPKG_RM_BINS
+	rm -rf $(BUILD_DIR_OPKG)/$(LIBMPEG2_BASE_NAME)/usr/bin
+endef
+
 LIBMPEG2_POST_INSTALL_TARGET_HOOKS += LIBMPEG2_REMOVE_BINS
+
+LIBMPEG2_PRE_BUILD_OPKG_HOOKS += LIBMPEG2_OPKG_RM_BINS
 endif
 
 $(eval $(call AUTOTARGETS,package/multimedia,libmpeg2))
