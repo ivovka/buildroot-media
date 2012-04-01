@@ -4,7 +4,7 @@
 #
 #############################################################
 
-LAME_VERSION = 3.98.4
+LAME_VERSION = 3.99.4
 LAME_SITE = http://$(BR2_SOURCEFORGE_MIRROR).dl.sourceforge.net/sourceforge/lame
 LAME_DEPENDENCIES = host-pkg-config
 LAME_INSTALL_STAGING = YES
@@ -41,9 +41,8 @@ LAME_CONF_OPT += \
             --disable-frontend \
             --disable-mp3x \
             --disable-mp3rtp \
-            --disable-brhist \
-            --disable-all-float \
             --enable-expopt=no \
+	    --disable-dynamic-frontends \
             --enable-debug=no
 
 ifeq ($(BR2_ENDIAN),"BIG")
