@@ -12,8 +12,6 @@ LIBMODPLUG_INSTALL_TARGET = YES
 LIBMODPLUG_BUILD_OPKG = YES
 
 LIBMODPLUG_SECTION = libs
-LIBMODPLUG_PRIORITY = optional
-LIBMODPLUG_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 LIBMODPLUG_DESCRIPTION = renders mod music files as raw audio data, for playing or conversion.
 
 
