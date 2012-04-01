@@ -12,8 +12,6 @@ LIBDAEMON_INSTALL_STAGING = YES
 LIBDAEMON_BUILD_OPKG = YES
 
 LIBDAEMON_SECTION = other
-LIBDAEMON_PRIORITY = optional
-LIBDAEMON_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 LIBDAEMON_DESCRIPTION = A lightweight C library which eases the writing of UNIX daemon
 
 LIBDAEMON_CONF_ENV = ac_cv_func_setpgrp_void=no
