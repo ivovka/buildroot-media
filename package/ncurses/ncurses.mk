@@ -29,8 +29,6 @@ NCURSES_INSTALL_STAGING = YES
 NCURSES_BUILD_OPKG = YES
 
 NCURSES_SECTION = devel
-NCURSES_PRIORITY = optional
-NCURSES_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 NCURSES_DESCRIPTION = The ncurses (new curses) library
 
 NCURSES_CONF_OPT = \
@@ -47,6 +45,11 @@ NCURSES_CONF_OPT = \
 	--enable-const \
 	--enable-overwrite \
 	--enable-broken_linker \
+	--with-termlib \
+	--enable-termcap \
+	--enable-getcap \
+	--disable-getcap-cache \
+	--disable-tcap-names \
 	--disable-static
 
 ifneq ($(BR2_ENABLE_DEBUG),y)
@@ -150,26 +153,24 @@ define NCURSES_INSTALL_TARGET_CMDS
 endef # NCURSES_INSTALL_TARGET_CMDS
 
 define NCURSES_BUILD_OPKG_CMDS
-	mkdir -p $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/lib
-	cp -dpf $(NCURSES_DIR)/lib/libncurses.so* $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/lib/
+	mkdir -p $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/lib
+	cp -dpf $(NCURSES_DIR)/lib/libncurses.so* $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/lib/
+	cp -dpf $(NCURSES_DIR)/lib/libtinfo.so* $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/lib/
 	$(NCURSES_INSTALL_OPKG_PANEL)
 	$(NCURSES_INSTALL_OPKG_FORM)
 	$(NCURSES_INSTALL_OPKG_MENU)
-	ln -snf /usr/share/terminfo $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/lib/terminfo
-	mkdir -p $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/x
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/x/xterm $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/x
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/x/xterm-color $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/x
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/x/xterm-xfree86 $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/x
-	mkdir -p $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/v
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/v/vt100 $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/v
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/v/vt102 $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/v
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/v/vt200 $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/v
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/v/vt220 $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/v
-	mkdir -p $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/a
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/a/ansi $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/a
-	mkdir -p $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/l
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/l/linux $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/share/terminfo/l
-	-$(STRIPCMD) $(STRIP_STRIP_UNNEEDED) $(BUILD_DIR_OPKG)/ncurses-$(NCURSES_VERSION)/usr/lib/libncurses.so*
+	ln -snf /usr/share/terminfo $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/lib/terminfo
+	mkdir -p $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/share/terminfo/x
+	cp -dpf $(STAGING_DIR)/usr/share/terminfo/x/xterm $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/share/terminfo/x
+	cp -dpf $(STAGING_DIR)/usr/share/terminfo/x/xterm-color $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/share/terminfo/x
+	cp -dpf $(STAGING_DIR)/usr/share/terminfo/x/xterm-xfree86 $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/share/terminfo/x
+	mkdir -p $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/share/terminfo/v
+	cp -dpf $(STAGING_DIR)/usr/share/terminfo/v/vt100 $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/share/terminfo/v
+	mkdir -p $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/share/terminfo/a
+	cp -dpf $(STAGING_DIR)/usr/share/terminfo/a/ansi $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/share/terminfo/a
+	mkdir -p $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/share/terminfo/l
+	cp -dpf $(STAGING_DIR)/usr/share/terminfo/l/linux $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/share/terminfo/l
+	-$(STRIPCMD) $(STRIP_STRIP_UNNEEDED) $(BUILD_DIR_OPKG)/$(NCURSES_BASE_NAME)/usr/lib/libncurses.so*
 	$(NCURSES_INSTALL_OPKG_DEVFILES)
 endef # NCURSES_BUILD_OPKG_CMDS
 
