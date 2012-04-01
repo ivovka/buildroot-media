@@ -11,8 +11,6 @@ FAAD2_BUILD_OPKG = YES
 FAAD2_AUTORECONF = YES
 
 FAAD2_SECTION = libs
-FAAD2_PRIORITY = optional
-FAAD2_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 FAAD2_DESCRIPTION = FAAD2 is an open source MPEG-4 and MPEG-2 AAC decoder
 
 FAAD2_CONF_OPT = --without-xmms \
