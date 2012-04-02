@@ -3,7 +3,7 @@
 # alsa-lib
 #
 #############################################################
-ALSA_LIB_VERSION = 1.0.24.1
+ALSA_LIB_VERSION = 1.0.25
 ALSA_LIB_SOURCE = alsa-lib-$(ALSA_LIB_VERSION).tar.bz2
 ALSA_LIB_SITE = ftp://ftp.alsa-project.org/pub/lib
 ALSA_LIB_INSTALL_STAGING = YES
@@ -12,7 +12,6 @@ ALSA_LIB_BUILD_OPKG = YES
 
 ALSA_LIB_SECTION = libs
 ALSA_LIB_PRIORITY = important
-ALSA_LIB_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 ALSA_LIB_DESCRIPTION = The Advanced Linux Sound Architecture (ALSA) provides audio and MIDI\\n functionality to the Linux operating system.
 
 ALSA_LIB_CFLAGS=$(TARGET_CFLAGS)
