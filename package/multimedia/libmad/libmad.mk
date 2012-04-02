@@ -11,10 +11,7 @@ LIBMAD_LIBTOOL_PATCH = NO
 LIBMAD_BUILD_OPKG = YES
 
 LIBMAD_SECTION = libs
-LIBMAD_PRIORITY = optional
-LIBMAD_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 LIBMAD_DESCRIPTION = MPEG Audio Decoder
-
 
 define LIBMAD_PREVENT_AUTOMAKE
 	# Prevent automake from running.
@@ -37,6 +34,8 @@ LIBMAD_POST_INSTALL_TARGET_HOOKS += LIBMAD_INSTALL_TARGET_PC
 
 LIBMAD_CONF_OPT = \
 		--disable-debugging \
-		--enable-speed
+		--enable-speed \
+		--enable-accuracy \
+		--enable-fpm=64bit
 
 $(eval $(call AUTOTARGETS,package/multimedia,libmad))
