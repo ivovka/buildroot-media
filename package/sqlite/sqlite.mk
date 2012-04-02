@@ -4,15 +4,13 @@
 #
 #############################################################
 
-SQLITE_VERSION = 3070603
+SQLITE_VERSION = 3071100
 SQLITE_SOURCE = sqlite-autoconf-$(SQLITE_VERSION).tar.gz
 SQLITE_SITE = http://www.sqlite.org
 SQLITE_INSTALL_STAGING = YES
 SQLITE_BUILD_OPKG = YES
 
 SQLITE_SECTION = database
-SQLITE_PRIORITY = optional
-SQLITE_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 SQLITE_DESCRIPTION = An Embeddable SQL Database Engine
 
 ifneq ($(BR2_LARGEFILE),y)
@@ -48,5 +46,11 @@ define SQLITE_UNINSTALL_STAGING_CMDS
 	rm -f $(STAGING_DIR)/usr/lib/pkgconfig/sqlite3.pc
 	rm -f $(STAGING_DIR)/usr/include/sqlite3*.h
 endef
+
+define SQLITE_OPKG_RM_BIN
+	rm -rf $(BUILD_DIR_OPKG)/$(SQLITE_BASE_NAME)/usr/bin
+endef
+
+SQLITE_PRE_BUILD_OPKG_HOOKS += SQLITE_OPKG_RM_BIN
 
 $(eval $(call AUTOTARGETS,package,sqlite))
