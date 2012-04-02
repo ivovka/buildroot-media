@@ -4,15 +4,13 @@
 #
 #############################################################
 
-LIBCAP_VERSION = 2.21
+LIBCAP_VERSION = 2.22
 LIBCAP_SITE = http://mirror.be.gbxs.net/pub/linux/libs/security/linux-privs/libcap2
 LIBCAP_DEPENDENCIES = host-libcap attr
 LIBCAP_INSTALL_STAGING = YES
 LIBCAP_BUILD_OPKG = YES
 
 LIBCAP_SECTION = devel
-LIBCAP_PRIORITY = optional
-LIBCAP_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 LIBCAP_DESCRIPTION = A library for getting and setting POSIX.1e capabilities
 LIBCAP_OPKG_DEPENDENCIES = attr
 
