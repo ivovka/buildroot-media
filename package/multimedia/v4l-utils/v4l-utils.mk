@@ -5,6 +5,8 @@ V4L_UTILS_INSTALL_STAGING = NO
 V4L_UTILS_BUILD_OPKG = YES
 V4L_UTILS_SECTION = system
 V4L_UTILS_DESCRIPTION = Linux V4L2 and DVB API utilities and v4l libraries (libv4l).
+V4L_UTILS_DEPENDENCIES = $(call qstrip,$(BR2_JPEG_LIBRARY))
+V4L_UTILS_OPKG_DEPENDENCIES = $(call qstrip,$(BR2_JPEG_LIBRARY))
 
 #V4L_CFLAGS = `echo $(TARGET_CFLAGS) | $(SED) 's:-D_FILE_OFFSET_BITS=64::'`
 
@@ -19,5 +21,12 @@ endef
 define V4L_UTILS_BUILD_OPKG_CMDS
     $(TARGET_MAKE_ENV) $(MAKE) -C $(@D) DESTDIR=$(BUILD_DIR_OPKG)/$(V4L_UTILS_BASE_NAME) PREFIX=/usr install
 endef
+
+define V4L_UTILS_OPKG_RM
+  find $(BUILD_DIR_OPKG)/$(V4L_UTILS_BASE_NAME)/usr/bin -type f ! -name ir-keytable | xargs rm
+  rm -rf $(BUILD_DIR_OPKG)/$(V4L_UTILS_BASE_NAME)/usr/sbin
+endef
+
+V4L_UTILS_PRE_BUILD_OPKG_HOOKS += V4L_UTILS_OPKG_RM
 
 $(eval $(call GENTARGETS,package/multimedia,v4l-utils))
