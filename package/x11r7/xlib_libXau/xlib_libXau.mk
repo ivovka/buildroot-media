@@ -16,6 +16,8 @@ XLIB_LIBXAU_BUILD_OPKG = YES
 XLIB_LIBXAU_SECTION = x11
 XLIB_LIBXAU_DESCRIPTION = X authorization file management libary
 
+XLIB_LIBXAU_CONF_OPT = --enable-xthreads
+
 HOST_XLIB_LIBXAU_DEPENDENCIES = host-xutil_util-macros host-xproto_xproto
 
 $(eval $(call AUTOTARGETS,package/x11r7,xlib_libXau))
