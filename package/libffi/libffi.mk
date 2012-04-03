@@ -42,5 +42,10 @@ endef
 
 LIBFFI_POST_INSTALL_TARGET_HOOKS += LIBFFI_MOVE_TARGET_HEADERS
 
+HOST_LIBFFI_CONF_OPT = \
+	--enable-structs \
+	--enable-raw-api \
+	--disable-purify-safety
+
 $(eval $(call AUTOTARGETS,package,libffi))
 $(eval $(call AUTOTARGETS,package,libffi,host))
