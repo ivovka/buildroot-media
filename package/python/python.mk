@@ -4,14 +4,12 @@
 #
 #############################################################
 PYTHON_VERSION_MAJOR = 2.7
-PYTHON_VERSION       = $(PYTHON_VERSION_MAJOR).1
+PYTHON_VERSION       = $(PYTHON_VERSION_MAJOR).2
 PYTHON_SOURCE        = Python-$(PYTHON_VERSION).tar.bz2
 PYTHON_SITE          = http://python.org/ftp/python/$(PYTHON_VERSION)
 PYTHON_BUILD_OPKG = YES
 
 PYTHON_SECTION = lang
-PYTHON_PRIORITY = optional
-PYTHON_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 PYTHON_DESCRIPTION = The Python programming language
 PYTHON_OPKG_DEPENDENCIES = libffi,file
 
@@ -21,31 +19,24 @@ PYTHON_OPKG_DEPENDENCIES = libffi,file
 # installed in $(HOST_DIR), as it is needed when cross-compiling
 # third-party Python modules.
 
+HOST_PYTHON_DISABLED_MODULES = "readline _curses _curses_panel _tkinter nis gdbm bsddb _codecs_kr _codecs_jp _codecs_cn _codecs_tw _codecs_hk"
+
 HOST_PYTHON_CONF_OPT += 	\
 	--without-cxx-main 	\
-	--disable-sqlite3	\
-	--disable-tk		\
-	--with-expat=system	\
-	--disable-curses	\
-	--disable-codecs-cjk	\
-	--disable-nis		\
-	--disable-unicodedata	\
-	--disable-dbm		\
-	--disable-gdbm		\
-	--disable-bsddb		\
-	--disable-test-modules	\
-	--disable-bz2		\
-	--disable-ssl
+	--with-threads		\
+	--enable-unicode=ucs4	\
+	--with-system-expat
 
 HOST_PYTHON_MAKE_ENV = \
 	PYTHON_MODULES_INCLUDE=$(HOST_DIR)/usr/include \
-	PYTHON_MODULES_LIB="$(HOST_DIR)/lib $(HOST_DIR)/usr/lib"
+	PYTHON_MODULES_LIB="$(HOST_DIR)/lib $(HOST_DIR)/usr/lib" \
+	PYTHON_DISABLE_MODULES=$(HOST_PYTHON_DISABLED_MODULES)
 
 HOST_PYTHON_AUTORECONF = YES
 
 PYTHON_DEPENDENCIES  = zlib host-python libffi
 
-HOST_PYTHON_DEPENDENCIES = host-expat
+HOST_PYTHON_DEPENDENCIES = host-zlib host-expat
 
 PYTHON_INSTALL_STAGING = YES
 
@@ -210,6 +201,7 @@ PYTHON_PRE_BUILD_OPKG_HOOKS += PYTHON_REMOVE_USELESS_MODULES_OPKG
 
 define HOST_PYTHON_LN_PYTHON2
     ln -sf python $(HOST_DIR)/usr/bin/python2
+    cp $(HOST_PYTHON_DIR)/Parser/pgen $(HOST_DIR)/usr/bin/
 endef
 
 HOST_PYTHON_POST_INSTALL_HOOKS += HOST_PYTHON_LN_PYTHON2
