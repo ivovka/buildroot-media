@@ -3,7 +3,7 @@
 # dbus
 #
 #############################################################
-DBUS_VERSION = 1.4.12
+DBUS_VERSION = 1.4.20
 DBUS_SOURCE = dbus-$(DBUS_VERSION).tar.gz
 DBUS_SITE = http://dbus.freedesktop.org/releases/dbus/
 DBUS_INSTALL_STAGING = YES
@@ -12,9 +12,9 @@ DBUS_BUILD_OPKG = YES
 DBUS_SECTION = system
 DBUS_PRIORITY = required
 DBUS_DESCRIPTION = simple interprocess messaging system
-DBUS_OPKG_DEPENDENCIES = libx11
+DBUS_OPKG_DEPENDENCIES = expat
 
-DBUS_DEPENDENCIES = host-pkg-config xlib_libX11
+DBUS_DEPENDENCIES = host-pkg-config expat
 
 DBUS_CONF_ENV = ac_cv_have_abstract_sockets=yes
 DBUS_CONF_OPT = \
@@ -29,13 +29,12 @@ DBUS_CONF_OPT = \
     --disable-xml-docs \
     --disable-doxygen-docs \
     --enable-abstract-sockets \
-    --enable-x11-autolaunch \
+    --disable-x11-autolaunch \
     --disable-selinux \
     --disable-libaudit \
     --enable-dnotify \
     --enable-inotify \
-    --with-xml=expat \
-    --with-x \
+    --without-x \
     --with-dbus-user=dbus \
     --program-prefix="" \
     --with-system-socket=/var/run/dbus/system_bus_socket \
@@ -56,7 +55,13 @@ define DBUS_CP_OPKG_SCRIPTS
     cp $(TOPDIR)/package/dbus/opkg-postinst $(BUILD_DIR_OPKG)/$(DBUS_BASE_NAME)/CONTROL/postinst
 endef
 
+define DBUS_OPKG_RM_INCLUDE
+    rm -rf $(BUILD_DIR_OPKG)/$(DBUS_BASE_NAME)/usr/lib/dbus-1.0
+    rm -rf $(BUILD_DIR_OPKG)/$(DBUS_BASE_NAME)/var
+endef
+
 DBUS_PRE_BUILD_OPKG_HOOKS += DBUS_CP_OPKG_SCRIPTS
+DBUS_PRE_BUILD_OPKG_HOOKS += DBUS_OPKG_RM_INCLUDE
 
 # fix rebuild (dbus makefile errors out if /var/lib/dbus is a symlink)
 define DBUS_REMOVE_VAR_LIB_DBUS
