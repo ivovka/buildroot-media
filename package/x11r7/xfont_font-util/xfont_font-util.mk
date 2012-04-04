@@ -18,5 +18,11 @@ XFONT_FONT_UTIL_CONF_OPT += --with-mapdir=/usr/share/fonts/util
 
 HOST_XFONT_FONT_UTIL_DEPENDENCIES = host-pkg-config host-xutil_util-macros
 
+define XFONT_FONT_UTIL_OPKG_RM_BIN
+  rm -rf $(BUILD_DIR_OPKG)/$(XFONT_FONT_UTIL_BASE_NAME)/usr/{lib,bin}
+endef
+
+XFONT_FONT_UTIL_PRE_BUILD_OPKG_HOOKS += XFONT_FONT_UTIL_OPKG_RM_BIN
+
 $(eval $(call AUTOTARGETS,package/x11r7,xfont_font-util))
 $(eval $(call AUTOTARGETS,package/x11r7,xfont_font-util,host))
