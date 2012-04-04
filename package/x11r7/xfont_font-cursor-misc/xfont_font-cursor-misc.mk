@@ -17,6 +17,7 @@ XFONT_FONT_CURSOR_MISC_SECTION = x11
 XFONT_FONT_CURSOR_MISC_DESCRIPTION = X11 cursor fonts
 XFONT_FONT_CURSOR_MISC_CONF_OPT = --with-fontrootdir=/usr/share/fonts
 XFONT_FONT_CURSOR_MISC_DEPENDENCIES = xutil_util-macros xfont_font-util host-xfont_font-util host-xapp_mkfontscale host-xapp_mkfontdir host-xapp_bdftopcf
+XFONT_FONT_CURSOR_MISC_OPKG_DEPENDENCIES = mkfontdir, mkfontscale
 
 define XFONT_FONT_CURSOR_MISC_RM_FONTS_DIR
     rm $(BUILD_DIR_OPKG)/$(XFONT_FONT_CURSOR_MISC_BASE_NAME)/usr/share/fonts/misc/fonts.dir
