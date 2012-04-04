@@ -1,0 +1,8 @@
+config BR2_PACKAGE_LIBGSSGLUE
+        bool "libgssglue"
+        help
+          libgssglue is a library which exports a gssapi interface,
+          but doesn't implement any gssapi mechanisms itself;
+          instead it calls gssapi routines in other libraries, depending on the mechanism.
+
+          http://www.citi.umich.edu/projects/nfsv4/linux/libgssglue/
