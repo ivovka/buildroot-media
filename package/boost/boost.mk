@@ -3,21 +3,20 @@
 # boost
 #
 #############################################################
-BOOST_VERSION = 1_47_0
-BOOST_VERSION_URL = 1.47.0
+BOOST_VERSION = 1_49_0
+BOOST_VERSION_URL = 1.49.0
 BOOST_SOURCE = boost_$(BOOST_VERSION).tar.bz2
 BOOST_SITE = http://prdownloads.sourceforge.net/boost/boost/$(BOOST_VERSION_URL)
 BOOST_INSTALL_STAGING = YES
 BOOST_INSTALL_TARGET = YES
 BOOST_BUILD_OPKG = YES
+BOOST_DEPENDENCIES = zlib bzip2 host-boost host-python
+BOOST_OPKG_DEPENDENCIES = zlib,bzip2
 
 BOOST_SECTION = devel
 BOOST_PRIORITY = important
-BOOST_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 BOOST_DESCRIPTION = Peer-reviewed STL style libraries for C++
-BOOST_OPKG_DEPENDENCIES = bzip2
 
-BOOST_DEPENDENCIES = zlib bzip2 host-boost host-python
 
 define BOOST_CONFIGURE_CMDS
     (cd $(BOOST_DIR) && \
@@ -25,7 +24,7 @@ define BOOST_CONFIGURE_CMDS
 	--prefix=/usr \
 	--with-bjam=$(HOST_DIR)/usr/bin/bjam \
 	--with-python=$(HOST_DIR)/usr/bin/python && \
-    echo "using gcc : `$(TARGET_CC) -v 2>&1  | tail -n 1 |awk '{print $$3}'` : $(TARGET_CC)  ; " \
+    echo "using gcc : `$(TARGET_CC) -v 2>&1  | tail -n 1 |awk '{print $$3}'` : $(TARGET_CC)  : <compileflags>\"$(TARGET_CFLAGS)\" <linkflags>\"$(TARGET_LDFLAGS)\" ;" \
 	> tools/build/v2/user-config.jam \
     )
 endef
