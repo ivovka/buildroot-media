@@ -87,17 +87,10 @@ DBUS_POST_INSTALL_TARGET_HOOKS += DBUS_INSTALL_TARGET_FIXUP
 
 HOST_DBUS_DEPENDENCIES = host-pkg-config host-expat
 HOST_DBUS_CONF_OPT = \
-		--with-dbus-user=dbus \
 		--disable-tests \
-		--disable-asserts \
-		--enable-abstract-sockets \
-		--disable-selinux \
 		--disable-xml-docs \
 		--disable-doxygen-docs \
-		--disable-static \
-		--enable-dnotify \
-		--without-x \
-		--with-xml=expat
+		--enable-asserts=yes
 
 # dbus for the host
 DBUS_HOST_INTROSPECT=$(HOST_DBUS_DIR)/introspect.xml
