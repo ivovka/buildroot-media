@@ -5,7 +5,8 @@ PM_UTILS_INSTALL_STAGING = NO
 PM_UTILS_BUILD_OPKG = YES
 PM_UTILS_SECTION = system
 PM_UTILS_DESCRIPTION = a small collection of scripts that handle suspend and resume on behalf of HAL.
-PM_UTILS_OPKG_DEPENDENCIES = kbd
+PM_UTILS_OPKG_DEPENDENCIES = busybox,bash
+PM_UTILS_DEPENDENCIES = bash
 
 define PM_UTILS_COPY_QUIRKS
     mkdir -p $(BUILD_DIR_OPKG)/$(PM_UTILS_BASE_NAME)/etc/pm/config.d

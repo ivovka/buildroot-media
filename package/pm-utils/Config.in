@@ -1,5 +1,6 @@
 config BR2_PACKAGE_PM_UTILS
 	bool "pm-utils"
+        select BR2_PACKAGE_BASH
 	help
           pm-utils is a small collection of scripts that handle suspend and resume on behalf of HAL.
 
