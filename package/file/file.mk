@@ -4,20 +4,19 @@
 #
 #############################################################
 
-FILE_VERSION = 5.07
+FILE_VERSION = 5.11
 FILE_SITE = ftp://ftp.astron.com/pub/file/
 FILE_DEPENDENCIES = host-file zlib
+FILE_OPKG_DEPENDENCIES = zlib
 HOST_FILE_DEPENDENCIES = host-zlib
 FILE_BUILD_OPKG = YES
 
 FILE_SECTION = devel
-FILE_PRIORITY = optional
-FILE_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 FILE_DESCRIPTION = File type identification utility
 
-FILE_CONF_OPT = \
-    --enable-fsect-man5 \
-    --disable-rpath
+FILE_CONF_OPT = --enable-fsect-man5
+
+HOST_FILE_CONF_OPT = --enable-fsect-man5
 
 define FILE_UNINSTALL_TARGET_CMDS
 	$(MAKE) DESTDIR=$(TARGET_DIR) uninstall -C $(FILE_DIR)
