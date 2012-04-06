@@ -11,11 +11,10 @@ EGGDBUS_BUILD_OPKG = YES
 
 EGGDBUS_SECTION = devel
 EGGDBUS_DESCRIPTION = D-Bus bindings for GObject
-EGGDBUS_OPKG_DEPENDENCIES = dbus-glib
-EGGDBUS_DEPENDENCIES = host-eggdbus dbus-glib
+EGGDBUS_OPKG_DEPENDENCIES = dbus-glib,libglib2,dbus
+EGGDBUS_DEPENDENCIES = host-eggdbus dbus-glib libglib2 dbus
+HOST_EGGDBUS_DEPENDENCIES = host-dbus-glib host-libglib2 host-dbus
 EGGDBUS_AUTORECONF = YES
-
-HOST_EGGDBUS_DEPENDENCIES = host-dbus-glib
 
 EGGDBUS_HOST_BINARY:=$(HOST_DIR)/usr/bin/eggdbus-binding-tool
 
