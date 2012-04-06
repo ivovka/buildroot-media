@@ -8,14 +8,12 @@ LIBXML2_VERSION = 2.7.8
 LIBXML2_SITE = ftp://xmlsoft.org/libxml2
 LIBXML2_INSTALL_STAGING = YES
 LIBXML2_BUILD_OPKG = YES
-LIBXML2_DEPENDENCIES = zlib
+LIBXML2_DEPENDENCIES = zlib host-libxml2
 LIBXML2_OPKG_DEPENDENCIES = zlib
+HOST_LIBXML2_DEPENDENCIES = host-pkg-config host-python host-zlib
 
 LIBXML2_SECTION = libs
 LIBXML2_DESCRIPTION = XML parser library for Gnome
-
-# Add host-libxml2 dependency because i don't know which packages actually needs libxml2 on host
-LIBXML2_DEPENDENCIES += host-libxml2
 
 ifneq ($(BR2_LARGEFILE),y)
 LIBXML2_CONF_ENV = CC="$(TARGET_CC) $(TARGET_CFLAGS) -DNO_LARGEFILE_SOURCE"
@@ -30,9 +28,7 @@ endef
 
 LIBXML2_POST_INSTALL_STAGING_HOOKS += LIBXML2_STAGING_LIBXML2_CONFIG_FIXUP
 
-HOST_LIBXML2_DEPENDENCIES = host-pkg-config host-python host-zlib
-
-HOST_LIBXML2_CONF_OPT = --without-debug --with-python --with-zlib
+HOST_LIBXML2_CONF_OPT = --without-debug --with-python --with-zlib --disable-ipv6
 
 define LIBXML2_REMOVE_CONFIG_SCRIPTS
 	$(RM) -f $1/usr/bin/xml2-config
