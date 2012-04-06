@@ -4,6 +4,7 @@ config BR2_PACKAGE_UDEV
         select BR2_PACKAGE_PCIUTILS
         select BR2_PACKAGE_USBUTILS
         select BR2_PACKAGE_LIBUSB_COMPAT
+        select BR2_PACKAGE_UTIL_LINUX
 	select BR2_PACKAGE_KMOD
 	help
 	  Userspace device daemon.
