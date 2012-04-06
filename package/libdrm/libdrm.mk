@@ -11,7 +11,7 @@ LIBDRM_BUILD_OPKG = YES
 
 LIBDRM_SECTION = graphics
 LIBDRM_DESCRIPTION = Userspace interface to kernel DRM services
-LIBDRM_OPKG_DEPENDENCIES = udev,libpciaccess,libxmu,pthread-stubs
+LIBDRM_OPKG_DEPENDENCIES = udev,libpciaccess,libxmu
 
 LIBDRM_DEPENDENCIES = xproto_glproto xproto_xf86vidmodeproto xlib_libXmu xproto_dri2proto pthread-stubs xlib_libpciaccess udev
 
