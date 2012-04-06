@@ -10,10 +10,10 @@ FLAC_SITE = http://$(BR2_SOURCEFORGE_MIRROR).dl.sourceforge.net/sourceforge/flac
 FLAC_INSTALL_STAGING = YES
 FLAC_BUILD_OPKG = YES
 FLAC_AUTORECONF = YES
+FLAC_DEPENDENCIES = libogg
+FLAC_OPKG_DEPENDENCIES = libogg
 
 FLAC_SECTION = libs
-FLAC_PRIORITY = optional
-FLAC_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 FLAC_DESCRIPTION = An Free Lossless Audio Codec
 
 FLAC_CONF_OPT = \
@@ -24,14 +24,12 @@ FLAC_CONF_OPT = \
 	--disable-doxygen-docs \
 	--disable-thorough-tests \
 	--disable-oggtest \
-	--with-libiconv-prefix="$(STAGING_DIR)/usr"
+	--with-ogg=$(STAGING_DIR)/usr
 
-ifeq ($(BR2_PACKAGE_LIBOGG),y)
-FLAC_CONF_OPT += --with-ogg=$(STAGING_DIR)/usr
-FLAC_DEPENDENCIES = libogg
-FLAC_OPKG_DEPENDENCIES = libogg
-else
-FLAC_CONF_OPT += --disable-ogg
-endif
+define FLAC_OPKG_CLEANUP
+  rm -rf $(BUILD_DIR_OPKG)/$(FLAC_BASE_NAME)/usr/bin
+endef
+
+FLAC_PRE_BUILD_OPKG_HOOKS += FLAC_OPKG_CLEANUP
 
 $(eval $(call AUTOTARGETS,package/multimedia,flac))
