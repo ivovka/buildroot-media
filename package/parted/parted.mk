@@ -4,15 +4,16 @@
 #
 #############################################################
 
-PARTED_VERSION = 3.0
+PARTED_VERSION = 3.1
 PARTED_SITE = http://ftp.gnu.org/gnu/parted
+PARTED_SOURCE = parted-$(PARTED_VERSION).tar.xz
 PARTED_INSTALL_STAGING = YES
 PARTED_BUILD_OPKG = YES
+PARTED_DEPENDENCIES = util-linux
+PARTED_OPKG_DEPENDENCIES = util-linux
 
 PARTED_SECTION = system
 PARTED_DESCRIPTION = GNU partition editor
-PARTED_OPKG_DEPENDENCIES = util-linux
-PARTED_DEPENDENCIES = util-linux
 
 PARTED_CONF_OPT = \
     --disable-device-mapper \
