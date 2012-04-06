@@ -15,6 +15,7 @@ XLIB_LIBPCIACCESS_DESCRIPTION = X.org libpciaccess library
 XLIB_LIBPCIACCESS_NAME_OPKG = libpciaccess
 
 XLIB_LIBPCIACCESS_DEPENDENCIES = zlib xutil_util-macros
+XLIB_LIBPCIACCESS_OPKG_DEPENDENCIES = zlib
 XLIB_LIBPCIACCESS_CONF_ENV = ac_cv_header_asm_mtrr_h=set
 XLIB_LIBPCIACCESS_CONF_OPT = \
 	    --with-pciids-path=/usr/share \
