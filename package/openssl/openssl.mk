@@ -4,7 +4,7 @@
 #
 #############################################################
 
-OPENSSL_VERSION = 1.0.0h
+OPENSSL_VERSION = 1.0.1
 OPENSSL_SITE = http://www.openssl.org/source
 OPENSSL_INSTALL_STAGING = YES
 
@@ -63,15 +63,21 @@ define OPENSSL_CONFIGURE_CMDS
 			shared \
 			no-rc5 \
 			enable-camellia \
-			enable-mdc2 \
+			enable-seed \
+			enable-rfc3779 \
+			enable-cms \
+			enable-md2 \
+			no-krb5 \
+			no-mdc2 \
 			enable-tlsext \
 			zlib-dynamic \
 	)
-	$(SED) "s:-march=[-a-z0-9] ::" -e "s:-mcpu=[-a-z0-9] ::g" $(@D)/Makefile
-	$(SED) "s:-O[0-9]:$(OPENSSL_CFLAGS):" $(@D)/Makefile
 endef
+#	$(SED) "s:-march=[-a-z0-9] ::" -e "s:-mcpu=[-a-z0-9] ::g" $(@D)/Makefile
+#	$(SED) "s:-O[0-9]:$(OPENSSL_CFLAGS):" $(@D)/Makefile
 
 define OPENSSL_BUILD_CMDS
+	$(MAKE1) -C $(@D) depend
 	$(MAKE1) -C $(@D) all build-shared
 	$(MAKE1) -C $(@D) do_linux-shared
 endef
