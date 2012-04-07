@@ -4,7 +4,7 @@
 #
 #############################################################
 
-POLKIT_VERSION = 0.101
+POLKIT_VERSION = 0.104
 POLKIT_SITE = http://hal.freedesktop.org/releases
 POLKIT_INSTALL_STAGING = YES
 POLKIT_BUILD_OPKG = YES
@@ -27,6 +27,11 @@ define POLKIT_CP_OPKG_SCRIPTS
     cp $(TOPDIR)/package/polkit/opkg-postinst $(BUILD_DIR_OPKG)/$(POLKIT_BASE_NAME)/CONTROL/postinst
 endef
 
+define POLKIT_OPKG_RM_LOCALE
+  rm -rf $(BUILD_DIR_OPKG)/$(POLKIT_BASE_NAME)/usr/share/locale
+endef
+
 POLKIT_PRE_BUILD_OPKG_HOOKS += POLKIT_CP_OPKG_SCRIPTS
+POLKIT_PRE_BUILD_OPKG_HOOKS += POLKIT_OPKG_RM_LOCALE
 
 $(eval $(call AUTOTARGETS,package,polkit))
