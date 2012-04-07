@@ -4,8 +4,8 @@
 #
 #############################################################
 
-GOBJECT_INTROSPECTION_VERSION = 0.10.0
-GOBJECT_INTROSPECTION_SITE = http://ftp.gnome.org/pub/gnome/sources/gobject-introspection/0.10
+GOBJECT_INTROSPECTION_VERSION = 1.31.0
+GOBJECT_INTROSPECTION_SITE = http://ftp.gnome.org/pub/gnome/sources/gobject-introspection/1.31
 GOBJECT_INTROSPECTION_SOURCE = gobject-introspection-$(GOBJECT_INTROSPECTION_VERSION).tar.bz2
 GOBJECT_INTROSPECTION_INSTALL_STAGING = YES
 GOBJECT_INTROSPECTION_INSTALL_TARGET = NO
