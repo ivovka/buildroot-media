@@ -1,0 +1,8 @@
+config BR2_PACKAGE_LIBTIRPC
+        bool "libtirpc"
+        select BR2_PACKAGE_LIBGSSGLUE
+        help
+          Libtirpc is a port of Suns Transport-Independent RPC library to Linux.
+          It's being developed by the Bull GNU/Linux NFSv4 project.
+
+          https://sourceforge.net/projects/libtirpc/

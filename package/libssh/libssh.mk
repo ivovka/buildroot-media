@@ -4,18 +4,16 @@
 #
 #############################################################
 
-LIBSSH_VERSION = 0.5.0
+LIBSSH_VERSION = 0.5.2
 LIBSSH_SITE = http://www.libssh.org/files/0.5
 LIBSSH_SOURCE = libssh-$(LIBSSH_VERSION).tar.gz
 LIBSSH_INSTALL_STAGING = YES
 LIBSSH_INSTALL_TARGET = YES
 LIBSSH_BUILD_OPKG = YES
 LIBSSH_DEPENDENCIES = host-cmake zlib libgcrypt
-LIBSSH_OPKG_DEPENDENCIES = libgcrypt
+LIBSSH_OPKG_DEPENDENCIES = zlib,libgcrypt
 
 LIBSSH_SECTION = network
-LIBSSH_PRIORITY = optional
-LIBSSH_MAINTAINER = Vladimir Ivakin vladimir_iva@pisem.net
 LIBSSH_DESCRIPTION = A working SSH implementation by means of a library
 
 LIBSSH_CONF_OPT = -DWITH_GCRYPT="ON"

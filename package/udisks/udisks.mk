@@ -4,7 +4,7 @@
 #
 #############################################################
 
-UDISKS_VERSION = 1.0.3
+UDISKS_VERSION = 1.0.4
 UDISKS_SITE = http://hal.freedesktop.org/releases
 UDISKS_INSTALL_STAGING = NO
 UDISKS_BUILD_OPKG = YES
@@ -40,6 +40,14 @@ endef
 define UDISKS_RM_BUGGY_RULE_OPKG
     $(call UDISKS_RM_BUGGY_RULE,$(BUILD_DIR_OPKG)/$(UDISKS_BASE_NAME))
 endef
+
+define UDISKS_OPKG_CLEANUP
+  rm -rf $(BUILD_DIR_OPKG)/$(UDISKS_BASE_NAME)/etc/profile.d
+  rm -rf $(BUILD_DIR_OPKG)/$(UDISKS_BASE_NAME)/usr/share/locale
+  rm -rf $(BUILD_DIR_OPKG)/$(UDISKS_BASE_NAME)/usr/share/pkgconfig
+endef
+
+UDISKS_PRE_BUILD_OPKG_HOOKS += UDISKS_OPKG_CLEANUP
 
 UDISKS_POST_INSTALL_TARGET_HOOKS += UDISKS_RM_BUGGY_RULE_TARGET
 UDISKS_PRE_BUILD_OPKG_HOOKS += UDISKS_RM_BUGGY_RULE_OPKG

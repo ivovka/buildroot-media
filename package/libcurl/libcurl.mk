@@ -3,7 +3,7 @@
 # libcurl
 #
 #############################################################
-LIBCURL_VERSION = 7.24.0
+LIBCURL_VERSION = 7.25.0
 LIBCURL_SOURCE = curl-$(LIBCURL_VERSION).tar.bz2
 LIBCURL_SITE = http://curl.haxx.se/download/
 LIBCURL_INSTALL_STAGING = YES
@@ -12,28 +12,14 @@ LIBCURL_BUILD_OPKG = YES
 LIBCURL_SECTION = libs
 LIBCURL_PRIORITY = required
 LIBCURL_DESCRIPTION = tool for getting files from FTP, HTTP, Gopher, Telnet and Dict servers, using any of the supported protocols.
-LIBCURL_OPKG_DEPENDENCIES = rtmpdump
+LIBCURL_OPKG_DEPENDENCIES = zlib,openssl,rtmpdump
+LIBCURL_DEPENDENCIES = host-autoconf host-m4 host-pkg-config rtmpdump zlib openssl
 
 LIBCURL_CONF_ENV = LDFLAGS="$(TARGET_LDFLAGS) -lrt -lrtmp"
-#LIBCURL_CONF_ENV = LDFLAGS="$(TARGET_LDFLAGS) -lrtmp"
-LIBCURL_DEPENDENCIES = host-autoconf host-m4 host-pkg-config rtmpdump
-
-ifeq ($(BR2_PACKAGE_OPENSSL),y)
-LIBCURL_DEPENDENCIES += openssl
-LIBCURL_OPKG_DEPENDENCIES += ,openssl
-LIBCURL_CONF_ENV += ac_cv_lib_crypto_CRYPTO_lock=yes
-# configure adds the cross openssl dir to LD_LIBRARY_PATH which screws up
-# native stuff during the rest of configure when target == host.
-# Fix it by setting LD_LIBRARY_PATH to something sensible so those libs
-# are found first.
-LIBCURL_CONF_ENV += LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/lib:/usr/lib
-LIBCURL_CONF_OPT += --with-ssl=$(STAGING_DIR)/usr --with-random=/dev/urandom
-else
-LIBCURL_CONF_OPT += --without-ssl
-endif
+LIBCURL_CONF_ENV += ac_cv_lib_rtmp_RTMP_Init=yes \
+    ac_cv_header_librtmp_rtmp_h=yes
 
 LIBCURL_CONF_OPT += \
-	    --disable-static \
 	    --disable-debug \
             --enable-optimize \
             --enable-warnings \
@@ -57,6 +43,7 @@ LIBCURL_CONF_OPT += \
             --disable-manual \
             --enable-libgcc \
             --disable-ipv6 \
+	    --enable-versioned-symbols \
             --enable-nonblocking \
             --enable-threaded-resolver \
             --enable-verbose \
@@ -68,9 +55,11 @@ LIBCURL_CONF_OPT += \
             --without-krb4 \
             --without-spnego \
             --without-gssapi \
+	    --with-ssl \
             --with-zlib \
             --without-egd-socket \
             --enable-thread \
+	    --with-random=/dev/urandom \
             --without-gnutls \
             --without-polarssl \
             --without-nss \
@@ -80,17 +69,14 @@ LIBCURL_CONF_OPT += \
             --with-librtmp="$(STAGING_DIR)/usr" \
             --without-libidn
 
-LIBCURL_CONF_ENV += ac_cv_lib_rtmp_RTMP_Init=yes \
-    ac_cv_header_librtmp_rtmp_h=yes
-
 define LIBCURL_TARGET_CLEANUP
 	rm -rf $(TARGET_DIR)/usr/bin/curl-config \
 	       $(if $(BR2_PACKAGE_CURL),,$(TARGET_DIR)/usr/bin/curl)
 endef
 
 define LIBCURL_OPKG_CLEANUP
-	rm -rf $(BUILD_DIR_OPKG)/libcurl-$(LIBCURL_VERSION)/usr/bin/curl-config \
-		$(if $(BR2_PACKAGE_CURL),,$(BUILD_DIR_OPKG)/libcurl-$(LIBCURL_VERSION)/usr/bin/curl)
+	rm -rf $(BUILD_DIR_OPKG)/$(LIBCURL_BASE_NAME)/usr/bin/curl-config \
+		$(if $(BR2_PACKAGE_CURL),,$(BUILD_DIR_OPKG)/$(LIBCURL_BASE_NAME)/usr/bin/curl)
 endef
 
 LIBCURL_POST_INSTALL_TARGET_HOOKS += LIBCURL_TARGET_CLEANUP

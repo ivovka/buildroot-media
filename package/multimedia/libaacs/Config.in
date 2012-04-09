@@ -1,0 +1,8 @@
+config BR2_PACKAGE_LIBAACS
+        bool "libaacs"
+        select BR2_PACKAGE_LIBGCRYPT
+        help
+          a research project to implement the
+          Advanced Access Content System specification.
+
+          http://www.videolan.org/developers/libaacs.html

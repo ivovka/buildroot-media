@@ -1,5 +1,7 @@
 config BR2_PACKAGE_LIBBLURAY
         bool "libbluray"
+        select BR2_PACKAGE_LIBXML2
+        select BR2_PACKAGE_LIBAACS
         help
             A Blu-Ray Discs playback library.
             http://www.videolan.org/developers/libbluray.html

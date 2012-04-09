@@ -4,7 +4,7 @@
 #
 #############################################################
 
-UPOWER_VERSION = 0.9.12
+UPOWER_VERSION = 0.9.15
 UPOWER_SITE = http://upower.freedesktop.org/releases
 UPOWER_SOURCE = upower-$(UPOWER_VERSION).tar.xz
 UPOWER_INSTALL_STAGING = NO
