@@ -14,6 +14,7 @@ endif
 source "package/lzop/Config.in"
 source "package/lzma/Config.in"
 source "package/xz/Config.in"
+source "package/zip/Config.in"
 endmenu
 
 menu "Debugging, profiling and benchmark"
