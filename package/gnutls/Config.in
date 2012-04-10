@@ -1,7 +1,8 @@
 config BR2_PACKAGE_GNUTLS
 	bool "gnutls"
-	select BR2_PACKAGE_LIBGCRYPT
-	select BR2_PACKAGE_LZO
+        select BR2_PACKAGE_CRYPTODEV_LINUX
+        select BR2_PACKAGE_ZLIB
+        select BR2_PACKAGE_NETTLE
 	help
 	  GnuTLS is a secure communications library implementing the SSL
 	  and TLS protocols and technologies around them.
