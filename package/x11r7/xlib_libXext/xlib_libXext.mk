@@ -16,7 +16,7 @@ XLIB_LIBXEXT_SECTION = x11
 XLIB_LIBXEXT_DESCRIPTION = X11 miscellaneous extensions library
 XLIB_LIBXEXT_OPKG_DEPENDENCIES = libx11
 
-XLIB_LIBXEXT_DEPENDENCIES = xlib_libX11 xproto_xextproto xproto_xproto
+XLIB_LIBXEXT_DEPENDENCIES = xlib_libX11 xproto_xextproto xproto_xproto xutil_util-macros
 XLIB_LIBXEXT_CONF_OPT = --enable-malloc0returnsnull
 
 $(eval $(call AUTOTARGETS,package/x11r7,xlib_libXext))

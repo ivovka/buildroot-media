@@ -10,5 +10,6 @@ XPROTO_RENDERPROTO_SITE = http://xorg.freedesktop.org/releases/individual/proto
 XPROTO_RENDERPROTO_AUTORECONF = NO
 XPROTO_RENDERPROTO_INSTALL_STAGING = YES
 XPROTO_RENDERPROTO_INSTALL_TARGET = NO
+XPROTO_RENDERPROTO_DEPENDENCIES = xutil_util-macros
 
 $(eval $(call AUTOTARGETS,package/x11r7,xproto_renderproto))

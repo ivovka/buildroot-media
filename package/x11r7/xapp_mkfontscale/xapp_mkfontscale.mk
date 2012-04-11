@@ -13,7 +13,7 @@ XAPP_MKFONTSCALE_NAME_OPKG = mkfontscale
 XAPP_MKFONTSCALE_SECTION = x11
 XAPP_MKFONTSCALE_DESCRIPTION = create an index of scalable font files for X
 XAPP_MKFONTSCALE_OPKG_DEPENDENCIES = zlib,freetype,libfontenc
-XAPP_MKFONTSCALE_DEPENDENCIES = zlib freetype xlib_libfontenc xproto_xproto
+XAPP_MKFONTSCALE_DEPENDENCIES = zlib freetype xlib_libfontenc xproto_xproto xutil_util-macros xlib_libX11
 HOST_XAPP_MKFONTSCALE_DEPENDENCIES = host-zlib host-freetype host-xlib_libfontenc host-xproto_xproto
 
 $(eval $(call AUTOTARGETS,package/x11r7,xapp_mkfontscale))

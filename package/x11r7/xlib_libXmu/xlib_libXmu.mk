@@ -16,6 +16,6 @@ XLIB_LIBXMU_SECTION = x11
 XLIB_LIBXMU_DESCRIPTION = X11 miscellaneous utility library
 XLIB_LIBXMU_OPKG_DEPENDENCIES = libxext,libx11,libxt
 
-XLIB_LIBXMU_DEPENDENCIES = xlib_libX11 xlib_libXext xlib_libXt xproto_xproto xproto_xextproto
+XLIB_LIBXMU_DEPENDENCIES = xlib_libX11 xlib_libXext xlib_libXt xproto_xproto xproto_xextproto xutil_util-macros
 
 $(eval $(call AUTOTARGETS,package/x11r7,xlib_libXmu))

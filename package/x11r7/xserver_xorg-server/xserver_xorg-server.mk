@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-XSERVER_XORG_SERVER_VERSION = 1.12.0
+XSERVER_XORG_SERVER_VERSION = 1.11.4
 XSERVER_XORG_SERVER_SOURCE = xorg-server-$(XSERVER_XORG_SERVER_VERSION).tar.bz2
 XSERVER_XORG_SERVER_SITE = ftp://ftp.x.org/pub/individual/xserver
 XSERVER_XORG_SERVER_MAKE = $(MAKE1) # make install fails with parallel make
@@ -14,7 +14,7 @@ XSERVER_XORG_SERVER_BUILD_OPKG = YES
 XSERVER_XORG_SERVER_NAME_OPKG = xorg-server
 XSERVER_XORG_SERVER_SECTION = x11
 XSERVER_XORG_SERVER_DESCRIPTION = The Xorg X server
-XSERVER_XORG_SERVER_OPKG_DEPENDENCIES = libpciaccess,freetype,libx11,libxfont,libxkbfile,libdrm,mesa,pixman,udev,libxinerama,font-xfree86-type1,encodings,font-bitstream-type1,font-misc-misc,xkbcomp,xkeyboard-config,xf86-input-evdev,pciutils,xrandr,setxkbmap,xf86-video-nvidia
+XSERVER_XORG_SERVER_OPKG_DEPENDENCIES = libpciaccess,freetype,libx11,libxfont,libxkbfile,libdrm,mesa,libxinerama,font-xfree86-type1,encodings,font-bitstream-type1,font-misc-misc,xkbcomp,xkeyboard-config,xf86-input-evdev,pciutils,xrandr,setxkbmap,ratpoison,xf86-video-nvidia,openssl,pixman,udev
 
 XSERVER_XORG_SERVER_INSTALL_STAGING_OPT = DESTDIR=$(STAGING_DIR) install install-data
 
@@ -158,11 +158,11 @@ define XSERVER_XORG_SERVER_RM_SDKSYMS
 endef
 
 define XSERVER_XORG_SERVER_CP_SCRIPTS
-    mkdir -p $(BUILD_DIR_OPKG)/xserver_xorg-server-$(XSERVER_XORG_SERVER_VERSION)/lib/udev
-    cp $(TOPDIR)/package/x11r7/xserver_xorg-server/scripts/xorg_start $(BUILD_DIR_OPKG)/xserver_xorg-server-$(XSERVER_XORG_SERVER_VERSION)/lib/udev
+    mkdir -p $(BUILD_DIR_OPKG)/$(XSERVER_XORG_SERVER_BASE_NAME)/lib/udev
+    cp $(TOPDIR)/package/x11r7/xserver_xorg-server/scripts/xorg_start $(BUILD_DIR_OPKG)/$(XSERVER_XORG_SERVER_BASE_NAME)/lib/udev
 endef
 
-XSERVER_XORG_SERVER_POST_PATCH_HOOKS += XSERVER_XORG_SERVER_RM_SDKSYMS
+#XSERVER_XORG_SERVER_POST_PATCH_HOOKS += XSERVER_XORG_SERVER_RM_SDKSYMS
 XSERVER_XORG_SERVER_PRE_BUILD_OPKG_HOOKS += XSERVER_XORG_SERVER_CP_SCRIPTS
 
 $(eval $(call AUTOTARGETS,package/x11r7,xserver_xorg-server))

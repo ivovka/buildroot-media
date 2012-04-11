@@ -13,6 +13,9 @@ LIBVDPAU_SECTION = multimedia
 LIBVDPAU_DESCRIPTION = a Video Decode and Presentation API for UNIX.
 LIBVDPAU_DEPENDENCIES = xlib_libX11
 LIBVDPAU_OPKG_DEPENDENCIES = libx11
-LIBVDPAU_CONF_OPT = --disable-documentation
+LIBVDPAU_CONF_OPT = \
+  --disable-documentation \
+  --enable-dri2 \
+  --with-module-dir=/usr/lib/vdpau
 
 $(eval $(call AUTOTARGETS,package/multimedia,libvdpau))

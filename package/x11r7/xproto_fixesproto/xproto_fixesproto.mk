@@ -10,5 +10,6 @@ XPROTO_FIXESPROTO_SITE = http://xorg.freedesktop.org/releases/individual/proto
 XPROTO_FIXESPROTO_AUTORECONF = NO
 XPROTO_FIXESPROTO_INSTALL_STAGING = YES
 XPROTO_FIXESPROTO_INSTALL_TARGET = NO
+XPROTO_FIXESPROTO_DEPENDENCIES = xutil_util-macros
 
 $(eval $(call AUTOTARGETS,package/x11r7,xproto_fixesproto))

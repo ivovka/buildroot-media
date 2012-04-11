@@ -16,7 +16,7 @@ XLIB_LIBSM_SECTION = x11
 XLIB_LIBSM_DESCRIPTION = X11 Inter-Client Exchange library
 XLIB_LIBSM_OPKG_DEPENDENCIES = util-linux,libice
 
-XLIB_LIBSM_DEPENDENCIES = xlib_libICE xlib_xtrans xproto_xproto util-linux
+XLIB_LIBSM_DEPENDENCIES = xlib_libICE util-linux xutil_util-macros
 XLIB_LIBSM_CONF_OPT = --with-libuuid --without-xmlto --without-fop
 
 $(eval $(call AUTOTARGETS,package/x11r7,xlib_libSM))

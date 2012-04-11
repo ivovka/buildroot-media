@@ -132,6 +132,7 @@ comment "X Window managers"
 source "package/matchbox/Config.in"
 source "package/metacity/Config.in"
 source "package/blackbox/Config.in"
+source "package/ratpoison/Config.in"
 
 comment "X applications"
 source "package/alsamixergui/Config.in"

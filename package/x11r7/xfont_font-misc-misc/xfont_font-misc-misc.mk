@@ -16,7 +16,7 @@ XFONT_FONT_MISC_MISC_BUILD_OPKG = YES
 XFONT_FONT_MISC_MISC_NAME_OPKG = font-misc-misc
 XFONT_FONT_MISC_MISC_SECTION = x11
 XFONT_FONT_MISC_MISC_DESCRIPTION = A misc. public domain font
-XFONT_FONT_MISC_MISC_OPKG_DEPENDENCIES = font-cursor-misc,font-util
+XFONT_FONT_MISC_MISC_OPKG_DEPENDENCIES = font-cursor-misc,font-util,mkfontsale,mkfontdir
 XFONT_FONT_MISC_MISC_CONF_OPT = \
     --with-fontrootdir=/usr/share/fonts \
     --disable-silent-rules \
@@ -44,13 +44,12 @@ define XFONT_FONT_MISC_MISC_MAPFILES_PATH_FIX
 	$(SED) 's|UTIL_DIR = |UTIL_DIR = $(STAGING_DIR)|' $(@D)/Makefile
 endef
 
-define XFONT_FONT_MISC_MISC_RM_FONTS_DIR
-    rm $(BUILD_DIR_OPKG)/$(XFONT_FONT_MISC_MISC_BASE_NAME)/usr/share/fonts/misc/fonts.dir
+define XFONT_FONT_MISC_MISC_BUILD_OPKG_CMDS
+  mkdir -p $(BUILD_DIR_OPKG)/$(XFONT_FONT_MISC_MISC_BASE_NAME)/usr/share/fonts/misc
+  cp $(@D)/6x13-ISO8859-1.pcf.gz $(BUILD_DIR_OPKG)/$(XFONT_FONT_MISC_MISC_BASE_NAME)/usr/share/fonts/misc
 endef
 
 XFONT_FONT_MISC_MISC_POST_CONFIGURE_HOOKS += XFONT_FONT_MISC_MISC_MAPFILES_PATH_FIX
-
-XFONT_FONT_MISC_MISC_PRE_BUILD_OPKG_HOOKS += XFONT_FONT_MISC_MISC_RM_FONTS_DIR
 
 $(eval $(call AUTOTARGETS,package/x11r7,xfont_font-misc-misc))
 

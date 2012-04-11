@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-XLIB_LIBX11_VERSION = 1.4.4
+XLIB_LIBX11_VERSION = 1.4.99.901
 XLIB_LIBX11_SOURCE = libX11-$(XLIB_LIBX11_VERSION).tar.bz2
 XLIB_LIBX11_SITE = http://xorg.freedesktop.org/releases/individual/lib
 XLIB_LIBX11_AUTORECONF = YES
@@ -35,9 +35,6 @@ XLIB_LIBX11_CONF_OPT = \
 	--disable-ipv6 \
 	--without-launchd \
 	--without-lint
-
-#	--with-xcb \
-#	--with-keysymdef=$(STAGING_DIR)/usr/include/X11/keysymdef.h \
 
 HOST_XLIB_LIBX11_CONF_OPT = \
 	--disable-specs

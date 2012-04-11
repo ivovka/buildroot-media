@@ -10,5 +10,6 @@ XPROTO_VIDEOPROTO_SITE = http://xorg.freedesktop.org/releases/individual/proto
 XPROTO_VIDEOPROTO_AUTORECONF = NO
 XPROTO_VIDEOPROTO_INSTALL_STAGING = YES
 XPROTO_VIDEOPROTO_INSTALL_TARGET = NO
+XPROTO_VIDEOPROTO_DEPENDENCIES = xutil_util-macros
 
 $(eval $(call AUTOTARGETS,package/x11r7,xproto_videoproto))

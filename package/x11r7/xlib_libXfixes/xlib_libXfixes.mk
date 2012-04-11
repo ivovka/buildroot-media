@@ -16,6 +16,6 @@ XLIB_LIBXFIXES_SECTION = x11
 XLIB_LIBXFIXES_DESCRIPTION = X Fixes Library
 XLIB_LIBXFIXES_OPKG_DEPENDENCIES = libx11
 
-XLIB_LIBXFIXES_DEPENDENCIES = xproto_fixesproto xlib_libX11 xproto_xextproto xproto_xproto
+XLIB_LIBXFIXES_DEPENDENCIES = xproto_fixesproto xlib_libX11 xutil_util-macros
 
 $(eval $(call AUTOTARGETS,package/x11r7,xlib_libXfixes))

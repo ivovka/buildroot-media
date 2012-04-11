@@ -3,7 +3,7 @@
 # GLEW
 #
 #############################################################
-GLEW_VERSION:=1.6.0
+GLEW_VERSION:=1.7.0
 GLEW_SOURCE:=glew-$(GLEW_VERSION).tgz
 GLEW_SITE:=http://$(BR2_SOURCEFORGE_MIRROR).dl.sourceforge.net/sourceforge/glew/glew/$(GLEW_VERSION)
 GLEW_BUILD_OPKG = YES

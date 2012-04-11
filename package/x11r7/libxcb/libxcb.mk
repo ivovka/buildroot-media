@@ -16,7 +16,7 @@ LIBXCB_OPKG_DEPENDENCIES = libxau
 
 LIBXCB_AUTORECONF = NO
 LIBXCB_DEPENDENCIES = \
-	pthread-stubs xcb-proto xlib_libXau host-xcb-proto host-python
+	xutil_util-macros pthread-stubs xcb-proto xlib_libXau host-xcb-proto host-python
 LIBXCB_CONF_ENV = STAGING_DIR="$(STAGING_DIR)"
 LIBXCB_MAKE_OPT = XCBPROTO_XCBINCLUDEDIR=$(STAGING_DIR)/usr/share/xcb \
 	XCBPROTO_XCBPYTHONDIR=$(HOST_DIR)/usr/lib/python$(PYTHON_VERSION_MAJOR)/site-packages

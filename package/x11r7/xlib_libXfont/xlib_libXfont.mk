@@ -13,15 +13,16 @@ XLIB_LIBXFONT_BUILD_OPKG = YES
 XLIB_LIBXFONT_NAME_OPKG = libxfont
 XLIB_LIBXFONT_SECTION = x11
 XLIB_LIBXFONT_DESCRIPTION = X font Library
-XLIB_LIBXFONT_OPKG_DEPENDENCIES = freetype,libfontenc,xtrans
-XLIB_LIBXFONT_DEPENDENCIES = freetype xlib_libfontenc xlib_xtrans xproto_fontcacheproto xproto_fontsproto
+XLIB_LIBXFONT_OPKG_DEPENDENCIES = freetype
+XLIB_LIBXFONT_DEPENDENCIES = freetype xlib_libfontenc xlib_xtrans xproto_fontcacheproto xproto_fontsproto xutil_util-macros
 XLIB_LIBXFONT_CONF_OPT = --disable-devel-docs \
 	--enable-freetype \
 	--enable-builtins \
 	--disable-pcfformat \
 	--disable-bdfformat \
 	--disable-snfformat \
-	--enable-fc
+	--enable-fc \
+	--without-xmlto
 
 HOST_XLIB_LIBXFONT_CONF_OPT = --disable-devel-docs
 HOST_XLIB_LIBXFONT_DEPENDENCIES = host-freetype host-xlib_libfontenc host-xlib_xtrans host-xproto_fontcacheproto host-xproto_fontsproto host-xproto_xproto host-xfont_encodings

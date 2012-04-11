@@ -2,5 +2,6 @@ config BR2_PACKAGE_XFONT_FONT_MISC_MISC
 	bool "font-misc-misc"
         select BR2_PACKAGE_XUTIL_UTIL_MACROS
         select BR2_PACKAGE_XFONT_FONT_CURSOR_MISC
+        select BR2_PACKAGE_XFONT_FONT_UTIL
 	help
 	  No description available

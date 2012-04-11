@@ -4,11 +4,12 @@
 #
 ################################################################################
 
-XAPP_SETXKBMAP_VERSION = 1.2.0
+XAPP_SETXKBMAP_VERSION = 1.3.0
 XAPP_SETXKBMAP_SOURCE = setxkbmap-$(XAPP_SETXKBMAP_VERSION).tar.bz2
 XAPP_SETXKBMAP_SITE = http://xorg.freedesktop.org/releases/individual/app
 XAPP_SETXKBMAP_AUTORECONF = NO
 XAPP_SETXKBMAP_DEPENDENCIES = xlib_libX11 xlib_libxkbfile
+XAPP_SETXKBMAP_INSTALL_STAGING = NO
 XAPP_SETXKBMAP_BUILD_OPKG = YES
 XAPP_SETXKBMAP_NAME_OPKG = setxkbmap
 XAPP_SETXKBMAP_SECTION = x11

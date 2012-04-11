@@ -3,7 +3,7 @@
 # libdrm
 #
 #############################################################
-LIBDRM_VERSION = 2.4.31
+LIBDRM_VERSION = 2.4.33
 LIBDRM_SOURCE = libdrm-$(LIBDRM_VERSION).tar.bz2
 LIBDRM_SITE = http://dri.freedesktop.org/libdrm/
 LIBDRM_INSTALL_STAGING = YES
@@ -17,9 +17,10 @@ LIBDRM_DEPENDENCIES = xproto_glproto xproto_xf86vidmodeproto xlib_libXmu xproto_
 
 LIBDRM_CONF_OPT = --disable-libkms \
 	--disable-nouveau-experimental-api \
-	--disable-vmgfx-experimental-api \
+	--disable-vmwgfx-experimental-api \
 	--enable-udev \
-	--enable-largefile
+	--enable-largefile \
+	--with-kernel-source=$(BUILD_DIR)/linux-$(LINUX_VERSION)
 
 ifeq ($(BR2_PACKAGE_XDRIVER_XF86_VIDEO_INTEL),y)
 LIBDRM_CONF_OPT += --enable-intel

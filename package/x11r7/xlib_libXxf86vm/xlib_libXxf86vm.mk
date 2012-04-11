@@ -14,7 +14,7 @@ XLIB_LIBXXF86VM_NAME_OPKG = libxxf86vm
 XLIB_LIBXXF86VM_SECTION = x11
 XLIB_LIBXXF86VM_DESCRIPTION = Extension library for the XFree86-VidMode X extension
 XLIB_LIBXXF86VM_OPKG_DEPENDENCIES = libx11,libxext
-XLIB_LIBXXF86VM_DEPENDENCIES = xlib_libX11 xlib_libXext xproto_xf86vidmodeproto xproto_xproto xutil_util-macros
+XLIB_LIBXXF86VM_DEPENDENCIES = xlib_libX11 xlib_libXext xproto_xf86vidmodeproto xutil_util-macros
 XLIB_LIBXXF86VM_CONF_OPT = --enable-malloc0returnsnull
 
 $(eval $(call AUTOTARGETS,package/x11r7,xlib_libXxf86vm))

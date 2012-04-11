@@ -14,6 +14,6 @@ XLIB_LIBXDAMAGE_NAME_OPKG = libxdamage
 XLIB_LIBXDAMAGE_SECTION = x11
 XLIB_LIBXDAMAGE_DESCRIPTION = X11 damaged region extension library
 XLIB_LIBXDAMAGE_OPKG_DEPENDENCIES = libx11,libxfixes
-XLIB_LIBXDAMAGE_DEPENDENCIES = xproto_damageproto xlib_libX11 xlib_libXfixes xproto_xproto
+XLIB_LIBXDAMAGE_DEPENDENCIES = xproto_damageproto xlib_libX11 xlib_libXfixes xutil_util-macros
 
 $(eval $(call AUTOTARGETS,package/x11r7,xlib_libXdamage))

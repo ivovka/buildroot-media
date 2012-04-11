@@ -4,12 +4,13 @@
 #
 ################################################################################
 
-XAPP_XKBCOMP_VERSION = 1.2.3
+XAPP_XKBCOMP_VERSION = 1.2.4
 XAPP_XKBCOMP_SOURCE = xkbcomp-$(XAPP_XKBCOMP_VERSION).tar.bz2
 XAPP_XKBCOMP_SITE = http://xorg.freedesktop.org/releases/individual/app
 XAPP_XKBCOMP_AUTORECONF = NO
-XAPP_XKBCOMP_DEPENDENCIES = xlib_libX11 xlib_libxkbfile
+XAPP_XKBCOMP_DEPENDENCIES = xutil_util-macros xlib_libX11 xlib_libxkbfile
 HOST_XAPP_XKBCOMP_DEPENDENCIES = host-xlib_libX11 host-xlib_libxkbfile
+XAPP_XKBCOMP_INSTALL_STAGING = NO
 XAPP_XKBCOMP_BUILD_OPKG = YES
 XAPP_XKBCOMP_NAME_OPKG = xkbcomp
 XAPP_XKBCOMP_SECTION = x11
