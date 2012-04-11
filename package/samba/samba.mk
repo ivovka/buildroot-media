@@ -3,7 +3,7 @@
 # samba
 #
 #############################################################
-SAMBA_VERSION:=3.5.9
+SAMBA_VERSION:=3.5.12
 SAMBA_SOURCE:=samba-$(SAMBA_VERSION).tar.gz
 SAMBA_SITE:=http://samba.org/samba/ftp/stable/
 
@@ -98,7 +98,7 @@ SAMBA_CONF_OPT = \
 	--with-static-modules=charset_CP437,charset_CP850 \
 	--with-included-popt \
 	--with-included-iniparser \
-	--with-libiconv=$(STAGING_DIR) \
+	--with-libiconv=$(STAGING_DIR)/usr \
 	--with-sqlite3 \
 	--with-pthreads \
 	--without-setproctitle 
@@ -112,8 +112,10 @@ endef
 SAMBA_PRE_CONFIGURE_HOOKS += SAMBA_RUN_AUTOGEN
 
 SAMBA_MAKE_OPT = \
-	-C $(SAMBA_DIR)/$(SAMBA_SUBDIR) \
-	bin/libsmbclient.so bin/mount.cifs bin/umount.cifs bin/smbd bin/nmbd
+	bin/libsmbclient.so bin/smbd bin/nmbd bin/smbpasswd
+
+
+#	-C $(SAMBA_DIR)/$(SAMBA_SUBDIR) \
 
 define SAMBA_INSTALL_STAGING_CMDS
 	(mkdir -p $(STAGING_DIR)/usr/lib && \
@@ -140,6 +142,7 @@ define SAMBA_BUILD_OPKG_CMDS
 	mkdir -p $(BUILD_DIR_OPKG)/$(SAMBA_BASE_NAME)/usr/bin && \
 	install -m 0755 $(SAMBA_DIR)/$(SAMBA_SUBDIR)/bin/smbd $(BUILD_DIR_OPKG)/$(SAMBA_BASE_NAME)/usr/bin && \
 	install -m 0755 $(SAMBA_DIR)/$(SAMBA_SUBDIR)/bin/nmbd $(BUILD_DIR_OPKG)/$(SAMBA_BASE_NAME)/usr/bin && \
+	install -m 0755 $(SAMBA_DIR)/$(SAMBA_SUBDIR)/bin/smbpasswd $(BUILD_DIR_OPKG)/$(SAMBA_BASE_NAME)/usr/bin && \
 	mkdir -p $(BUILD_DIR_OPKG)/$(SAMBA_BASE_NAME)/etc/samba && \
 	cp $(TOPDIR)/package/samba/config/smb.conf $(BUILD_DIR_OPKG)/$(SAMBA_BASE_NAME)/etc/samba && \
 	mkdir -p $(BUILD_DIR_OPKG)/$(SAMBA_BASE_NAME)/usr/config && \
