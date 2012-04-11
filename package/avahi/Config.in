@@ -27,6 +27,8 @@ config BR2_PACKAGE_AVAHI_DAEMON
 	depends on BR2_PACKAGE_AVAHI
 	select BR2_PACKAGE_LIBDAEMON
 	select BR2_PACKAGE_EXPAT
+        select BR2_PACKAGE_PYTHON
+        select BR2_PACKAGE_DBUS_PYTHON
 	help
 	  The Avahi mDNS/DNS-SD daemon implementing Apple's ZeroConf
 	  architecture (also known as "Rendezvous" or "Bonjour").
