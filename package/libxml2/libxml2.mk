@@ -28,7 +28,7 @@ endef
 
 LIBXML2_POST_INSTALL_STAGING_HOOKS += LIBXML2_STAGING_LIBXML2_CONFIG_FIXUP
 
-HOST_LIBXML2_CONF_OPT = --without-debug --with-python --with-zlib --disable-ipv6
+HOST_LIBXML2_CONF_OPT = --with-python --with-zlib --disable-ipv6
 
 define LIBXML2_REMOVE_CONFIG_SCRIPTS
 	$(RM) -f $1/usr/bin/xml2-config
