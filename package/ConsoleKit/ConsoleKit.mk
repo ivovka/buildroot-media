@@ -13,12 +13,10 @@ CONSOLEKIT_NAME_OPKG = consolekit
 
 CONSOLEKIT_SECTION = "system"
 CONSOLEKIT_DESCRIPTION = a framework for defining and tracking users, login sessions, and seats.
-CONSOLEKIT_DEPENDENCIES = dbus dbus-glib polkit
-CONSOLEKIT_OPKG_DEPENDENCIES = dbus,dbus-glib,polkit
+CONSOLEKIT_DEPENDENCIES = dbus dbus-glib polkit xlib_libX11
+CONSOLEKIT_OPKG_DEPENDENCIES = dbus,dbus-glib,polkit,libx11
 
 CONSOLEKIT_CONF_OPT = --libexecdir=/usr/lib/ConsoleKit \
-    --sysconfdir=/etc \
-    --sbindir=/sbin \
     --localstatedir=/var \
     --disable-pam-module \
     --disable-docbook-docs
