@@ -34,7 +34,6 @@ LIBMAD_POST_INSTALL_TARGET_HOOKS += LIBMAD_INSTALL_TARGET_PC
 
 LIBMAD_CONF_OPT = \
 		--disable-debugging \
-		--enable-speed \
 		--enable-accuracy \
 		--enable-fpm=64bit
 
