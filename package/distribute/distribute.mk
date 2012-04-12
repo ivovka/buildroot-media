@@ -13,6 +13,7 @@ DISTRIBUTE_SECTION = python
 DISTRIBUTE_DESCRIPTION = A collection of enhancements to the Python distutils
 DISTRIBUTE_OPKG_DEPENDENCIES = python
 DISTRIBUTE_DEPENDENCIES = host-python python host-distribute
+HOST_DISTRIBUTE_DEPENDENCIES = host-python
 
 define DISTRIBUTE_BUILD_OPKG_CMDS
     mkdir -p $(BUILD_DIR_OPKG)/$(DISTRIBUTE_BASE_NAME)/usr/lib/python$(PYTHON_VERSION_MAJOR)/site-packages
