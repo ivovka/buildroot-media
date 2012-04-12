@@ -3,17 +3,16 @@
 # vdr
 #
 #############################################################
-VDR_VERSION = 1.7.21
+VDR_VERSION = 1.7.27
 VDR_SITE = ftp://ftp.tvdr.de/vdr/Developer
 VDR_SOURCE = vdr-$(VDR_VERSION).tar.bz2
 
 VDR_SC_SITE = http://85.17.209.13:6100
-VDR_SC_VERSION = 442eee2f550d
+VDR_SC_VERSION = 7dea047c5dbb
 VDR_SC_SOURCE = sc-$(VDR_SC_VERSION).tar.bz2
 
 VDR_XVDR_SITE = https://nodeload.github.com
-#VDR_XVDR_VERSION = 0.9.5-11-g05a82c5
-VDR_XVDR_VERSION = 0.9.5-27-gc98852f
+VDR_XVDR_VERSION = 0.9.5-38-gc75ec21
 VDR_XVDR_SOURCE = pipelka-vdr-plugin-xvdr-$(VDR_XVDR_VERSION).tar.gz
 
 VDR_INSTALL_STAGING = NO

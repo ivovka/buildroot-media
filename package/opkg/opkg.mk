@@ -4,7 +4,7 @@
 #
 #############################################################
 
-OPKG_VERSION = 625
+OPKG_VERSION = 635
 OPKG_SITE = http://opkg.googlecode.com/svn/trunk/
 OPKG_SITE_METHOD = svn
 OPKG_AUTORECONF = YES
@@ -13,7 +13,7 @@ OPKG_BUILD_OPKG = YES
 OPKG_SECTION = admin
 OPKG_PRIORITY = required
 OPKG_DESCRIPTION = lightweight package management system based on Ipkg.
-OPKG_OPKG_DEPENDENCIES = openssl,libcurl
+OPKG_OPKG_DEPENDENCIES = linux,libc,busybox,openssl,libcurl
 OPKG_CONF_OPT = \
     --disable-static \
     --disable-pathfinder \
