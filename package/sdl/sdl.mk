@@ -35,11 +35,11 @@ SDL_CONF_OPT+=--enable-video-qtopia=no
 endif
 
 ifeq ($(BR2_PACKAGE_SDL_X11),y)
-SDL_CONF_OPT+=--enable-video-x11=yes
+SDL_CONF_OPT+=--enable-video-x11
 SDL_DEPENDENCIES += xserver_xorg-server xlib_libX11 xlib_libXrandr mesa3d
 SDL_OPKG_DEPENDENCIES += ,libx11,libxrandr,mesa
 else
-SDL_CONF_OPT+=--enable-video-x11=no
+SDL_CONF_OPT+=--disable-video-x11
 endif
 
 ifeq ($(BR2_PACKAGE_TSLIB),y)
@@ -83,13 +83,8 @@ SDL_CONF_OPT += \
     --disable-nanox-debug \
     --disable-nanox-share-memory \
     --disable-nanox-direct-fb \
-    --enable-x11-shared \
     --disable-dga \
     --disable-video-dga \
-    --disable-video-x11-dgamouse \
-    --disable-video-x11-xinerama \
-    --disable-video-x11-xme \
-    --enable-video-x11-xrandr \
     --disable-video-photon \
     --disable-video-carbon \
     --disable-video-cocoa \
@@ -113,7 +108,12 @@ SDL_CONF_OPT += \
     --enable-sdl-dlopen \
     --disable-atari-ldg \
     --disable-clock_gettime \
-    --enable-video-x11-vm \
+    --enable-x11-shared \
+    --disable-video-x11-dgamouse \
+    --disable-video-x11-xinerama \
+    --disable-video-x11-xme \
+    --enable-video-x11-xrandr \
+    --disable-video-x11-vm \
     --enable-video-x11-xv \
     --with-x
 
