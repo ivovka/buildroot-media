@@ -2,7 +2,6 @@ config BR2_PACKAGE_IMAGING
         bool "Imaging"
         depends on BR2_PACKAGE_PYTHON
         select BR2_PACKAGE_DISTRIBUTE
-        select BR2_PACKAGE_DISTUTILSCROSS
         select BR2_PACKAGE_ZLIB
         select BR2_PACKAGE_FREETYPE
         select BR2_PACKAGE_JPEG_LIBRARY

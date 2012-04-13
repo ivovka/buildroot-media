@@ -11,8 +11,8 @@ IMAGING_INSTALL_TARGET = YES
 IMAGING_BUILD_OPKG = YES
 IMAGING_SECTION = python
 IMAGING_DESCRIPTION = Imaging handling/processing for Python
-IMAGING_OPKG_DEPENDENCIES = python,freetype,$(call qstrip,$(BR2_JPEG_LIBRARY))
-IMAGING_DEPENDENCIES = host-python python distribute distutilscross zlib freetype $(call qstrip,$(BR2_JPEG_LIBRARY))
+IMAGING_OPKG_DEPENDENCIES = python,distribute,zlib,freetype,$(call qstrip,$(BR2_JPEG_LIBRARY))
+IMAGING_DEPENDENCIES = host-python python distribute host-distutilscross zlib freetype $(call qstrip,$(BR2_JPEG_LIBRARY))
 
 IMAGINGXCPREFIX=$(STAGING_DIR)/usr
 IMAGING_LDFLAGS="$(TARGET_LDFLAGS) -L$(STAGING_DIR)/usr/lib -L$(STAGING_DIR)/lib"
@@ -22,7 +22,7 @@ IMAGING_LDFLAGS="$(TARGET_LDFLAGS) -L$(STAGING_DIR)/usr/lib -L$(STAGING_DIR)/lib
 define IMAGING_BUILD_CMDS
     (cd $(@D) && \
     $(HOST_MAKE_ENV) PYTHONXCPREFIX=$(IMAGINGXCPREFIX) LDFLAGS=$(IMAGING_LDFLAGS) python setup.py build --cross-compile && \
-    $(HOST_MAKE_ENV) PYTHONXCPREFIX=$(IMAGINGXCPREFIX) LDFLAGS=$(IMAGING_LDFLAGS) python setup.py install -O1 --skip-build --prefix /usr --root .install \
+    $(HOST_MAKE_ENV) PYTHONXCPREFIX=$(IMAGINGXCPREFIX) LDFLAGS=$(IMAGING_LDFLAGS) python setup.py install -O0 --skip-build --prefix /usr --root .install \
     )
     find $(@D)/.install -name "*.py" -exec rm -rf "{}" ";"
     find $(@D)/.install -name "*.pyo" -exec rm -rf "{}" ";"
