@@ -24,7 +24,7 @@ endef
 
 define XDRIVER_XF86_VIDEO_NVIDIA_BUILD_CMDS
     (cd $(BUILD_DIR)/$(XDRIVER_XF86_VIDEO_NVIDIA_BASE_NAME)/kernel && \
-    $(TARGET_MAKE_ENV) $(MAKE) module CC="$(TARGET_CC)" HOST_CC="$(HOSTCC)" ARCH=$(ARCH) SYSSRC=$(BUILD_DIR)/linux-$(LINUX_VERSION) SYSOUT=$(BUILD_DIR)/linux-$(LINUX_VERSION) && \
+    $(TARGET_MAKE_ENV) $(MAKE) module CC="$(TARGET_CC)" LD="$(TARGET_LD)" HOST_CC="$(HOSTCC)" ARCH=$(ARCH) SYSSRC=$(BUILD_DIR)/linux-$(LINUX_VERSION) SYSOUT=$(BUILD_DIR)/linux-$(LINUX_VERSION) && \
     cd .. && \
     ln -sf libnvidia-ml.so.$(XDRIVER_XF86_VIDEO_NVIDIA_VERSION) libnvidia-ml.so.1 \
     )
