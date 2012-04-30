@@ -13,7 +13,7 @@ OPENSSL_SECTION = libs
 OPENSSL_PRIORITY = required
 OPENSSL_DESCRIPTION = Open Source toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Security (TLS v1) as well as a full-strength general-purpose cryptography library
 OPENSSL_OPKG_DEPENDENCIES = zlib
-OPENSSL_DEPENDENCIES = zlib
+OPENSSL_DEPENDENCIES = zlib host-xutil_makedepend
 OPENSSL_TARGET_ARCH = generic32
 OPENSSL_CFLAGS = $(TARGET_CFLAGS)
 
@@ -76,23 +76,25 @@ endef
 #	$(SED) "s:-march=[-a-z0-9] ::" -e "s:-mcpu=[-a-z0-9] ::g" $(@D)/Makefile
 #	$(SED) "s:-O[0-9]:$(OPENSSL_CFLAGS):" $(@D)/Makefile
 
+OPENSSL_MAKE_OPT = CC="$(TARGET_CC)" AR="$(TARGET_AR) r" RANLIB="$(TARGET_RANLIB)" MAKEDEPPROG="$(TARGET_CC_NOCCACHE)"
+
 define OPENSSL_BUILD_CMDS
-	$(MAKE1) -C $(@D) depend
-	$(MAKE1) -C $(@D) all build-shared
-	$(MAKE1) -C $(@D) do_linux-shared
+	$(TARGET_MAKE_ENV) $(MAKE1) $(OPENSSL_MAKE_OPT) -C $(@D) depend
+	$(TARGET_MAKE_ENV) $(MAKE1) $(OPENSSL_MAKE_OPT) -C $(@D) all build-shared
+	$(TARGET_MAKE_ENV) $(MAKE1) $(OPENSSL_MAKE_OPT) -C $(@D) do_linux-shared
 endef
 
 define OPENSSL_INSTALL_STAGING_CMDS
-	$(MAKE1) -C $(@D) INSTALL_PREFIX=$(STAGING_DIR) install
+	$(TARGET_MAKE_ENV) $(MAKE1) $(OPENSSL_MAKE_OPT) -C $(@D) INSTALL_PREFIX=$(STAGING_DIR) install
 endef
 
 define OPENSSL_INSTALL_TARGET_CMDS
-	$(MAKE1) -C $(@D) INSTALL_PREFIX=$(TARGET_DIR) install
+	$(TARGET_MAKE_ENV) $(MAKE1) $(OPENSSL_MAKE_OPT) -C $(@D) INSTALL_PREFIX=$(TARGET_DIR) install
 endef
 
 define OPENSSL_BUILD_OPKG_CMDS
 	mkdir -p $(BUILD_DIR_OPKG)/openssl-$(OPENSSL_VERSION)
-	$(MAKE1) -C $(@D) INSTALL_PREFIX=$(BUILD_DIR_OPKG)/openssl-$(OPENSSL_VERSION) install
+	$(TARGET_MAKE_ENV) $(MAKE1) $(OPENSSL_MAKE_OPT) -C $(@D) INSTALL_PREFIX=$(BUILD_DIR_OPKG)/openssl-$(OPENSSL_VERSION) install
 	rm -f $(BUILD_DIR_OPKG)/openssl-$(OPENSSL_VERSION)/usr/bin/c_rehash
 	# libraries gets installed read only, so strip fails
 	chmod +w $(BUILD_DIR_OPKG)/openssl-$(OPENSSL_VERSION)/usr/lib/engines/lib*.so
