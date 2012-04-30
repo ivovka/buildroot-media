@@ -13,8 +13,8 @@ XBMC_INSTALL_TARGET = YES
 XBMC_BUILD_OPKG = YES
 XBMC_SECTION = mediacenter
 XBMC_DESCRIPTION = XBMC Mediacenter
-XBMC_OPKG_DEPENDENCIES = boost,python,zlib,bzip2,lzo,pcre,alsa-lib,libass,enca,libssh,rtmpdump,dbus,libxt,libxtst,libxmu,libxrandr,mesa,glew,fontconfig,fribidi,libpng,tiff,freetype,jasper,libmad,libsamplerate,libogg,libvorbis,libcdio,libmodplug,faad2,flac,wavpack,lame,libmpeg2,libbluray,sdl,sdl-mixer,sdl-image,sqlite,mysql,samba,avahi,libmicrohttpd,libvdpau,imaging,libplist,consolekit,yajl
-XBMC_DEPENDENCIES = boost python zlib bzip2 lzo pcre alsa-lib libass enca curl libssh rtmpdump dbus xlib_libXt xlib_libXtst xlib_libXmu xlib_libXrandr mesa3d glew fontconfig fribidi libpng tiff freetype jasper libmad libsamplerate libogg libvorbis libcdio libmodplug faad2 flac wavpack lame libmpeg2 libbluray sdl sdl_mixer sdl_image sqlite mysql samba avahi libmicrohttpd libvdpau imaging libplist ConsoleKit yajl
+XBMC_OPKG_DEPENDENCIES = boost,python,zlib,bzip2,lzo,pcre,alsa-lib,libass,enca,libssh,rtmpdump,fontconfig,fribidi,libpng,tiff,freetype,jasper,libmad,libsamplerate,libogg,libvorbis,libcdio,libmodplug,faad2,flac,lame,libmpeg2,sdl,sdl-mixer,sdl-image,sqlite,mysql,alsa-utils,bc,libx11,libxext,libxrandr,mesa,glew,dbus,libxt,libxmu,libbluray,samba,avahi,libnfs,libmicrohttpd,libvdpau,imaging,libplist,consolekit,yajl,simplejson
+XBMC_DEPENDENCIES = boost python zlib bzip2 lzo pcre alsa-lib libass enca curl libssh rtmpdump dbus xlib_libX11 xlib_libXext dbus xlib_libXt xlib_libXtst xlib_libXmu xlib_libXrandr mesa3d glew fontconfig fribidi libpng tiff freetype jasper libmad libsamplerate libogg libvorbis libcdio libmodplug faad2 flac wavpack lame libmpeg2 libbluray sdl sdl_mixer sdl_image sqlite mysql samba avahi libmicrohttpd libvdpau imaging libplist ConsoleKit yajl libnfs
 XBMC_AUTORECONF = YES
 
 define XBMC_AUTORECONF_LIBS
