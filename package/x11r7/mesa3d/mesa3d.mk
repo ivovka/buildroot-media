@@ -20,7 +20,9 @@ MESA3D_CONF_ENV += \
     HOST_OPT_FLAGS="$(HOST_CFLAGS)" \
     X11_INCLUDES= \
     DRI_DRIVER_INSTALL_DIR="/usr/lib/dri" \
-    DRI_DRIVER_SEARCH_DIR="/usr/lib/dri"
+    DRI_DRIVER_SEARCH_DIR="/usr/lib/dri" \
+    AR="$(TARGET_AR)" \
+    RANLIB="$(TARGET_RANLIB)"
 MESA3D_CONF_OPT = \
     --disable-gallium-llvm \
     --disable-debug \
