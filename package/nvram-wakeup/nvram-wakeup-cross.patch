@@ -1,5 +1,6 @@
---- nvram-wakeup-1.1/Makefile.orig	2011-11-14 09:09:07.000000000 +0400
-+++ nvram-wakeup-1.1/Makefile	2011-11-14 09:09:50.000000000 +0400
+diff -Naur nvram-wakeup-orig/Makefile nvram-wakeup-1.1/Makefile
+--- nvram-wakeup-orig/Makefile	2012-04-27 01:16:47.393205457 +0400
++++ nvram-wakeup-1.1/Makefile	2012-04-27 01:17:37.050640048 +0400
 @@ -6,7 +6,7 @@
  
  
@@ -9,12 +10,21 @@
  BINDIR   = ${prefix}/bin
  SBINDIR  = ${prefix}/sbin
  MANDIR   = ${prefix}/man
-@@ -39,7 +39,7 @@
+@@ -39,14 +39,15 @@
  TMPDIR = /tmp
  VERSION = $(shell sed -ne '/define VERSION/s/^.*"\(.*\)".*$$/\1/p' nvram-wakeup.h)
  
 -CC = gcc
 +CC ?= gcc
++SIZE ?= size
  DEFS = -D_GNU_SOURCE
  CFLAGS = -O2 -Wall -Wstrict-prototypes -g -pedantic $(DEFS)
  INSTALL = install
+ INSTALL_STRIP = $(INSTALL) -s
+ 
+ all: $(BINS) $(GTTXT)
+-	size $(BINS)
++	$(SIZE) $(BINS)
+ 
+ nvram-wakeup:   nvram-wakeup.o nvram-wakeup-mb.o gmt-test.o byteops.o nvramops.o bios.o tools.o readconf.o 
+ 
