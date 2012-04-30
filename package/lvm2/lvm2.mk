@@ -47,7 +47,7 @@ LVM2_CONF_OPT += \
 
 # LVM2 uses autoconf, but not automake, and the build system does not
 # take into account the CC passed at configure time.
-LVM2_MAKE_ENV = CC="$(TARGET_CC)"
+LVM2_MAKE_ENV = CC="$(TARGET_CC)" AR="$(TARGET_AR)" RANLIB="$(TARGET_RANLIB)"
 
 ifeq ($(BR2_PACKAGE_LVM2_DMSETUP_ONLY),y)
 LVM2_MAKE_OPT = device-mapper
