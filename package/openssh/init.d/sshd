@@ -1,0 +1,67 @@
+#!/bin/sh
+#
+# Starts sshd.
+#
+SSH_DIR="/etc/ssh"
+RSA1_KEY=$SSH_DIR/ssh_host_key
+RSA2_KEY=$SSH_DIR/ssh_host_rsa_key
+DSA2_KEY=$SSH_DIR/ssh_host_dsa_key
+KEYGEN="/usr/bin/ssh-keygen"
+SSHD="/usr/sbin/sshd"
+
+start() {
+ 	if [ ! -s $RSA1_KEY ] ; then
+ 		echo -n "SSH: generating SSH1 RSA key"
+ 		mkdir -p $SSH_DIR
+ 		$KEYGEN -q -t rsa1 -f $RSA1_KEY -C '' -N '' >&/dev/null
+ 		chmod 600 $RSA1_KEY
+ 		echo "OK"
+ 	fi
+ 	if [ ! -s $RSA2_KEY ] ; then
+ 		echo -n "SSH: generating SSH2 RSA key"
+ 		mkdir -p $SSH_DIR
+ 		$KEYGEN -q -t rsa -f $RSA2_KEY -C '' -N '' >&/dev/null
+ 		chmod 600 $RSA2_KEY
+ 		echo "OK"
+ 	fi
+ 	if [ ! -s $DSA2_KEY ] ; then
+ 		echo -n "SSH: generating SSH2 DSA key"
+ 		mkdir -p $SSH_DIR
+ 		$KEYGEN -q -t dsa -f $DSA2_KEY -C '' -N '' >&/dev/null
+ 		chmod 600 $DSA2_KEY
+ 		echo "OK"
+	fi
+	echo -n "Starting ssh daemon..."
+	mkdir -p /var/empty
+	chmod -R 600 /var/empty
+	umask 077
+	start-stop-daemon -S -q -p /var/run/sshd.pid --exec $SSHD --
+	echo "OK"
+}
+stop() {
+	echo -n "Stopping ssh daemon: "
+	start-stop-daemon -K -q -n sshd
+	echo "OK"
+}
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+  	restart
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+

@@ -26,16 +26,15 @@ OPENSSH_CONF_OPT = \
   --without-rpath \
   --with-ssl-engine \
   --without-pam
-define OPENSSH_INSTALL_INITSCRIPT
-	$(INSTALL) -D -m 755 package/openssh/S50sshd $(TARGET_DIR)/etc/init.d/S50sshd
-endef
 
 define OPENSSH_OPKG_CLEANUP
   rm $(BUILD_DIR_OPKG)/$(OPENSSH_BASE_NAME)/usr/bin/{sftp,ssh-keyscan}
   rm $(BUILD_DIR_OPKG)/$(OPENSSH_BASE_NAME)/usr/lib/{ssh-keysign,ssh-pkcs11-helper}
+  rm -rf $(BUILD_DIR_OPKG)/$(OPENSSH_BASE_NAME)/var
+  mkdir -p $(BUILD_DIR_OPKG)/$(OPENSSH_BASE_NAME)/etc
+  cp package/openssh/sshd_config $(BUILD_DIR_OPKG)/$(OPENSSH_BASE_NAME)/etc
 endef
 
-OPENSSH_POST_INSTALL_TARGET_HOOKS += OPENSSH_INSTALL_INITSCRIPT
 OPENSSH_PRE_BUILD_OPKG_HOOKS += OPENSSH_OPKG_CLEANUP
 
 $(eval $(call AUTOTARGETS,package,openssh))
