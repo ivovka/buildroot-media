@@ -3,8 +3,8 @@
 # libglib2
 #
 #############################################################
-LIBGLIB2_VERSION_MAJOR = 2.32
-LIBGLIB2_VERSION_MINOR = 0
+LIBGLIB2_VERSION_MAJOR = 2.30
+LIBGLIB2_VERSION_MINOR = 3
 LIBGLIB2_VERSION = $(LIBGLIB2_VERSION_MAJOR).$(LIBGLIB2_VERSION_MINOR)
 LIBGLIB2_SOURCE = glib-$(LIBGLIB2_VERSION).tar.xz
 LIBGLIB2_SITE = http://ftp.gnome.org/pub/gnome/sources/glib/$(LIBGLIB2_VERSION_MAJOR)
@@ -29,7 +29,8 @@ LIBGLIB2_CONF_ENV = \
   ac_cv_func_posix_getpwuid_r=yes \
   ac_cv_func_posix_getgrgid_r=yes \
   ac_cv_func_printf_unix98=yes \
-  ac_cv_func_vsnprintf_c99=yes
+  ac_cv_func_vsnprintf_c99=yes \
+  ac_cv_func_qsort_r=no
 
 LIBGLIB2_CONF_OPT = \
 	--disable-gtk-doc \
