@@ -16,11 +16,13 @@ POLKIT_DESCRIPTION = Authorization Toolkit
 
 POLKIT_CONF_OPT = \
     --libexecdir=/usr/lib/polkit-1 \
+    --localstatedir=/var \
     --disable-man-pages \
     --disable-nls \
     --disable-introspection \
     --with-authfw=shadow \
-    --with-os-type=redhat
+    --with-os-type=redhat \
+    --with-expat=$(STAGING_DIR)/usr
 
 define POLKIT_CP_OPKG_SCRIPTS
     mkdir -p $(BUILD_DIR_OPKG)/$(POLKIT_BASE_NAME)/CONTROL
@@ -29,6 +31,7 @@ endef
 
 define POLKIT_OPKG_RM_LOCALE
   rm -rf $(BUILD_DIR_OPKG)/$(POLKIT_BASE_NAME)/usr/share/locale
+  rm -rf $(BUILD_DIR_OPKG)/$(POLKIT_BASE_NAME)/var
 endef
 
 POLKIT_PRE_BUILD_OPKG_HOOKS += POLKIT_CP_OPKG_SCRIPTS
