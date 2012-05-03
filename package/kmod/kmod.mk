@@ -25,6 +25,7 @@ define KMOD_OPKG_TOOLS
   ln -sf /usr/bin/kmod $(BUILD_DIR_OPKG)/$(KMOD_BASE_NAME)/sbin/rmmod
   ln -sf /usr/bin/kmod $(BUILD_DIR_OPKG)/$(KMOD_BASE_NAME)/sbin/modinfo
   ln -sf /usr/bin/kmod $(BUILD_DIR_OPKG)/$(KMOD_BASE_NAME)/sbin/modprobe
+  ln -sf /usr/bin/kmod $(BUILD_DIR_OPKG)/$(KMOD_BASE_NAME)/sbin/depmod
 endef
 
 KMOD_PRE_BUILD_OPKG_HOOKS += KMOD_OPKG_TOOLS
