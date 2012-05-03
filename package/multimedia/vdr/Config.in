@@ -22,5 +22,11 @@ config BR2_PACKAGE_VDR_XVDR
         default n
         help
             xvdr plugin
+
+config BR2_PACKAGE_VDR_IPTV
+        bool "vdr-iptv"
+        default n
+        help
+            iptv plugin
 endmenu
 endif
