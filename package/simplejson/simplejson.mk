@@ -27,6 +27,8 @@ define SIMPLEJSON_BUILD_OPKG_CMDS
     PYTHON_IMAGE_DIR="$(BUILD_DIR_OPKG)/$(SIMPLEJSON_BASE_NAME)/usr/lib/python$(PYTHON_VERSION_MAJOR)/site-packages" \
     $(HOST_DIR)/usr/bin/easy_install --exclude-scripts --zip-ok --no-deps --quiet --prefix=$(BUILD_DIR_OPKG)/$(SIMPLEJSON_BASE_NAME)/usr $(@D)/dist/*.egg \
     )
+    rm $(BUILD_DIR_OPKG)/$(SIMPLEJSON_BASE_NAME)/usr/lib/python$(PYTHON_VERSION_MAJOR)/site-packages/site.*
+    rm $(BUILD_DIR_OPKG)/$(SIMPLEJSON_BASE_NAME)/usr/lib/python$(PYTHON_VERSION_MAJOR)/site-packages/easy-install.pth
 endef
 
 $(eval $(call GENTARGETS,package,simplejson))
