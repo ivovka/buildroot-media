@@ -16,7 +16,7 @@ XFONT_FONT_MISC_MISC_BUILD_OPKG = YES
 XFONT_FONT_MISC_MISC_NAME_OPKG = font-misc-misc
 XFONT_FONT_MISC_MISC_SECTION = x11
 XFONT_FONT_MISC_MISC_DESCRIPTION = A misc. public domain font
-XFONT_FONT_MISC_MISC_OPKG_DEPENDENCIES = font-cursor-misc,font-util,mkfontsale,mkfontdir
+XFONT_FONT_MISC_MISC_OPKG_DEPENDENCIES = font-cursor-misc,font-util,mkfontscale,mkfontdir
 XFONT_FONT_MISC_MISC_CONF_OPT = \
     --with-fontrootdir=/usr/share/fonts \
     --disable-silent-rules \
