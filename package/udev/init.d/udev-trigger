@@ -5,8 +5,8 @@ case "$1" in
   start)
 	(
 	echo "request udev events from the kernel"
-    	/usr/sbin/udevadm trigger --action=add
-	/usr/sbin/udevadm settle
+    	/usr/bin/udevadm trigger --action=add
+	/usr/bin/udevadm settle
 	)&
 	;;
   stop)

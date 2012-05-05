@@ -4,7 +4,7 @@
 case "$1" in
   start)
   	echo -n "Starting udev monitor: "
-  	/usr/sbin/udevadm monitor -e > /dev/udev.log &
+  	/usr/bin/udevadm monitor -e > /dev/udev.log &
   	echo "OK"
   	;;
   stop)

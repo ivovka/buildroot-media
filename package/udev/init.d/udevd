@@ -5,7 +5,7 @@ case "$1" in
   	echo -n "Starting udev daemon: "
   	echo -e '\000\000\000\000' > /proc/sys/kernel/hotplug
 	mkdir -p /dev/rules.d
-	start-stop-daemon -S -q --exec /usr/sbin/udevd -- --daemon
+	start-stop-daemon -S -q --exec /lib/udev/udevd -- --daemon
 	echo "OK"
 	;;
   stop)
