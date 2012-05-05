@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/usr/bin/mkfontdir /usr/share/fonts/misc
+/usr/bin/mkfontscale /usr/share/fonts/misc
+exit 0
