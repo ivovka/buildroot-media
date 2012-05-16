@@ -22,7 +22,7 @@
 
 . /etc/profile
 
-if [ "$RUNLEVEL" = openelec ]; then
+if [ "$RUNHTPC" = yes ]; then
 
   logger -t Xorg "### starting Xorg with driver ${xorg_driver} ###"
 
@@ -34,7 +34,7 @@ if [ "$RUNLEVEL" = openelec ]; then
 
   XORG_CONF_USER="/storage/.config/xorg.conf"
   XORG_CONF_USER_DRV="/storage/.config/xorg-${xorg_driver}.conf"
-  XORG_CONF_DEFAULT="/etc/X11/xorg.conf"
+  XORG_CONF_DEFAULT="/etc/X11/xorg-tv.conf"
   XORG_CONF_DEFAULT_DRV="/etc/X11/xorg-${xorg_driver}.conf"
 
   ##############################################################################
@@ -87,9 +87,9 @@ if [ "$RUNLEVEL" = openelec ]; then
   # starting Xorg
   ##############################################################################
 
-  logger -t Xorg "### starting Xorg with '$DISPLAY vt01 $XORG_ARGS' ###"
+  logger -t Xorg "### starting Xorg with '$DISPLAY vt05 $XORG_ARGS' ###"
 
-  Xorg $DISPLAY vt01 $XORG_ARGS > /dev/null 2>&1 &
+  Xorg $DISPLAY vt05 $XORG_ARGS > /dev/null 2>&1 &
 
 fi
 
