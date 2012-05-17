@@ -1,8 +1,17 @@
 --- xbmc-orig/Makefile.include.in	2012-03-25 13:26:05.402451519 +0400
 +++ xbmc-g45c575b/Makefile.include.in	2012-03-26 23:16:23.734357604 +0400
-@@ -1,4 +1,4 @@
+@@ -1,4 +1,5 @@
 -AR=ar
 +AR=@AR@
++NM=@NM@
  ARFLAGS=crus
  RM=rm -rf
  SHELL=@SHELL@
+--- a/xbmc/cores/DllLoader/exports/Makefile	2012-05-17 00:26:53.890032317 +0400
++++ b/xbmc/cores/DllLoader/exports/Makefile	2012-05-17 00:28:18.104668134 +0400
+@@ -17,4 +17,4 @@
+ 	$(CXX) $(CXXFLAGS) $(DEFINES) -c $(INCLUDES) $< -o $@
+ 
+ wrapper.def : wrapper.o
+-	nm wrapper.o | grep __wrap | awk '{printf("%s ", $$3);}' | sed "s/___wrap_/__wrap_/g" | sed "s/__wrap_/-Wl,-wrap,/g" > $@
++	$(NM) wrapper.o | grep __wrap | awk '{printf("%s ", $$3);}' | sed "s/___wrap_/__wrap_/g" | sed "s/__wrap_/-Wl,-wrap,/g" > $@
