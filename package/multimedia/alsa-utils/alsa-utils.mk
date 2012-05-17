@@ -62,7 +62,6 @@ define ALSA_UTILS_INSTALL_TARGET_CMDS
 endef
 
 define ALSA_UTILS_BUILD_OPKG_CMDS
-	mkdir -p $(BUILD_DIR_OPKG)/var/lib/alsa
 	for i in $(ALSA_UTILS_TARGETS_y); do \
 		install -D -m 755 $(STAGING_DIR)/$$i $(BUILD_DIR_OPKG)/$(ALSA_UTILS_BASE_NAME)/$$i; \
 	done
@@ -75,12 +74,12 @@ define ALSA_UTILS_BUILD_OPKG_CMDS
 	if [ -x "$(BUILD_DIR_OPKG)/$(ALSA_UTILS_BASE_NAME)/usr/sbin/alsactl" ]; then \
 		mkdir -p $(BUILD_DIR_OPKG)/$(ALSA_UTILS_BASE_NAME)/usr/share/; \
 		rm -rf $(BUILD_DIR_OPKG)/$(ALSA_UTILS_BASE_NAME)/usr/share/alsa/; \
-		cp -rdpf $(STAGING_DIR)/usr/share/alsa/ $(BUILD_DIR_OPKG)/$(ALSA_UTILS_BASE_NAME)/usr/share/alsa/; \
 	fi
 	mkdir -p $(BUILD_DIR_OPKG)/$(ALSA_UTILS_BASE_NAME)/usr/share/alsa/init
 	cp $(STAGING_DIR)/usr/share/alsa/init/* $(BUILD_DIR_OPKG)/$(ALSA_UTILS_BASE_NAME)/usr/share/alsa/init
 	rm -rf $(BUILD_DIR_OPKG)/$(ALSA_UTILS_BASE_NAME)/usr/share/alsa/init/Makefile*
-	cp $(TOPDIR)/package/multimedia/alsa-utils/scripts/soundconfig $(BUILD_DIR_OPKG)/$(ALSA_UTILS_BASE_NAME)/usr/bin
+	mkdir -p $(BUILD_DIR_OPKG)/$(ALSA_UTILS_BASE_NAME)/lib/udev
+	cp $(TOPDIR)/package/multimedia/alsa-utils/scripts/soundconfig $(BUILD_DIR_OPKG)/$(ALSA_UTILS_BASE_NAME)/lib/udev
 endef
 define ALSA_UTILS_UNINSTALL_TARGET_CMDS
 	rm -f $(addprefix $(TARGET_DIR)/,$(ALSA_UTILS_TARGETS_) $(ALSA_UTILS_TARGETS_y))
