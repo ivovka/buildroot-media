@@ -1,0 +1,1 @@
+ENV{ACTION}=="add", KERNEL=="dvb0.demux0", RUN+="/etc/init.d/vdr start &"
