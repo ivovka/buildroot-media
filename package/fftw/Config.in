@@ -1,0 +1,6 @@
+config BR2_PACKAGE_FFTW
+  bool "fftw"
+  help
+    FFTW is a C subroutine library for computing the discrete Fourier transform (DFT) in one or more dimensions
+
+    http://www.fftw.org
