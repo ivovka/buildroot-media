@@ -4,15 +4,31 @@
 #
 #############################################################
 
-FFMPEG_VERSION = 0.6.3
+FFMPEG_VERSION = snapshot
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VERSION).tar.bz2
 FFMPEG_SITE = http://ffmpeg.org/releases
 FFMPEG_INSTALL_STAGING = YES
+FFMPEG_BUILD_OPKG = YES
+FFMPEG_SECTION = multimedia
+FFMPEG_PRIORITY = optional
+FFMPEG_DESCRIPTION = FFmpeg is a complete, cross-platform solution to record, convert and stream audio and video.
+
+FFMPEG_DEPENDENCIES = zlib libvdpau
+FFMPEG_OPKG_DEPENDENCIES = zlib,libvdpau
 
 FFMPEG_CONF_OPT = \
 	--prefix=/usr		\
 	--disable-avfilter	\
-	$(if $(BR2_HAVE_DOCUMENTATION),,--disable-doc)
+	--disable-doc		\
+	--disable-runtime-cpudetect \
+	--enable-vdpau \
+	--nm="$(TARGET_NM)" \
+	--ar="$(TARGET_AR)" \
+	--as="$(TARGET_CC)" \
+	--cc="$(TARGET_CC)" \
+	--cxx="$(TARGET_CXX)" \
+	--ld="$(TARGET_CC)" \
+	--cpu=$(BR2_GCC_TARGET_TUNE)
 
 ifeq ($(BR2_PACKAGE_FFMPEG_GPL),y)
 FFMPEG_CONF_OPT += --enable-gpl
@@ -116,13 +132,7 @@ else
 FFMPEG_CONF_OPT += --disable-pthreads
 endif
 
-ifeq ($(BR2_PACKAGE_ZLIB),y)
 FFMPEG_CONF_OPT += --enable-zlib
-FFMPEG_DEPENDENCIES += zlib
-else
-FFMPEG_CONF_OPT += --disable-zlib
-endif
-
 # MMX on is default for x86, disable it for lowly x86-type processors
 ifeq ($(BR2_x86_i386)$(BR2_x86_i486)$(BR2_x86_i586)$(BR2_x86_i686)$(BR2_x86_pentiumpro)$(BR2_x86_geode),y)
 FFMPEG_CONF_OPT += --disable-mmx
@@ -171,5 +181,11 @@ define FFMPEG_CONFIGURE_CMDS
 		$(FFMPEG_CONF_OPT) \
 	)
 endef
+
+define FFMPEG_OPKG_RM_EXAMPLE
+  rm -rf $(BUILD_DIR_OPKG)/$(FFMPEG_BASE_NAME)/usr/share/ffmpeg/examples
+endef
+
+FFMPEG_PRE_BUILD_OPKG_HOOKS += FFMPEG_OPKG_RM_EXAMPLE
 
 $(eval $(call AUTOTARGETS,package/multimedia,ffmpeg))

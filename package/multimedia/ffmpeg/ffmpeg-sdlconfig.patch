@@ -3,15 +3,16 @@ So just pass the whole string to make things simpler.
 
 Signed-off-by: Gustavo Zacarias <gustavo@zacarias.com.ar>
 
-diff -Nura ffmpeg-0.6.1/configure ffmpeg-0.6.1.sdl/configure
---- ffmpeg-0.6.1/configure	2010-06-15 16:44:30.000000000 -0300
-+++ ffmpeg-0.6.1.sdl/configure	2011-02-25 17:13:12.979168176 -0300
-@@ -2640,7 +2640,7 @@
+diff -Nura a/configure b/configure
+--- a/configure	2010-06-15 16:44:30.000000000 -0300
++++ b/configure	2011-02-25 17:13:12.979168176 -0300
+@@ -3261,7 +3261,7 @@
      die "ERROR: No version of libdc1394 found "
- fi
+  fi
  
 -SDL_CONFIG="${cross_prefix}sdl-config"
 +SDL_CONFIG="${SDL_CONFIG}"
- if "${SDL_CONFIG}" --version > /dev/null 2>&1; then
-     sdl_cflags=$("${SDL_CONFIG}" --cflags)
-     sdl_libs=$("${SDL_CONFIG}" --libs)
+ if check_pkg_config sdl SDL_events.h SDL_PollEvent; then
+     check_cpp_condition SDL.h "(SDL_MAJOR_VERSION<<16 | SDL_MINOR_VERSION<<8 | SDL_PATCHLEVEL) >= 0x010201" $sdl_cflags &&
+     enable sdl &&
+

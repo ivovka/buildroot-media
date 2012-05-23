@@ -28,5 +28,11 @@ config BR2_PACKAGE_VDR_IPTV
         default n
         help
             iptv plugin
+config BR2_PACKAGE_VDR_XINELIBOUTPUT
+        bool "vdr-xineliboutput"
+        select BR2_PACKAGE_XINE_LIB
+        default n
+        help
+            xineliboutput plugin
 endmenu
 endif

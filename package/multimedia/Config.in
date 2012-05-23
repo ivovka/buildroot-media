@@ -60,4 +60,5 @@ source "package/multimedia/vorbis-tools/Config.in"
 source "package/multimedia/wavpack/Config.in"
 source "package/multimedia/xbmc/Config.in"
 source "package/multimedia/xbmc-addon-xvdr/Config.in"
+source "package/multimedia/xine-lib/Config.in"
 endmenu
