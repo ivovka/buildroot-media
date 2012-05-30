@@ -3,11 +3,9 @@
 # xine-lib
 #
 #############################################################
-XINE_LIB_VERSION = 1.2.1
-# Actually it is fake - i use xine version 1.1 from git
-#XINE_LIB_SOURCE = xine-lib-$(XINE_LIB_VERSION).tar.xz
-XINE_LIB_SOURCE = xine-lib-$(XINE_LIB_VERSION).tar.gz
-XINE_LIB_SITE = http://$(BR2_SOURCEFORGE_MIRROR).dl.sourceforge.net/sourceforge/xine/xine-lib
+XINE_LIB_VERSION = 1.2-head
+XINE_LIB_SOURCE = xine-lib-$(XINE_LIB_VERSION).tar.bz2
+XINE_LIB_SITE = http://anonscm.debian.org/hg/xine-lib/xine-lib-1.2/archive
 XINE_LIB_AUTORECONF = YES
 XINE_LIB_INSTALL_STAGING = YES
 XINE_LIB_INSTALL_TARGET = YES
@@ -17,8 +15,8 @@ XINE_LIB_SECTION = multimedia
 XINE_LIB_PRIORITY = optional
 XINE_LIB_DESCRIPTION = A free video player
 
-XINE_LIB_DEPENDENCIES = ffmpeg
-XINE_LIB_OPKG_DEPENDENCIES = ffmpeg
+XINE_LIB_DEPENDENCIES = ffmpeg xlib_libXv xlib_libICE xlib_libXext mesa3d alsa-lib libvdpau libbluray libmad libmodplug libvorbis
+XINE_LIB_OPKG_DEPENDENCIES = ffmpeg,libxv,libice,libxext,mesa3d,alsa-lib,libvdpau,libbluray,libmad,libmodplug,libvorbis
 
 # XINE_LIB_CFLAGS=$(TARGET_CFLAGS)
 
@@ -30,16 +28,20 @@ XINE_LIB_CONF_OPT = --disable-ipv6 \
   --enable-opengl \
   --enable-glu \
   --disable-vidix \
-  --enable-xinerama \
+  --disable-xinerama \
   --disable-static-xv \
   --disable-xvmc \
   --enable-vdpau \
   --with-x \
   --with-alsa \
   --without-sdl \
+  --without-imagemagick \
   --disable-vcd \
-  --with-external-ffmpeg \
-  --disable-musepack 
-
+  --disable-musepack \
+  --disable-iconvtest \
+  --disable-dxr3 \
+  --disable-oss \
+  --disable-gdkpixbuf \
+  --without-xcb
 
 $(eval $(call AUTOTARGETS,package/multimedia,xine-lib))
