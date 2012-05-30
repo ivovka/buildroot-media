@@ -2,16 +2,13 @@
 #
 # Start the Video Disk Recorder
 #
+. /etc/profile
 export LC_ALL=ru_RU.utf8
 export VDR_CHARSET_OVERRIDE=ISO-8859-5
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
 TERMOUT=/var/log/vdr.log
 loglevel=3
 VDRCMD="/usr/bin/vdr -c /etc/vdr -E /export/vdr -v /export/vdr/video -l $loglevel.6 -L /usr/lib/vdr/PLUGINS -P sc -P iptv -P xvdr --localedir=/usr/share/locale --no-kbd -d"
-NetworkLoaded()
-{
-  ifconfig eth0 | grep -qse UP
-}
 NoloadHTPC()
 {
   grep -qse nohtpc /proc/cmdline
@@ -24,22 +21,11 @@ case "$1" in
       exit 0
     fi
     logger -t vdr "Starting Video Disk Recorder..."
-    if ! NetworkLoaded; then
-      logger -t vdr "Waiting for network to load..."
-      cnt=0
-      while [ $cnt -lt $MODWAIT ]
-      do
-        cnt=$(( $cnt + 1 ))
-        sleep 1
-      done
-      if ! NetworkLoaded; then
-        logger -t vdr "Network does not work. Exit."
-        exit 1
-      fi
-    fi
+    logger -t vdr "Waiting for network interface..."
+    wait_for_network
     touch "$TERMOUT"
     $VDRCMD > $TERMOUT 2>&1
-    echo "OK"
+    logger -t vdr "VDR started"
     ;;
   stop)
     killall vdr
