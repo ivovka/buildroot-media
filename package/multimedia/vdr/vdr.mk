@@ -124,7 +124,7 @@ define VDR_BUILD_OPKG_CMDS
     mkdir -p $(BUILD_DIR_OPKG)/vdr-$(VDR_VERSION)/usr/share/locale
     mkdir -p $(BUILD_DIR_OPKG)/vdr-$(VDR_VERSION)/usr/lib/vdr/PLUGINS
     cp $(VDR_DIR)/vdr $(BUILD_DIR_OPKG)/vdr-$(VDR_VERSION)/usr/bin
-    cp $(VDR_DIR)/PLUGINS/lib/lib*-*.so.$(VDR_VERSION) $(BUILD_DIR_OPKG)/vdr-$(VDR_VERSION)/usr/lib/vdr/PLUGINS
+    cp $(VDR_DIR)/PLUGINS/lib/lib*.so.* $(BUILD_DIR_OPKG)/vdr-$(VDR_VERSION)/usr/lib/vdr/PLUGINS
     cp -r $(VDR_DIR)/locale/ru_RU $(BUILD_DIR_OPKG)/vdr-$(VDR_VERSION)/usr/share/locale
 endef
 $(eval $(call GENTARGETS,package/multimedia,vdr))
