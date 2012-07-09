@@ -1,0 +1,24 @@
+--- a/Makefile	2012-07-05 01:49:44.279384854 +0400
++++ b/Makefile	2012-07-05 01:50:44.096976545 +0400
+@@ -15,15 +15,15 @@
+ 
+ # TINYXML_USE_STL can be used to turn on STL support. NO, then STL
+ # will not be used. YES will include the STL files.
+-TINYXML_USE_STL := NO
++TINYXML_USE_STL := YES
+ 
+ #****************************************************************************
+ 
+-CC     := gcc
+-CXX    := g++
+-LD     := g++
+-AR     := ar rc
+-RANLIB := ranlib
++CC     ?= gcc
++CXX    ?= g++
++LD     ?= g++
++AR     ?= ar rc
++RANLIB ?= ranlib
+ 
+ DEBUG_CFLAGS     := -Wall -Wno-format -g -DDEBUG
+ RELEASE_CFLAGS   := -Wall -Wno-unknown-pragmas -Wno-format -O3
