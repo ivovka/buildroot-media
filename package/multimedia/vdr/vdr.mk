@@ -8,15 +8,15 @@ VDR_SITE = ftp://ftp.tvdr.de/vdr/Developer
 VDR_SOURCE = vdr-$(VDR_VERSION).tar.bz2
 
 VDR_SC_SITE = http://85.17.209.13:6100
-VDR_SC_VERSION = 7dea047c5dbb
+VDR_SC_VERSION = 35714d9890a9
 VDR_SC_SOURCE = sc-$(VDR_SC_VERSION).tar.bz2
 
 VDR_XVDR_SITE = https://nodeload.github.com
-VDR_XVDR_VERSION = 0.9.5-38-gc75ec21
+VDR_XVDR_VERSION = 0.9.5-39-gb62ccbd
 VDR_XVDR_SOURCE = pipelka-vdr-plugin-xvdr-$(VDR_XVDR_VERSION).tar.gz
 
 VDR_IPTV_SITE = http://www.saunalahti.fi/~rahrenbe/vdr/iptv/files
-VDR_IPTV_VERSION = 0.5.2
+VDR_IPTV_VERSION = 1.0.0
 VDR_IPTV_SOURCE = vdr-iptv-$(VDR_IPTV_VERSION).tgz
 
 VDR_XINELIBOUTPUT_VERSION = 20120511
