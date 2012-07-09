@@ -1,7 +1,7 @@
-diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-d48d118/xbmc/Application.cpp
---- xbmc-orig/xbmc/Application.cpp	2011-12-19 16:17:26.000000000 +0400
-+++ xbmc-d48d118/xbmc/Application.cpp	2011-12-21 08:45:23.000000000 +0400
-@@ -363,6 +363,7 @@ CApplication::CApplication(void) : m_ite
+diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-g45c575b/xbmc/Application.cpp
+--- xbmc-orig/xbmc/Application.cpp	2012-03-25 12:17:57.202561973 +0400
++++ xbmc-g45c575b/xbmc/Application.cpp	2012-03-25 12:26:43.714037683 +0400
+@@ -377,6 +377,7 @@ CApplication::CApplication(void)
    m_nextPlaylistItem = -1;
    m_bPlaybackStarting = false;
    m_skinReloading = false;
@@ -9,7 +9,7 @@ diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-d48d118/xbmc/Application.cpp
  
  #ifdef HAS_GLX
    XInitThreads();
-@@ -2156,6 +2157,7 @@ bool CApplication::OnKey(const CKey& key
+@@ -2209,6 +2210,7 @@ bool CApplication::OnKey(const CKey& key
    // a key has been pressed.
    // reset Idle Timer
    m_idleTimer.StartZero();
@@ -17,7 +17,7 @@ diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-d48d118/xbmc/Application.cpp
    bool processKey = AlwaysProcess(action);
  
    ResetScreenSaver();
-@@ -2739,6 +2741,7 @@ bool CApplication::ProcessGamepad(float 
+@@ -2793,6 +2795,7 @@ bool CApplication::ProcessGamepad(float
    {
      // reset Idle Timer
      m_idleTimer.StartZero();
@@ -25,7 +25,7 @@ diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-d48d118/xbmc/Application.cpp
  
      ResetScreenSaver();
      if (WakeUpScreenSaverAndDPMS())
-@@ -2797,6 +2800,7 @@ bool CApplication::ProcessGamepad(float 
+@@ -2851,6 +2854,7 @@ bool CApplication::ProcessGamepad(float
    {
      // reset Idle Timer
      m_idleTimer.StartZero();
@@ -33,7 +33,7 @@ diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-d48d118/xbmc/Application.cpp
  
      ResetScreenSaver();
      if (WakeUpScreenSaverAndDPMS())
-@@ -2873,6 +2877,7 @@ bool CApplication::ProcessMouse()
+@@ -2927,6 +2931,7 @@ bool CApplication::ProcessMouse()
  
    // Reset the screensaver and idle timers
    m_idleTimer.StartZero();
@@ -41,7 +41,7 @@ diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-d48d118/xbmc/Application.cpp
    ResetScreenSaver();
    if (WakeUpScreenSaverAndDPMS())
      return true;
-@@ -2999,6 +3004,7 @@ bool CApplication::ProcessEventServer(fl
+@@ -3066,6 +3071,7 @@ bool CApplication::ProcessEventServer(fl
    {
      // reset idle timers
      m_idleTimer.StartZero();
@@ -49,7 +49,7 @@ diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-d48d118/xbmc/Application.cpp
      ResetScreenSaver();
      WakeUpScreenSaverAndDPMS();
    }
-@@ -3076,6 +3082,7 @@ bool CApplication::ProcessJoystickEvent(
+@@ -3149,6 +3155,7 @@ bool CApplication::ProcessJoystickEvent(
  {
  #if defined(HAS_EVENT_SERVER)
    m_idleTimer.StartZero();
@@ -57,7 +57,7 @@ diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-d48d118/xbmc/Application.cpp
  
     // Make sure to reset screen saver, mouse.
     ResetScreenSaver();
-@@ -4476,8 +4483,22 @@ void CApplication::CheckShutdown()
+@@ -4568,8 +4575,22 @@ void CApplication::CheckShutdown()
    CGUIDialogMusicScan *pMusicScan = (CGUIDialogMusicScan *)g_windowManager.GetWindow(WINDOW_DIALOG_MUSIC_SCAN);
    CGUIDialogVideoScan *pVideoScan = (CGUIDialogVideoScan *)g_windowManager.GetWindow(WINDOW_DIALOG_VIDEO_SCAN);
  
@@ -81,7 +81,7 @@ diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-d48d118/xbmc/Application.cpp
  
    if (IsPlaying() || IsPaused()) // is something playing?
      resetTimer = true;
-@@ -4500,7 +4521,7 @@ void CApplication::CheckShutdown()
+@@ -4592,7 +4613,7 @@ void CApplication::CheckShutdown()
      return;
    }
  
@@ -90,10 +90,10 @@ diff -Nurp xbmc-orig/xbmc/Application.cpp xbmc-d48d118/xbmc/Application.cpp
    {
      // Since it is a sleep instead of a shutdown, let's set everything to reset when we wake up.
      m_shutdownTimer.Stop();
-diff -Nurp xbmc-orig/xbmc/Application.h xbmc-d48d118/xbmc/Application.h
---- xbmc-orig/xbmc/Application.h	2011-12-19 16:17:26.000000000 +0400
-+++ xbmc-d48d118/xbmc/Application.h	2011-12-19 16:26:43.000000000 +0400
-@@ -288,6 +288,11 @@ public:
+diff -Nurp xbmc-orig/xbmc/Application.h xbmc-g45c575b/xbmc/Application.h
+--- xbmc-orig/xbmc/Application.h	2012-03-25 12:17:57.205895352 +0400
++++ xbmc-g45c575b/xbmc/Application.h	2012-03-25 12:28:24.708932703 +0400
+@@ -290,6 +290,11 @@ public:
    bool ToggleDPMS(bool manual);
  
    float GetDimScreenSaverLevel() const;
@@ -105,7 +105,7 @@ diff -Nurp xbmc-orig/xbmc/Application.h xbmc-d48d118/xbmc/Application.h
  protected:
    bool LoadSkin(const CStdString& skinID);
    void LoadSkin(const boost::shared_ptr<ADDON::CSkinInfo>& skin);
-@@ -316,6 +321,7 @@ protected:
+@@ -318,6 +323,7 @@ protected:
    CStopWatch m_shutdownTimer;
  
    bool m_bInhibitIdleShutdown;
@@ -113,10 +113,10 @@ diff -Nurp xbmc-orig/xbmc/Application.h xbmc-d48d118/xbmc/Application.h
  
    DPMSSupport* m_dpms;
    bool m_dpmsIsActive;
-diff -Nurp xbmc-orig/xbmc/pvr/PVRManager.cpp xbmc-d48d118/xbmc/pvr/PVRManager.cpp
---- xbmc-orig/xbmc/pvr/PVRManager.cpp	2011-12-19 16:18:04.000000000 +0400
-+++ xbmc-d48d118/xbmc/pvr/PVRManager.cpp	2011-12-21 08:46:02.000000000 +0400
-@@ -312,6 +312,40 @@ bool CPVRManager::Load(void)
+diff -Nurp xbmc-orig/xbmc/pvr/PVRManager.cpp xbmc-g45c575b/xbmc/pvr/PVRManager.cpp
+--- xbmc-orig/xbmc/pvr/PVRManager.cpp	2012-03-25 12:18:00.969286888 +0400
++++ xbmc-g45c575b/xbmc/pvr/PVRManager.cpp	2012-03-25 12:31:39.371942951 +0400
+@@ -323,6 +323,40 @@ bool CPVRManager::Load(void)
  
    /* close the progess dialog */
    HideProgressDialog();
@@ -157,7 +157,7 @@ diff -Nurp xbmc-orig/xbmc/pvr/PVRManager.cpp xbmc-d48d118/xbmc/pvr/PVRManager.cp
  
    return true;
  }
-@@ -900,10 +934,8 @@ bool CPVRManager::IsIdle(void) const
+@@ -912,10 +946,8 @@ bool CPVRManager::IsIdle(void) const
      const CDateTime next = m_timers->GetNextEventTime();
      const CDateTimeSpan delta = next - now;
  
@@ -169,25 +169,27 @@ diff -Nurp xbmc-orig/xbmc/pvr/PVRManager.cpp xbmc-d48d118/xbmc/pvr/PVRManager.cp
    }
  
    return true;
-diff -Nurp xbmc-orig/xbmc/pvr/timers/PVRTimers.cpp xbmc-d48d118/xbmc/pvr/timers/PVRTimers.cpp
---- xbmc-orig/xbmc/pvr/timers/PVRTimers.cpp	2011-12-19 16:18:30.000000000 +0400
-+++ xbmc-d48d118/xbmc/pvr/timers/PVRTimers.cpp	2011-12-21 08:51:50.000000000 +0400
-@@ -264,12 +264,14 @@ bool CPVRTimers::GetNextActiveTimer(CPVR
+diff -Nurp xbmc-orig/xbmc/pvr/timers/PVRTimers.cpp xbmc-g45c575b/xbmc/pvr/timers/PVRTimers.cpp
+--- xbmc-orig/xbmc/pvr/timers/PVRTimers.cpp	2012-03-25 12:18:01.035954612 +0400
++++ xbmc-g45c575b/xbmc/pvr/timers/PVRTimers.cpp	2012-03-25 12:41:49.084705627 +0400
+@@ -287,13 +287,15 @@ int CPVRTimers::GetTimers(CFileItemList*
+ 
+ bool CPVRTimers::GetNextActiveTimer(CPVRTimerInfoTag *tag) const
  {
-   bool bReturn(false);
-   bool bGotFirst(false);
 +  const CDateTime now = CDateTime::GetUTCDateTime();
    CSingleLock lock(m_critSection);
- 
-   for (unsigned int iTimerPtr = 0; iTimerPtr < size(); iTimerPtr++)
+   for (map<CDateTime, vector<CPVRTimerInfoTag *>* >::const_iterator it = m_tags.begin(); it != m_tags.end(); it++)
    {
-     CPVRTimerInfoTag *current = at(iTimerPtr);
-     if (current->IsActive() && !current->IsRecording() &&
-+        current->StartAsUTC() >= now &&
-         (!bGotFirst || current->Compare(*tag) < 0))
+     for (unsigned int iTimerPtr = 0; iTimerPtr < it->second->size(); iTimerPtr++)
      {
-       *tag = *at(iTimerPtr);
-@@ -642,7 +644,6 @@ void CPVRTimers::Notify(const Observable
+       CPVRTimerInfoTag *current = it->second->at(iTimerPtr);
+-      if (current->IsActive() && !current->IsRecording())
++      if (current->IsActive() && !current->IsRecording() &&
++        current->StartAsUTC() >= now)
+       {
+         *tag = *current;
+         return true;
+@@ -691,7 +693,6 @@ void CPVRTimers::Notify(const Observable
  
  CDateTime CPVRTimers::GetNextEventTime(void) const
  {
@@ -195,7 +197,7 @@ diff -Nurp xbmc-orig/xbmc/pvr/timers/PVRTimers.cpp xbmc-d48d118/xbmc/pvr/timers/
    const bool dailywakup = g_guiSettings.GetBool("pvrpowermanagement.dailywakeup");
    const CDateTime now = CDateTime::GetUTCDateTime();
    const CDateTimeSpan prewakeup(0, 0, g_guiSettings.GetInt("pvrpowermanagement.prewakeup"), 0);
-@@ -650,6 +651,7 @@ CDateTime CPVRTimers::GetNextEventTime(v
+@@ -699,6 +700,7 @@ CDateTime CPVRTimers::GetNextEventTime(v
  
    CDateTime timerwakeuptime;
    CDateTime dailywakeuptime;
@@ -203,7 +205,7 @@ diff -Nurp xbmc-orig/xbmc/pvr/timers/PVRTimers.cpp xbmc-d48d118/xbmc/pvr/timers/
  
    /* Check next active time */
    CPVRTimerInfoTag timer;
-@@ -657,11 +659,15 @@ CDateTime CPVRTimers::GetNextEventTime(v
+@@ -706,11 +708,15 @@ CDateTime CPVRTimers::GetNextEventTime(v
    {
      const CDateTime start = timer.StartAsUTC();
  
@@ -223,7 +225,7 @@ diff -Nurp xbmc-orig/xbmc/pvr/timers/PVRTimers.cpp xbmc-d48d118/xbmc/pvr/timers/
    }
  
    /* check daily wake up */
-@@ -675,13 +681,17 @@ CDateTime CPVRTimers::GetNextEventTime(v
+@@ -724,13 +730,17 @@ CDateTime CPVRTimers::GetNextEventTime(v
        dailywakeuptime.GetHour(), dailywakeuptime.GetMinute(), dailywakeuptime.GetSecond()
      );
  
