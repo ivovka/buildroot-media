@@ -3,9 +3,10 @@
 # xbmc
 #
 #############################################################
-#XBMC_VERSION = a17e541
-#XBMC_VERSION = 7a75a74
-XBMC_VERSION = g45c575b
+#XBMC_VERSION = g45c575b
+# this is a new version but it works not very well: not usable after bufferization
+#XBMC_VERSION = geb45e6f
+XBMC_VERSION = g604577c
 XBMC_SOURCE = opdenkamp-xbmc-$(XBMC_VERSION).tar.gz
 XBMC_SITE = http://www.example.com
 XBMC_INSTALL_STAGING = NO
@@ -13,8 +14,8 @@ XBMC_INSTALL_TARGET = YES
 XBMC_BUILD_OPKG = YES
 XBMC_SECTION = mediacenter
 XBMC_DESCRIPTION = XBMC Mediacenter
-XBMC_OPKG_DEPENDENCIES = boost,python,zlib,bzip2,lzo,pcre,alsa-lib,libass,enca,libssh,rtmpdump,fontconfig,fribidi,libpng,tiff,freetype,jasper,libmad,libsamplerate,libogg,libvorbis,libcdio,libmodplug,faad2,flac,lame,libmpeg2,sdl,sdl-mixer,sdl-image,sqlite,mysql,alsa-utils,bc,libx11,libxext,libxrandr,mesa,glew,dbus,libxt,libxmu,libbluray,samba,avahi,libnfs,libmicrohttpd,libvdpau,imaging,libplist,consolekit,yajl,simplejson
-XBMC_DEPENDENCIES = boost python zlib bzip2 lzo pcre alsa-lib libass enca curl libssh rtmpdump dbus xlib_libX11 xlib_libXext dbus xlib_libXt xlib_libXtst xlib_libXmu xlib_libXrandr mesa3d glew fontconfig fribidi libpng tiff freetype jasper libmad libsamplerate libogg libvorbis libcdio libmodplug faad2 flac wavpack lame libmpeg2 libbluray sdl sdl_mixer sdl_image sqlite mysql samba avahi libmicrohttpd libvdpau imaging libplist ConsoleKit yajl libnfs
+XBMC_OPKG_DEPENDENCIES = boost,python,zlib,bzip2,lzo,pcre,alsa-lib,libass,enca,libssh,rtmpdump,fontconfig,fribidi,libpng,tiff,freetype,jasper,libmad,libsamplerate,libogg,libvorbis,libcdio,libmodplug,faad2,flac,lame,libmpeg2,sdl,sdl-mixer,sdl-image,sqlite,mysql,alsa-utils,bc,libx11,libxext,libxrandr,mesa,glew,dbus,libxt,libxmu,libbluray,samba,avahi,libnfs,libmicrohttpd,libvdpau,imaging,libplist,consolekit,yajl,simplejson,tinyxml
+XBMC_DEPENDENCIES = boost python zlib bzip2 lzo pcre alsa-lib libass enca curl libssh rtmpdump dbus xlib_libX11 xlib_libXext dbus xlib_libXt xlib_libXtst xlib_libXmu xlib_libXrandr mesa3d glew fontconfig fribidi libpng tiff freetype jasper libmad libsamplerate libogg libvorbis libcdio libmodplug faad2 flac wavpack lame libmpeg2 libbluray sdl sdl_mixer sdl_image sqlite mysql samba avahi libmicrohttpd libvdpau imaging libplist ConsoleKit yajl libnfs tinyxml
 XBMC_AUTORECONF = YES
 
 define XBMC_AUTORECONF_LIBS

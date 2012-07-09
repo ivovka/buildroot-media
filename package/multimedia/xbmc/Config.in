@@ -49,6 +49,7 @@ config BR2_PACKAGE_XBMC
         select BR2_PACKAGE_LIBMICROHTTPD
         select BR2_PACKAGE_LIBVDPAU
         select BR2_PACKAGE_YAJL
+	select BR2_PACKAGE_TINYXML
     help
       XBMC Media Center (which was formerly named Xbox Media Center) is a free and open source
       cross-platform media player and home entertainment system software with a 10-foot user
