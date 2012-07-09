@@ -16,7 +16,7 @@ XINE_LIB_PRIORITY = optional
 XINE_LIB_DESCRIPTION = A free video player
 
 XINE_LIB_DEPENDENCIES = ffmpeg xlib_libXv xlib_libICE xlib_libXext mesa3d alsa-lib libvdpau libbluray libmad libmodplug libvorbis
-XINE_LIB_OPKG_DEPENDENCIES = ffmpeg,libxv,libice,libxext,mesa3d,alsa-lib,libvdpau,libbluray,libmad,libmodplug,libvorbis
+XINE_LIB_OPKG_DEPENDENCIES = ffmpeg,libxv,libice,libxext,mesa,alsa-lib,libvdpau,libbluray,libmad,libmodplug,libvorbis
 
 # XINE_LIB_CFLAGS=$(TARGET_CFLAGS)
 
