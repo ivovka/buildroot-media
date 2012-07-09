@@ -1,0 +1,26 @@
+From 6c35a5d6e9796c12b4d22574572692d098c93647 Mon Sep 17 00:00:00 2001
+From: Jonathan Marshall <jmarshall@never.you.mind>
+Date: Mon, 9 Jul 2012 08:32:46 +1200
+Subject: [PATCH 43/63] fixes potential read off the end of array, thanks to
+ night199uk
+
+---
+ xbmc/music/infoscanner/MusicInfoScanner.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/xbmc/music/infoscanner/MusicInfoScanner.cpp b/xbmc/music/infoscanner/MusicInfoScanner.cpp
+index c2ac7d7..fdfc053 100644
+--- a/xbmc/music/infoscanner/MusicInfoScanner.cpp
++++ b/xbmc/music/infoscanner/MusicInfoScanner.cpp
+@@ -687,7 +687,7 @@ void CMusicInfoScanner::CategoriseAlbums(VECSONGS &songsToCheck, VECALBUMS &albu
+       {
+         unsigned int match = 0;
+         vector<string> &compare = (*k)->albumArtist.empty() ? (*k)->artist : (*k)->albumArtist;
+-        for (; match < common.size(), match < compare.size(); match++)
++        for (; match < common.size() && match < compare.size(); match++)
+         {
+           if (compare[match] != common[match])
+             break;
+-- 
+1.7.9.4
+

@@ -1,0 +1,33 @@
+From 2f1834b92a615bfbe5e9057211cc898178359d0e Mon Sep 17 00:00:00 2001
+From: Martin van Beurden <chadoe@xbmc.org>
+Date: Sun, 8 Jul 2012 19:54:40 +0200
+Subject: [PATCH 42/63] fixed: track progress percentage for audio streams for
+ which the player can't determine duration but with
+ duration known in metadata. (was removed in
+ dd02c0c6d7).
+
+---
+ xbmc/Application.cpp |    7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/xbmc/Application.cpp b/xbmc/Application.cpp
+index e837809..c9f9a0d 100644
+--- a/xbmc/Application.cpp
++++ b/xbmc/Application.cpp
+@@ -5409,6 +5409,13 @@ float CApplication::GetPercentage() const
+ {
+   if (IsPlaying() && m_pPlayer)
+   {
++    if (m_pPlayer->GetTotalTime() == 0 && IsPlayingAudio() && m_itemCurrentFile->HasMusicInfoTag())
++    {
++      const CMusicInfoTag& tag = *m_itemCurrentFile->GetMusicInfoTag();
++      if (tag.GetDuration() > 0)
++        return (float)(GetTime() / tag.GetDuration() * 100);
++    }
++
+     if (m_itemCurrentFile->IsStack() && m_currentStack->Size() > 0)
+       return (float)(GetTime() / GetTotalTime() * 100);
+     else
+-- 
+1.7.9.4
+

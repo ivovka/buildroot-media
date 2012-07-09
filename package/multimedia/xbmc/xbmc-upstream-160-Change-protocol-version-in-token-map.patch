@@ -1,0 +1,26 @@
+From 207a952d8a8cd36271b8312860e052b0af03ba74 Mon Sep 17 00:00:00 2001
+From: David Teirney <david@teirney.net>
+Date: Sun, 24 Jun 2012 14:06:47 +1200
+Subject: [PATCH 60/63] Change protocol version in token map to be unsigned
+ int as it can never be negative.
+
+---
+ lib/cmyth/libcmyth/connection.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/cmyth/libcmyth/connection.c b/lib/cmyth/libcmyth/connection.c
+index 7f80f46..16fe074 100644
+--- a/lib/cmyth/libcmyth/connection.c
++++ b/lib/cmyth/libcmyth/connection.c
+@@ -35,7 +35,7 @@ static char * cmyth_conn_get_setting_unlocked(cmyth_conn_t conn, const char* hos
+ pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+ 
+ typedef struct {
+-	int version;
++	unsigned int version;
+ 	char token[9]; // 8 characters + the terminating NULL character
+ } myth_protomap_t;
+ 
+-- 
+1.7.9.4
+
