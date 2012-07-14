@@ -23,6 +23,12 @@ config BR2_PACKAGE_VDR_XVDR
         help
             xvdr plugin
 
+config BR2_PACKAGE_VDR_VNSI
+	bool "vdr-vnsi"
+	default n
+	help
+	    vnsi plugin from xbmc
+
 config BR2_PACKAGE_VDR_IPTV
         bool "vdr-iptv"
         default n
