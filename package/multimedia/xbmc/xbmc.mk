@@ -3,10 +3,7 @@
 # xbmc
 #
 #############################################################
-#XBMC_VERSION = g45c575b
-# this is a new version but it works not very well: not usable after bufferization
-#XBMC_VERSION = geb45e6f
-XBMC_VERSION = g604577c
+XBMC_VERSION = g45c575b
 XBMC_SOURCE = opdenkamp-xbmc-$(XBMC_VERSION).tar.gz
 XBMC_SITE = http://www.example.com
 XBMC_INSTALL_STAGING = NO

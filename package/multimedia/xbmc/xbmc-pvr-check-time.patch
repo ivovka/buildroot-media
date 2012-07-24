@@ -1,5 +1,5 @@
---- xbmc-a17e541/xbmc/pvr/addons/PVRClient.cpp.orig	2011-11-21 17:42:15.000000000 +0400
-+++ xbmc-a17e541/xbmc/pvr/addons/PVRClient.cpp	2011-11-21 17:44:15.000000000 +0400
+--- a/xbmc/pvr/addons/PVRClient.cpp	2011-11-21 17:42:15.000000000 +0400
++++ b/xbmc/pvr/addons/PVRClient.cpp	2011-11-21 17:44:15.000000000 +0400
 @@ -169,7 +169,7 @@
    time_t recTime;
    xbmcRecording.RecordingTimeAsUTC().GetAsTime(recTime);
