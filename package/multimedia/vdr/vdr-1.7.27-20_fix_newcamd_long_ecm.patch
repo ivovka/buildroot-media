@@ -1,0 +1,11 @@
+--- a/PLUGINS/src/sc/systems/cardclient/newcamd.c	2012-06-10 14:31:48.000000000 +0400
++++ b/PLUGINS/src/sc/systems/cardclient/newcamd.c	2012-07-25 15:57:17.000000000 +0400
+@@ -31,7 +31,7 @@
+ 
+ #include <openssl/des.h>
+ 
+-#define CWS_NETMSGSIZE 272
++#define CWS_NETMSGSIZE 480
+ 
+ // -- cTripleDes ---------------------------------------------------------------
+ 
