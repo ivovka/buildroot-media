@@ -3,8 +3,9 @@
 # xbmc
 #
 #############################################################
-XBMC_VERSION = g45c575b
-XBMC_SOURCE = opdenkamp-xbmc-$(XBMC_VERSION).tar.gz
+XBMC_VERSION = g6ba3c70
+XBMC_BRANCH = 11.0-Eden-pvr-r2-62
+XBMC_SOURCE = opdenkamp-xbmc-$(XBMC_BRANCH)-$(XBMC_VERSION).tar.gz
 XBMC_SITE = http://www.example.com
 XBMC_INSTALL_STAGING = NO
 XBMC_INSTALL_TARGET = YES
