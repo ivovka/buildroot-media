@@ -85,11 +85,9 @@ $(GDB_TARGET_DIR)/.configured: $(GDB_DIR)/.unpacked
 		--disable-sim --enable-gdbserver \
 		--without-included-gettext \
 		--disable-werror \
+		--disable-nls \
 		$(QUIET) \
 	)
-ifeq ($(BR2_ENABLE_LOCALE),y)
-	-$(SED) "s,^INTL *=.*,INTL = -lintl,g;" $(GDB_DIR)/gdb/Makefile
-endif
 	touch $@
 
 $(GDB_TARGET_DIR)/gdb/gdb: $(GDB_TARGET_DIR)/.configured
@@ -102,9 +100,9 @@ $(TARGET_DIR)/usr/bin/gdb: $(GDB_TARGET_DIR)/gdb/gdb
 	install -c -D $(GDB_TARGET_DIR)/gdb/gdb $(TARGET_DIR)/usr/bin/gdb
 
 gdb_target-opkg: $(GDB_TARGET_DIR)/gdb/gdb
-	mkdir -p $(BUILD_DIR_OPKG)/gdb-$(GDB_VERSION)/usr/bin/gdb
+	mkdir -p $(BUILD_DIR_OPKG)/gdb-$(GDB_VERSION)/usr/bin
 	mkdir -p $(BUILD_DIR_OPKG)/gdb-$(GDB_VERSION)/CONTROL
-	install -c -D $(GDB_TARGET_DIR)/gdb/gdb $(BUILD_DIR_OPKG)/gdb-$(GDB_VERSION)/usr/bin/gdb
+	install -c -D $(GDB_TARGET_DIR)/gdb/gdb $(BUILD_DIR_OPKG)/gdb-$(GDB_VERSION)/usr/bin
 	echo "Package: gdb" > $(BUILD_DIR_OPKG)/gdb-$(GDB_VERSION)/CONTROL/control
 	echo "Version: $(GDB_VERSION)" >> $(BUILD_DIR_OPKG)/gdb-$(GDB_VERSION)/CONTROL/control
 	echo "Architecture: $(ARCH)" >> $(BUILD_DIR_OPKG)/gdb-$(GDB_VERSION)/CONTROL/control
