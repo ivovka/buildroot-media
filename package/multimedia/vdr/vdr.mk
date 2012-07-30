@@ -12,7 +12,7 @@ VDR_SC_VERSION = 35714d9890a9
 VDR_SC_SOURCE = sc-$(VDR_SC_VERSION).tar.bz2
 
 VDR_XVDR_SITE = https://nodeload.github.com
-VDR_XVDR_VERSION = 0.9.5-39-gb62ccbd
+VDR_XVDR_VERSION = 0.9.5-40-g98e1ea1
 VDR_XVDR_SOURCE = pipelka-vdr-plugin-xvdr-$(VDR_XVDR_VERSION).tar.gz
 
 VDR_IPTV_SITE = http://www.saunalahti.fi/~rahrenbe/vdr/iptv/files
