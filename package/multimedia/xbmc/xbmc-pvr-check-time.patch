@@ -1,15 +1,15 @@
---- a/xbmc/pvr/addons/PVRClient.cpp	2011-11-21 17:42:15.000000000 +0400
-+++ b/xbmc/pvr/addons/PVRClient.cpp	2011-11-21 17:44:15.000000000 +0400
-@@ -169,7 +169,7 @@
-   time_t recTime;
-   xbmcRecording.RecordingTimeAsUTC().GetAsTime(recTime);
+--- a/xbmc/pvr/addons/PVRClient.cpp.orig	2012-11-18 09:56:09.000000000 +0400
++++ b/xbmc/pvr/addons/PVRClient.cpp	2012-11-18 09:58:56.000000000 +0400
+@@ -178,7 +178,7 @@ void CPVRClient::WriteClientRecordingInf
+ 
+   memset(&addonRecording, 0, sizeof(addonRecording));
  
 -  addonRecording.recordingTime  = recTime - g_advancedSettings.m_iPVRTimeCorrection;
 +  addonRecording.recordingTime  = recTime ? recTime - g_advancedSettings.m_iPVRTimeCorrection : recTime;
-   addonRecording.strRecordingId = xbmcRecording.m_strRecordingId.c_str();
-   addonRecording.strTitle       = xbmcRecording.m_strTitle.c_str();
-   addonRecording.strPlotOutline = xbmcRecording.m_strPlotOutline.c_str();
-@@ -205,9 +205,9 @@
+   strncpy(addonRecording.strRecordingId, xbmcRecording.m_strRecordingId.c_str(), sizeof(addonRecording.strRecordingId) - 1);
+   strncpy(addonRecording.strTitle, xbmcRecording.m_strTitle.c_str(), sizeof(addonRecording.strTitle) - 1);
+   strncpy(addonRecording.strPlotOutline, xbmcRecording.m_strPlotOutline.c_str(), sizeof(addonRecording.strPlotOutline) - 1);
+@@ -219,9 +219,9 @@ void CPVRClient::WriteClientTimerInfo(co
    addonTimer.iLifetime         = xbmcTimer.m_iLifetime;
    addonTimer.bIsRepeating      = xbmcTimer.m_bIsRepeating;
    addonTimer.iWeekdays         = xbmcTimer.m_iWeekdays;
@@ -20,5 +20,5 @@
 +  addonTimer.endTime           = end ? end - g_advancedSettings.m_iPVRTimeCorrection : end;
 +  addonTimer.firstDay          = firstDay ? firstDay - g_advancedSettings.m_iPVRTimeCorrection : firstDay;
    addonTimer.iEpgUid           = epgTag ? epgTag->UniqueBroadcastID() : -1;
-   addonTimer.strSummary        = xbmcTimer.m_strSummary.c_str();
+   strncpy(addonTimer.strSummary, xbmcTimer.m_strSummary.c_str(), sizeof(addonTimer.strSummary) - 1);
    addonTimer.iMarginStart      = xbmcTimer.m_iMarginStart;
