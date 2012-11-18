@@ -1,7 +1,6 @@
-diff -Naur xbmc-pvr-3513480/configure.in xbmc-pvr-3513480.patch/configure.in
---- xbmc-pvr-3513480/configure.in	2011-04-25 02:36:33.000000000 +0200
-+++ xbmc-pvr-3513480.patch/configure.in	2011-04-25 05:14:49.220848143 +0200
-@@ -885,6 +885,9 @@
+--- a/configure.in	2012-11-18 09:10:17.000000000 +0400
++++ b/configure.in	2012-11-18 09:15:38.000000000 +0400
+@@ -1622,6 +1622,9 @@
    AC_MSG_NOTICE($external_ffmpeg_disabled)
    USE_EXTERNAL_FFMPEG=0
    AC_DEFINE([PIX_FMT_VDPAU_MPEG4_IN_AVUTIL], [1], [Whether AVUtil defines PIX_FMT_VDPAU_MPEG4.])
@@ -10,11 +9,11 @@ diff -Naur xbmc-pvr-3513480/configure.in xbmc-pvr-3513480.patch/configure.in
 +  AC_CHECK_PROG(HAVE_YASM,yasm,"yes","no",)
  fi
  
- # Python
-@@ -1547,6 +1550,7 @@
-       `if test "$use_arch" != "no"; then echo --arch=$use_arch; fi`\
+ echo "Checking for SWIG installation"
+@@ -2599,6 +2602,7 @@
        `if test "$use_cpu" != "no"; then echo --cpu=$use_cpu; fi`\
-       --target-os=$(tolower $(uname -s)) \
+       `if test "$use_neon" = "yes"; then echo --enable-neon; else echo --disable-neon; fi`\
+       --target-os=$ffmpeg_target_os \
 +      `if test "$HAVE_YASM" = "yes"; then echo --enable-yasm; fi` \
        --disable-muxers \
        --enable-muxer=spdif \
