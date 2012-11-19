@@ -17,9 +17,7 @@ XBMC_DEPENDENCIES = boost python zlib bzip2 lzo pcre alsa-lib libass enca curl l
 XBMC_AUTORECONF = YES
 
 define XBMC_AUTORECONF_LIBS
-    cd $(XBMC_SRCDIR)/lib/libid3tag/libid3tag && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
     cd $(XBMC_SRCDIR)/xbmc/screensavers/rsxs-0.9 && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
-    cd $(XBMC_SRCDIR)/lib/libapetag && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
     cd $(XBMC_SRCDIR)/lib/cpluff && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
     cd $(XBMC_SRCDIR)/lib/libdvd/libdvdcss && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
     cd $(XBMC_SRCDIR)/lib/libdvd/libdvdread && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
