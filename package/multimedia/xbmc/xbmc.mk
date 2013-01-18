@@ -3,8 +3,8 @@
 # xbmc
 #
 #############################################################
-XBMC_VERSION = 25bb46a2
-XBMC_BRANCH = Frodo-beta1
+XBMC_VERSION = d0ace3df
+XBMC_BRANCH = Frodo
 XBMC_SOURCE = xbmc-$(XBMC_BRANCH)-$(XBMC_VERSION).tar.gz
 XBMC_SITE = http://www.example.com
 XBMC_INSTALL_STAGING = NO
