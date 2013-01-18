@@ -1,0 +1,71 @@
+--- a/system/Lircmap.xml	2013-01-18 16:40:16.000000000 +0400
++++ b/system/Lircmap.xml	2013-01-18 16:54:52.000000000 +0400
+@@ -415,7 +415,8 @@
+ 		<up>KEY_UP</up>
+ 		<down>KEY_DOWN</down>
+ 		<select>KEY_OK</select>
+-		<select>KEY_ENTER</select>
++                <enter>KEY_ENTER</enter>
++                <clear>KEY_DELETE</clear>
+ 		<start>KEY_SELECT</start>
+ 		<back>KEY_ESC</back>
+ 		<back>KEY_EXIT</back>
+@@ -433,31 +434,35 @@
+ 		<volumeminus>KEY_VOLUMEDOWN</volumeminus>
+ 		<channelplus>KEY_CHANNELUP</channelplus>
+ 		<channelminus>KEY_CHANNELDOWN</channelminus>
+-		<skipplus>KEY_NEXTSONG</skipplus>
+-		<skipminus>KEY_PREVIOUSSONG</skipminus>
+-		<title>KEY_TITLE</title>
++		<skipplus>KEY_NEXT</skipplus>
++		<skipminus>KEY_PREVIOUS</skipminus>
++		<title>KEY_EPG</title>
+ 		<subtitle>KEY_SUBTITLE</subtitle>
+ 		<language>KEY_LANGUAGE</language>
+ 		<mute>KEY_MUTE</mute>
+ 		<power>KEY_POWER</power>
+ 		<myvideo>KEY_VIDEO</myvideo>
+ 		<mymusic>KEY_AUDIO</mymusic>
+-		<mypictures>KEY_MHP</mypictures>
++                <mypictures>KEY_CAMERA</mypictures>
+ 		<mytv>KEY_TV</mytv>
+-		<one>KEY_1</one>
+-		<two>KEY_2</two>
+-		<three>KEY_3</three>
+-		<four>KEY_4</four>
+-		<five>KEY_5</five>
+-		<six>KEY_6</six>
+-		<seven>KEY_7</seven>
+-		<eight>KEY_8</eight>
+-		<nine>KEY_9</nine>
+-		<zero>KEY_0</zero>
++                <mytv>KEY_TUNER</mytv>
++                <one>KEY_NUMERIC_1</one>
++                <two>KEY_NUMERIC_2</two>
++                <three>KEY_NUMERIC_3</three>
++                <four>KEY_NUMERIC_4</four>
++                <five>KEY_NUMERIC_5</five>
++                <six>KEY_NUMERIC_6</six>
++                <seven>KEY_NUMERIC_7</seven>
++                <eight>KEY_NUMERIC_8</eight>
++                <nine>KEY_NUMERIC_9</nine>
++                <zero>KEY_NUMERIC_0</zero>
++                <star>KEY_NUMERIC_STAR</star>
++                <hash>KEY_NUMERIC_POUND</hash>
+ 		<red>KEY_RED</red>
+ 		<green>KEY_GREEN</green>
+ 		<yellow>KEY_YELLOW</yellow>
+ 		<blue>KEY_BLUE</blue>
++		<menu>KEY_DVD</menu>
+ 		<menu>KEY_MENU</menu>
+ 		<info>KEY_INFO</info>
+ 		<info>KEY_PROPS</info>
+@@ -465,6 +470,8 @@
+ 		<display>KEY_ANGLE</display>
+ 		<recordedtv>KEY_PVR</recordedtv>
+ 		<teletext>KEY_TEXT</teletext>
++                <display>KEY_ZOOM</display>
++                <eject>KEY_EJECT</eject>
+ 	</remote>
+ 	<remote device="mediacenter">
+ 		<pause>pause</pause>
