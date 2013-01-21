@@ -111,8 +111,6 @@ define XBMC_COPY_SCRIPTS
     mkdir -p $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/usr/bin
     cp $(TOPDIR)/package/multimedia/xbmc/scripts/cputemp $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/usr/bin
     cp $(TOPDIR)/package/multimedia/xbmc/scripts/gputemp $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/usr/bin
-    mkdir -p $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/etc/pm/sleep.d
-    cp $(TOPDIR)/package/multimedia/xbmc/sleep.d/* $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/etc/pm/sleep.d
     mkdir -p $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/usr/share/xbmc/media/Fonts
     cp $(TOPDIR)/package/multimedia/xbmc/fonts/*.ttf $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/usr/share/xbmc/media/Fonts
 endef
