@@ -8,7 +8,7 @@ export VDR_CHARSET_OVERRIDE=ISO-8859-5
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
 TERMOUT=/var/log/vdr.log
 loglevel=3
-VDRCMD="/usr/bin/vdr -c /etc/vdr -E /export/vdr -v /export/vdr/video -l $loglevel.6 -L /usr/lib/vdr/PLUGINS -P sc -P iptv -P xvdr --localedir=/usr/share/locale --no-kbd -d"
+VDRCMD="/usr/bin/vdr -c /etc/vdr -E /export/vdr -v /export/vdr/video -l $loglevel.6 -L /usr/lib/vdr/PLUGINS -P sc -P xvdr --localedir=/usr/share/locale --no-kbd -d"
 NoloadHTPC()
 {
   grep -qse nohtpc /proc/cmdline
@@ -28,7 +28,7 @@ case "$1" in
     logger -t vdr "VDR started"
     ;;
   stop)
-    killall vdr
+    kill_vdr
     ;;
   *)
     echo $"Usage: $0 {start|stop}"
