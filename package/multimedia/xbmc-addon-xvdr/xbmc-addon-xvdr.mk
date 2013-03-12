@@ -3,8 +3,8 @@
 # xbmc-addon-xvdr
 #
 #############################################################
-XBMC_ADDON_XVDR_VERSION = 0b3b2d42
-XBMC_ADDON_XVDR_XVDR_VERSION = 0.9.7
+XBMC_ADDON_XVDR_VERSION = a244bf7b
+XBMC_ADDON_XVDR_XVDR_VERSION = 0.9.9
 XBMC_ADDON_XVDR_SITE = https://nodeload.github.com
 XBMC_ADDON_XVDR_SOURCE = pipelka-xbmc-addon-xvdr-$(XBMC_ADDON_XVDR_XVDR_VERSION)-$(XBMC_ADDON_XVDR_VERSION).tar.gz
 
