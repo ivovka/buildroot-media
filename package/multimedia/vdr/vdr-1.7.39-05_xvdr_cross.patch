@@ -1,0 +1,22 @@
+--- a/PLUGINS/src/xvdr/Makefile	2013-03-06 00:58:32.000000000 +0400
++++ b/PLUGINS/src/xvdr/Makefile	2013-03-06 01:00:28.000000000 +0400
+@@ -16,8 +16,9 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell pkg-config --variable=$(1) vdr || pkg-config --variable=$(1) ../../../vdr.pc))
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
+ LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
+ LOCDIR = $(call PKGCFG,locdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ CFGDIR  = $(call PKGCFG,configdir)/plugins/$(PLUGIN)
+@@ -138,7 +139,7 @@
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) -o $@
+ 
+ install-lib: $(SOFILE)
+-	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
++	install -D $^ $(DESTDIR)$(DESTLIBDIR)/$^.$(APIVERSION)
+ 
+ install-conf:
+ 	install -Dm644 $(PLUGIN)/allowed_hosts.conf $(DESTDIR)$(CFGDIR)/allowed_hosts.conf
