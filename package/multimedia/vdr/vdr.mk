@@ -3,7 +3,7 @@
 # vdr
 #
 #############################################################
-VDR_VERSION = 1.7.39
+VDR_VERSION = 1.7.40
 VDR_SITE = ftp://ftp.tvdr.de/vdr/Developer
 VDR_SOURCE = vdr-$(VDR_VERSION).tar.bz2
 
