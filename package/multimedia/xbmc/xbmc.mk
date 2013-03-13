@@ -3,7 +3,7 @@
 # xbmc
 #
 #############################################################
-XBMC_VERSION = d0ace3df
+XBMC_VERSION = 952f1944
 XBMC_BRANCH = Frodo
 XBMC_SOURCE = xbmc-$(XBMC_BRANCH)-$(XBMC_VERSION).tar.gz
 XBMC_SITE = http://www.example.com
