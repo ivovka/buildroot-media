@@ -3,23 +3,21 @@
 # xbmc
 #
 #############################################################
-XBMC_VERSION = g6ba3c70
-XBMC_BRANCH = 11.0-Eden-pvr-r2-62
-XBMC_SOURCE = opdenkamp-xbmc-$(XBMC_BRANCH)-$(XBMC_VERSION).tar.gz
+XBMC_VERSION = 952f1944
+XBMC_BRANCH = Frodo
+XBMC_SOURCE = xbmc-$(XBMC_BRANCH)-$(XBMC_VERSION).tar.gz
 XBMC_SITE = http://www.example.com
 XBMC_INSTALL_STAGING = NO
 XBMC_INSTALL_TARGET = YES
 XBMC_BUILD_OPKG = YES
 XBMC_SECTION = mediacenter
 XBMC_DESCRIPTION = XBMC Mediacenter
-XBMC_OPKG_DEPENDENCIES = boost,python,zlib,bzip2,lzo,pcre,alsa-lib,libass,enca,libssh,rtmpdump,fontconfig,fribidi,libpng,tiff,freetype,jasper,libmad,libsamplerate,libogg,libvorbis,libcdio,libmodplug,faad2,flac,lame,libmpeg2,sdl,sdl-mixer,sdl-image,sqlite,mysql,alsa-utils,bc,libx11,libxext,libxrandr,mesa,glew,dbus,libxt,libxmu,libbluray,samba,avahi,libnfs,libmicrohttpd,libvdpau,imaging,libplist,consolekit,yajl,simplejson,tinyxml
-XBMC_DEPENDENCIES = boost python zlib bzip2 lzo pcre alsa-lib libass enca curl libssh rtmpdump dbus xlib_libX11 xlib_libXext dbus xlib_libXt xlib_libXtst xlib_libXmu xlib_libXrandr mesa3d glew fontconfig fribidi libpng tiff freetype jasper libmad libsamplerate libogg libvorbis libcdio libmodplug faad2 flac wavpack lame libmpeg2 libbluray sdl sdl_mixer sdl_image sqlite mysql samba avahi libmicrohttpd libvdpau imaging libplist ConsoleKit yajl libnfs tinyxml
+XBMC_OPKG_DEPENDENCIES = boost,python,zlib,bzip2,lzo,pcre,alsa-lib,libass,enca,libssh,rtmpdump,fontconfig,fribidi,libpng,tiff,freetype,jasper,libmad,libsamplerate,libogg,libvorbis,libcdio,libmodplug,faad2,flac,lame,libmpeg2,sdl,sdl-mixer,sdl-image,sqlite,mysql,alsa-utils,bc,libx11,libxext,libxrandr,mesa,glew,dbus,libxt,libxmu,libbluray,samba,avahi,libnfs,libmicrohttpd,libvdpau,imaging,libplist,consolekit,yajl,simplejson,tinyxml,taglib
+XBMC_DEPENDENCIES = boost python zlib bzip2 lzo pcre alsa-lib libass enca curl libssh rtmpdump dbus xlib_libX11 xlib_libXext dbus xlib_libXt xlib_libXtst xlib_libXmu xlib_libXrandr mesa3d glew fontconfig fribidi libpng tiff freetype jasper libmad libsamplerate libogg libvorbis libcdio libmodplug faad2 flac wavpack lame libmpeg2 libbluray sdl sdl_mixer sdl_image sqlite mysql samba avahi libmicrohttpd libvdpau imaging libplist ConsoleKit yajl libnfs tinyxml taglib host-swig
 XBMC_AUTORECONF = YES
 
 define XBMC_AUTORECONF_LIBS
-    cd $(XBMC_SRCDIR)/lib/libid3tag/libid3tag && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
     cd $(XBMC_SRCDIR)/xbmc/screensavers/rsxs-0.9 && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
-    cd $(XBMC_SRCDIR)/lib/libapetag && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
     cd $(XBMC_SRCDIR)/lib/cpluff && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
     cd $(XBMC_SRCDIR)/lib/libdvd/libdvdcss && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
     cd $(XBMC_SRCDIR)/lib/libdvd/libdvdread && $(AUTORECONF) $(XBMC_AUTORECONF_OPT)
@@ -113,8 +111,6 @@ define XBMC_COPY_SCRIPTS
     mkdir -p $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/usr/bin
     cp $(TOPDIR)/package/multimedia/xbmc/scripts/cputemp $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/usr/bin
     cp $(TOPDIR)/package/multimedia/xbmc/scripts/gputemp $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/usr/bin
-    mkdir -p $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/etc/pm/sleep.d
-    cp $(TOPDIR)/package/multimedia/xbmc/sleep.d/* $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/etc/pm/sleep.d
     mkdir -p $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/usr/share/xbmc/media/Fonts
     cp $(TOPDIR)/package/multimedia/xbmc/fonts/*.ttf $(BUILD_DIR_OPKG)/$(XBMC_BASE_NAME)/usr/share/xbmc/media/Fonts
 endef

@@ -1,0 +1,263 @@
+--- a/Makefile	2013-03-06 15:50:19.000000000 +0400
++++ b/Makefile	2013-03-06 15:52:03.000000000 +0400
+@@ -19,8 +19,8 @@
+ CDEFINES  = -D_GNU_SOURCE
+ CDEFINES += -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
+ 
+-LIBS      = -ljpeg -lpthread -ldl -lcap -lrt $(shell pkg-config --libs freetype2 fontconfig)
+-INCLUDES ?= $(shell pkg-config --cflags freetype2 fontconfig)
++LIBS      = -ljpeg -lpthread -ldl -lcap -lrt $(shell $(PKG_CONFIG) --libs freetype2 fontconfig)
++INCLUDES ?= $(shell $(PKG_CONFIG) --cflags freetype2 fontconfig)
+ 
+ # Directories:
+ 
+@@ -89,9 +89,9 @@
+ DEFINES += -DVDR_USER=\"$(VDR_USER)\"
+ endif
+ ifdef BIDI
+-INCLUDES += $(shell pkg-config --cflags fribidi)
++INCLUDES += $(shell $(PKG_CONFIG) --cflags fribidi)
+ DEFINES += -DBIDI
+-LIBS += $(shell pkg-config --libs fribidi)
++LIBS += $(shell $(PKG_CONFIG) --libs fribidi)
+ endif
+ 
+ LIRC_DEVICE ?= /var/run/lirc/lircd
+@@ -146,6 +146,7 @@
+ 	@echo "cachedir=$(CACHEDIR)" >> $@
+ 	@echo "resdir=$(RESDIR)" >> $@
+ 	@echo "libdir=$(LIBDIR)" >> $@
++	@echo "destlibdir=$(LIBDIR)" >> $@
+ 	@echo "locdir=$(LOCDIR)" >> $@
+ 	@echo "plgcfg=$(PLGCFG)" >> $@
+ 	@echo "apiversion=$(APIVERSION)" >> $@
+@@ -204,7 +205,7 @@
+ 	for i in `ls $(PLUGINDIR)/src | grep -v '[^a-z0-9]'`; do\
+ 	    echo; echo "*** Plugin $$i:";\
+ 	    # No APIVERSION: Skip\
+-	    if ! grep -q "\$$(LIBDIR)/.*\$$(APIVERSION)" "$(PLUGINDIR)/src/$$i/Makefile" ; then\
++	    if ! grep -q "\$$(DESTLIBDIR)/.*\$$(APIVERSION)" "$(PLUGINDIR)/src/$$i/Makefile" ; then\
+ 	       echo "ERROR: plugin $$i doesn't honor APIVERSION - not compiled!";\
+ 	       noapiv="$$noapiv $$i";\
+ 	       continue;\
+--- a/PLUGINS/src/dvbhddevice/Makefile	2013-03-06 15:50:19.000000000 +0400
++++ b/PLUGINS/src/dvbhddevice/Makefile	2013-03-06 16:07:08.000000000 +0400
+@@ -15,8 +15,9 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell pkg-config --variable=$(1) vdr || pkg-config --variable=$(1) ../../../vdr.pc))
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
+ LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
+ LOCDIR = $(call PKGCFG,locdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+@@ -105,7 +106,7 @@
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) libhdffcmd/libhdffcmd.a -o $@
+ 
+ install-lib: $(SOFILE)
+-	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
++	install -D $^ $(DESTDIR)$(DESTLIBDIR)/$^.$(APIVERSION)
+ 
+ install: install-lib install-i18n
+ 
+--- a/PLUGINS/src/dvbsddevice/Makefile	2013-03-06 15:50:19.000000000 +0400
++++ b/PLUGINS/src/dvbsddevice/Makefile	2013-03-06 16:14:20.000000000 +0400
+@@ -16,8 +16,9 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell pkg-config --variable=$(1) vdr || pkg-config --variable=$(1) ../../../vdr.pc))
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
+ LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+ TMPDIR ?= /tmp
+@@ -78,7 +79,7 @@
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) -o $@
+ 
+ install-lib: $(SOFILE)
+-	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
++	install -D $^ $(DESTDIR)$(DESTLIBDIR)/$^.$(APIVERSION)
+ 
+ install: install-lib
+ 
+--- a/PLUGINS/src/epgtableid0/Makefile	2013-03-06 15:50:19.000000000 +0400
++++ b/PLUGINS/src/epgtableid0/Makefile	2013-03-06 16:11:10.000000000 +0400
+@@ -16,8 +16,9 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell pkg-config --variable=$(1) vdr || pkg-config --variable=$(1) ../../../vdr.pc))
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
+ LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+ TMPDIR ?= /tmp
+@@ -78,7 +79,7 @@
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) -o $@
+ 
+ install-lib: $(SOFILE)
+-	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
++	install -D $^ $(DESTDIR)$(DESTLIBDIR)/$^.$(APIVERSION)
+ 
+ install: install-lib
+ 
+--- a/PLUGINS/src/hello/Makefile	2013-03-06 15:50:19.000000000 +0400
++++ b/PLUGINS/src/hello/Makefile	2013-03-06 16:10:06.000000000 +0400
+@@ -16,8 +16,9 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell pkg-config --variable=$(1) vdr || pkg-config --variable=$(1) ../../../vdr.pc))
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
+ LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
+ LOCDIR = $(call PKGCFG,locdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+@@ -105,7 +106,7 @@
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) -o $@
+ 
+ install-lib: $(SOFILE)
+-	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
++	install -D $^ $(DESTDIR)$(DESTLIBDIR)/$^.$(APIVERSION)
+ 
+ install: install-lib install-i18n
+ 
+--- a/PLUGINS/src/osddemo/Makefile	2013-03-06 15:50:19.000000000 +0400
++++ b/PLUGINS/src/osddemo/Makefile	2013-03-06 16:09:08.000000000 +0400
+@@ -16,8 +16,9 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell pkg-config --variable=$(1) vdr || pkg-config --variable=$(1) ../../../vdr.pc))
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
+ LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+ TMPDIR ?= /tmp
+@@ -78,7 +79,7 @@
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) -o $@
+ 
+ install-lib: $(SOFILE)
+-	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
++	install -D $^ $(DESTDIR)$(DESTLIBDIR)/$^.$(APIVERSION)
+ 
+ install: install-lib
+ 
+--- a/PLUGINS/src/pictures/Makefile	2013-03-06 15:50:19.000000000 +0400
++++ b/PLUGINS/src/pictures/Makefile	2013-03-06 16:08:03.000000000 +0400
+@@ -16,8 +16,9 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell pkg-config --variable=$(1) vdr || pkg-config --variable=$(1) ../../../vdr.pc))
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
+ LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
+ LOCDIR = $(call PKGCFG,locdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+@@ -105,7 +106,7 @@
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) -o $@
+ 
+ install-lib: $(SOFILE)
+-	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
++	install -D $^ $(DESTDIR)$(DESTLIBDIR)/$^.$(APIVERSION)
+ 
+ install: install-lib install-i18n
+ 
+--- a/PLUGINS/src/rcu/Makefile	2013-03-06 15:50:19.000000000 +0400
++++ b/PLUGINS/src/rcu/Makefile	2013-03-06 16:13:35.000000000 +0400
+@@ -16,8 +16,9 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell pkg-config --variable=$(1) vdr || pkg-config --variable=$(1) ../../../vdr.pc))
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
+ LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+ TMPDIR ?= /tmp
+@@ -78,7 +79,7 @@
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) -o $@
+ 
+ install-lib: $(SOFILE)
+-	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
++	install -D $^ $(DESTDIR)$(DESTLIBDIR)/$^.$(APIVERSION)
+ 
+ install: install-lib
+ 
+--- a/PLUGINS/src/servicedemo/Makefile	2013-03-06 15:50:19.000000000 +0400
++++ b/PLUGINS/src/servicedemo/Makefile	2013-03-06 16:12:50.000000000 +0400
+@@ -17,8 +17,9 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell pkg-config --variable=$(1) vdr || pkg-config --variable=$(1) ../../../vdr.pc))
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
+ LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+ TMPDIR ?= /tmp
+@@ -78,8 +79,8 @@
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(PLUGIN2).o -o $@
+ 
+ install-lib: libvdr-$(PLUGIN1).so libvdr-$(PLUGIN2).so
+-	install -D libvdr-$(PLUGIN1).so $(DESTDIR)$(LIBDIR)/libvdr-$(PLUGIN1).so.$(APIVERSION)
+-	install -D libvdr-$(PLUGIN2).so $(DESTDIR)$(LIBDIR)/libvdr-$(PLUGIN2).so.$(APIVERSION)
++	install -D libvdr-$(PLUGIN1).so $(DESTDIR)$(DESTLIBDIR)/libvdr-$(PLUGIN1).so.$(APIVERSION)
++	install -D libvdr-$(PLUGIN2).so $(DESTDIR)$(DESTLIBDIR)/libvdr-$(PLUGIN2).so.$(APIVERSION)
+ 
+ install: install-lib
+ 
+--- a/PLUGINS/src/status/Makefile	2013-03-06 15:50:19.000000000 +0400
++++ b/PLUGINS/src/status/Makefile	2013-03-06 16:11:57.000000000 +0400
+@@ -16,8 +16,9 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell pkg-config --variable=$(1) vdr || pkg-config --variable=$(1) ../../../vdr.pc))
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
+ LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+ TMPDIR ?= /tmp
+@@ -78,7 +79,7 @@
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) -o $@
+ 
+ install-lib: $(SOFILE)
+-	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
++	install -D $^ $(DESTDIR)$(DESTLIBDIR)/$^.$(APIVERSION)
+ 
+ install: install-lib
+ 
+--- a/PLUGINS/src/svdrpdemo/Makefile	2013-03-06 15:50:19.000000000 +0400
++++ b/PLUGINS/src/svdrpdemo/Makefile	2013-03-06 16:03:46.000000000 +0400
+@@ -16,8 +16,9 @@
+ ### The directory environment:
+ 
+ # Use package data if installed...otherwise assume we're under the VDR source directory:
+-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell pkg-config --variable=$(1) vdr || pkg-config --variable=$(1) ../../../vdr.pc))
++PKGCFG = $(if $(VDRDIR)/$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
+ LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
+ PLGCFG = $(call PKGCFG,plgcfg)
+ #
+ TMPDIR ?= /tmp
+@@ -78,7 +79,7 @@
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) -o $@
+ 
+ install-lib: $(SOFILE)
+-	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
++	install -D $^ $(DESTDIR)$(DESTLIBDIR)/$^.$(APIVERSION)
+ 
+ install: install-lib

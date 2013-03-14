@@ -1,0 +1,11 @@
+--- a/Makefile	2013-03-12 14:30:23.000000000 +0400
++++ b/Makefile	2013-03-12 14:31:16.000000000 +0400
+@@ -264,7 +264,7 @@
+ 	@mkdir -p $(DESTDIR)$(CACHEDIR)
+ 	@mkdir -p $(DESTDIR)$(RESDIR)
+ 
+-install-conf:
++install-conf: install-dirs
+ 	@cp -pn *.conf $(DESTDIR)$(CONFDIR)
+ 
+ # Documentation:
