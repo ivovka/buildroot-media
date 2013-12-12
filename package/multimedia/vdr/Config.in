@@ -17,6 +17,12 @@ config BR2_PACKAGE_VDR_SC
         help
             VDR softcam plugin
 
+config BR2_PACKAGE_VDR_DVBAPI
+        bool "dvbapi"
+        default n
+        help
+            dvbapi plugin
+
 config BR2_PACKAGE_VDR_XVDR
         bool "vdr-xvdr"
         default n
