@@ -33,5 +33,6 @@ endef
 define OSCAM_BUILD_OPKG_CMDS
     mkdir -p $(BUILD_DIR_OPKG)/oscam-$(OSCAM_VERSION)/usr/bin
     $(INSTALL) $(OSCAM_DIR)/Distribution/oscam-$(OSCAM_VERSION) $(BUILD_DIR_OPKG)/oscam-$(OSCAM_VERSION)/usr/bin
+    ln -s oscam-$(OSCAM_VERSION) $(BUILD_DIR_OPKG)/oscam-$(OSCAM_VERSION)/usr/bin/oscam
 endef
 $(eval $(call GENTARGETS,package,oscam))
