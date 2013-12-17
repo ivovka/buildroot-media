@@ -341,6 +341,10 @@ $(BUILD_DIR)/%/.stamp_opkg_built:
 	    mkdir -p $(OPKGBDNAME)/etc/init.d && \
 	    cp -d $($(PKG)_DIR_PREFIX)/$($(PKG)_NAME)/init.d/* $(OPKGBDNAME)/etc/init.d; \
 	fi; )
+	(if test -d $($(PKG)_DIR_PREFIX)/$($(PKG)_NAME)/pm; then \
+	    mkdir -p $(OPKGBDNAME)/etc/pm && \
+	    cp -dr $($(PKG)_DIR_PREFIX)/$($(PKG)_NAME)/pm/* $(OPKGBDNAME)/etc/pm; \
+	fi; )
 ifneq ($(BR2_HAVE_DEVFILES),y)
 	rm -rf $(OPKGBDNAME)/usr/include $(OPKGBDNAME)/usr/lib/pkgconfig $(OPKGBDNAME)/usr/share/aclocal
 	find $(OPKGBDNAME)/lib \( -name '*.a' -o -name '*.la' \) -print0 | xargs -0 rm -f
