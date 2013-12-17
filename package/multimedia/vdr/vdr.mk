@@ -11,6 +11,10 @@ VDR_SC_SITE = http://85.17.209.13:6100
 VDR_SC_VERSION = 29b7b5f231c8
 VDR_SC_SOURCE = sc-$(VDR_SC_VERSION).tar.bz2
 
+VDR_DVBAPI_SITE = https://nodeload.github.com
+VDR_DVBAPI_VERSION = 2be5e157
+VDR_DVBAPI_SOURCE = vdr-plugin-dvbapi-$(VDR_DVBAPI_VERSION).tar.gz
+
 VDR_XVDR_SITE = https://nodeload.github.com
 VDR_XVDR_VERSION = 0.9.9-184c35c2
 VDR_XVDR_SOURCE = pipelka-vdr-plugin-xvdr-$(VDR_XVDR_VERSION).tar.gz
@@ -34,6 +38,9 @@ VDR_DEPENDENCIES = libcap fontconfig freetype $(call qstrip,$(BR2_JPEG_LIBRARY))
 define VDR_SC_DOWNLOAD
     $(call DOWNLOAD,$(VDR_SC_SITE),$(VDR_SC_SOURCE))
 endef
+define VDR_DVBAPI_DOWNLOAD
+    $(call DOWNLOAD,$(VDR_DVBAPI_SITE),$(VDR_DVBAPI_SOURCE))
+endef
 define VDR_XVDR_DOWNLOAD
     $(call DOWNLOAD,$(VDR_XVDR_SITE),$(VDR_XVDR_SOURCE))
 endef
@@ -49,6 +56,11 @@ define VDR_SC_EXTRACT
     mkdir -p $(VDR_DIR)/PLUGINS/src/sc
     $(if $(VDR_SC_SOURCE),$(INFLATE$(suffix $(VDR_SC_SOURCE))) $(DL_DIR)/$(VDR_SC_SOURCE) | \
 	$(TAR) $(TAR_STRIP_COMPONENTS)=1 -C $(VDR_DIR)/PLUGINS/src/sc $(TAR_OPTIONS) -)
+endef
+define VDR_DVBAPI_EXTRACT
+    mkdir -p $(VDR_DIR)/PLUGINS/src/dvbapi
+    $(if $(VDR_DVBAPI_SOURCE),$(INFLATE$(suffix $(VDR_DVBAPI_SOURCE))) $(DL_DIR)/$(VDR_DVBAPI_SOURCE) | \
+	$(TAR) $(TAR_STRIP_COMPONENTS)=1 -C $(VDR_DIR)/PLUGINS/src/dvbapi $(TAR_OPTIONS) -)
 endef
 define VDR_XVDR_EXTRACT
     mkdir -p $(VDR_DIR)/PLUGINS/src/xvdr
@@ -91,6 +103,10 @@ endef
 ifeq ($(BR2_PACKAGE_VDR_SC),y)
 VDR_POST_DOWNLOAD_HOOKS += VDR_SC_DOWNLOAD
 VDR_POST_EXTRACT_HOOKS += VDR_SC_EXTRACT
+endif
+ifeq ($(BR2_PACKAGE_VDR_DVBAPI),y)
+VDR_POST_DOWNLOAD_HOOKS += VDR_DVBAPI_DOWNLOAD
+VDR_POST_EXTRACT_HOOKS += VDR_DVBAPI_EXTRACT
 endif
 ifeq ($(BR2_PACKAGE_VDR_XVDR),y)
 VDR_POST_DOWNLOAD_HOOKS += VDR_XVDR_DOWNLOAD

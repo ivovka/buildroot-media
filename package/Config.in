@@ -521,6 +521,10 @@ source "package/rpm/Config.in"
 endif
 endmenu
 
+menu "Security"
+source "package/oscam/Config.in"
+endmenu
+
 menu "Shell and utilities"
 source "package/at/Config.in"
 source "package/bc/Config.in"
