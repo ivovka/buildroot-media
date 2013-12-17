@@ -1,0 +1,12 @@
+#!/bin/sh
+
+case "$1" in
+  hibernate)
+    /etc/init.d/oscam stop
+    ;;
+  suspend)
+    /etc/init.d/oscam stop
+    ;;
+  *) exit 
+    ;;
+esac
